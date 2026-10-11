@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sales Tax Calculator — Add or Remove VAT, GST & Sales Tax | Toolbay</title>
+<meta name="description" content="Free bidirectional sales tax calculator. Add sales tax to a net price or strip inclusive VAT and GST out of a gross invoice amount with exact cent precision.">
+<meta name="keywords" content="sales tax calculator, vat calculator, gst calculator, add vat, remove tax, tax inclusive price, strip vat">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/sales-tax-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Sales Tax Calculator — Add or Strip VAT & GST | Toolbay">
+<meta property="og:description" content="Add statutory tax or back out inclusive VAT/GST with penny precision.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/sales-tax-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Sales Tax Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/sales-tax-calculator",
+      "description": "Bidirectional VAT, GST, and sales tax computation engine.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Money & Financial Engineering", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Sales Tax Calculator", "item": "https://tools.xyzhome.site/tools/sales-tax-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do you strip VAT or GST from a tax-inclusive price?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To remove tax from a gross price, divide by [1 + (Rate / 100)]. For example, to strip 20% VAT from $120, divide by 1.20, which gives a net price of $100 and tax of $20. Subtracting 20% directly is an arithmetic mistake."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Money &amp; Business</a> &rsaquo; Sales Tax Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[06] &bull; STATUTORY INSTRUMENT</span>
+      <h1>Bidirectional Sales Tax &amp; VAT Calculator</h1>
+      <p>Add statutory sales tax to a net base price or extract inclusive VAT and GST from gross retail invoices with exact cent rounding.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="amt">Base Amount</label>
+          <input type="number" id="amt" placeholder="1000" step="any" min="0" value="1000">
+        </div>
+        <div class="field">
+          <label for="rate">Tax Rate (%)</label>
+          <input type="number" id="rate" placeholder="18" step="0.01" min="0" max="100" value="18">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="mode">Computation Mode</label>
+        <select id="mode">
+          <option value="add">Add Tax to this amount (Base is Net exclusive price)</option>
+          <option value="rem">Extract / Remove Tax from this amount (Base is Gross inclusive price)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Common Global Tax Rates</label>
+        <div class="chips">
+          <span class="chip" data-r="5">5% (GCC / Canada GST)</span>
+          <span class="chip" data-r="10">10% (Australia / Japan)</span>
+          <span class="chip" data-r="15">15% (New Zealand)</span>
+          <span class="chip" data-r="18">18% (Pakistan / India GST standard)</span>
+          <span class="chip" data-r="20">20% (UK / France standard VAT)</span>
+          <span class="chip" data-r="25">25% (Sweden / Denmark VAT)</span>
+        </div>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; STATUTORY TAX ALGORITHMS
+      </span>
+      <h3>Adding Tax vs Stripping Tax Formulas</h3>
+      <ul>
+        <li><strong>Tax Inclusive (Adding Tax):</strong> $\text{Tax} = \text{Net} \times (R / 100)$, $\text{Gross} = \text{Net} + \text{Tax}$</li>
+        <li><strong>Tax Exclusive (Extracting Inclusive Tax):</strong> $\text{Net} = \text{Gross} / (1 + R / 100)$, $\text{Tax} = \text{Gross} - \text{Net}$</li>
+      </ul>
+    </div>
+
+    <!-- Deep Editorial Article -->
+    <article class="article">
+      <h2>The Critical Arithmetic Difference Between Adding and Removing Tax</h2>
+      <p>
+        Adding tax involves direct multiplication. Removing tax is where bookkeepers and small business owners frequently commit accounting errors. You cannot subtract the tax percentage from a gross figure: if you take 20% off $120, you subtract $24, arriving at $96—which is incorrect. The true net base is $100 ($120 / 1.20) and the tax collected was $20.
+      </p>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Financial Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/discount-calculator">
+          <div class="tile-top"><span class="tile-idx">[05]</span><span class="tile-badge">Commerce</span></div>
+          <b>Discount Calculator</b>
+          <i>Compute net sale price and multi-tier checkout discounts.</i>
+        </a>
+        <a class="tile" href="/tools/loan-emi-calculator">
+          <div class="tile-top"><span class="tile-idx">[04]</span><span class="tile-badge">Fiscal</span></div>
+          <b>Loan EMI Calculator</b>
+          <i>Monthly instalments, total interest, and year-by-year balance.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tax Notice</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Always confirm statutory rates with your national revenue authority.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var amtInput = document.getElementById('amt');
+  var rateInput = document.getElementById('rate');
+  var modeSelect = document.getElementById('mode');
+  var out = document.getElementById('out');
+
+  function fmt(x) {
+    return Number(x).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+
+  function calc() {
+    var a = parseFloat(amtInput.value);
+    var r = parseFloat(rateInput.value);
+    var isAdd = modeSelect.value === 'add';
+
+    if(isNaN(a) || a < 0 || isNaN(r) || r < 0) {
+      out.innerHTML = '<p class="err">Please enter valid non-negative base amount and tax rate values.</p>';
+      return;
+    }
+
+    var net, tax, gross;
+    if(isAdd) {
+      net = a;
+      tax = net * (r / 100);
+      gross = net + tax;
+    } else {
+      gross = a;
+      net = gross / (1 + (r / 100));
+      tax = gross - net;
+    }
+
+    var primaryVal = isAdd ? gross : net;
+    var primaryLabel = isAdd ? 'Total Gross Price (Tax Inclusive)' : 'Pre-Tax Net Price (Tax Exclusive)';
+
+    out.innerHTML = 
+      '<div class="big">' + fmt(primaryVal) + '</div>' +
+      '<p class="sub">' + primaryLabel + ' at ' + r + '% tax rate</p>' +
+      '<div class="kv"><span>Net Base Price</span><b>' + fmt(net) + '</b></div>' +
+      '<div class="kv"><span>Tax Amount (' + r + '%)</span><b style="color:var(--dusty-pink);">' + fmt(tax) + '</b></div>' +
+      '<div class="kv"><span>Gross Total Price</span><b>' + fmt(gross) + '</b></div>';
+  }
+
+  [amtInput, rateInput].forEach(function(el){ el.addEventListener('input', calc); });
+  modeSelect.addEventListener('change', calc);
+
+  document.querySelectorAll('.chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      rateInput.value = chip.getAttribute('data-r');
+      calc();
+    });
+  });
+
+  calc();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

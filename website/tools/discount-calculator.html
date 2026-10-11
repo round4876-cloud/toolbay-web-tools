@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discount Calculator — Sale Price, Money Saved & Stacked Discounts | Toolbay</title>
+<meta name="description" content="Calculate the final sale price, amount saved, and effective rate of stacked double discounts. Quick preset chips and real-world checkout analysis. Free and instant.">
+<meta name="keywords" content="discount calculator, sale price calculator, percent off, double discount, stacked discount, coupon calculator">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/discount-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Discount Calculator — Sale Price & Stacked Promos | Toolbay">
+<meta property="og:description" content="Compute final discounted prices, cash savings, and compounded multi-tier promotional discounts.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/discount-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Discount Calculator",
+      "applicationCategory": "ShoppingApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/discount-calculator",
+      "description": "Commercial discount and compound stacked checkout promotion calculator.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Money & Financial Engineering", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Discount Calculator", "item": "https://tools.xyzhome.site/tools/discount-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why don't double discounts add up directly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 30% discount followed by an extra 20% off at checkout does not equal 50% off. The second discount applies to the already reduced balance, producing an effective 44% total discount."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Money &amp; Business</a> &rsaquo; Discount Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[05] &bull; COMMERCE INSTRUMENT</span>
+      <h1>Precision Discount Calculator</h1>
+      <p>Evaluate final net retail prices, total cash savings, and the compounding reality of stacked checkout promotions.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="price">Original List Price</label>
+          <input type="number" id="price" placeholder="120" step="any" min="0" value="120">
+        </div>
+        <div class="field">
+          <label for="off">Primary Discount (%)</label>
+          <input type="number" id="off" placeholder="25" step="any" min="0" max="100" value="25">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="off2">Extra Checkout Coupon Discount (%, optional)</label>
+        <input type="number" id="off2" placeholder="10" step="any" min="0" max="100" value="10">
+      </div>
+
+      <div class="field">
+        <label>Quick Preset Discounts</label>
+        <div class="chips">
+          <span class="chip" data-v="10">10% Off</span>
+          <span class="chip" data-v="15">15% Off</span>
+          <span class="chip" data-v="20">20% Off</span>
+          <span class="chip" data-v="25">25% Off</span>
+          <span class="chip" data-v="30">30% Off</span>
+          <span class="chip" data-v="40">40% Off</span>
+          <span class="chip" data-v="50">50% Off</span>
+          <span class="chip" data-v="70">70% Off</span>
+        </div>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; COMPOUND DISCOUNT FORMULA
+      </span>
+      <h3>How Stacked Retail Discounts Function</h3>
+      <p>
+        When retailers offer a primary promotion followed by an additional checkout coupon (e.g. "Take 30% off, plus an extra 20% at checkout"), the discounts do not aggregate to 50%. The second discount is calculated exclusively against the intermediate discounted price:
+      </p>
+      <div class="geo-formula-badge">
+        Final Price = Original &times; (1 - D₁/100) &times; (1 - D₂/100)
+      </div>
+    </div>
+
+    <!-- Deep Editorial Article -->
+    <article class="article">
+      <h2>Why Two Discounts Never Simply Add Together</h2>
+      <p>
+        Retail psychology exploits the human tendency to add percentages. If an item listed at $100 has a 40% discount, the price drops to $60. If you apply an additional 20% discount code, that 20% is subtracted from $60 ($12 discount), yielding a final price of $48. You received an effective 52% total discount, not 60%.
+      </p>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Commercial Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/sales-tax-calculator">
+          <div class="tile-top"><span class="tile-idx">[06]</span><span class="tile-badge">Statutory</span></div>
+          <b>Sales Tax Calculator</b>
+          <i>Add or strip VAT and GST from retail prices.</i>
+        </a>
+        <a class="tile" href="/tools/percentage-calculator">
+          <div class="tile-top"><span class="tile-idx">[03]</span><span class="tile-badge">Ratio</span></div>
+          <b>Percentage Calculator</b>
+          <i>Multi-mode proportional ratio engine.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Shopping Notice</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Excludes local sales tax. Use Sales Tax tool for tax inclusive gross total.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var priceInput = document.getElementById('price');
+  var offInput = document.getElementById('off');
+  var off2Input = document.getElementById('off2');
+  var out = document.getElementById('out');
+
+  function fmt(x) {
+    return Number(x).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+
+  function calc() {
+    var p = parseFloat(priceInput.value);
+    var d1 = parseFloat(offInput.value) || 0;
+    var d2 = parseFloat(off2Input.value) || 0;
+
+    if (isNaN(p) || p <= 0) {
+      out.innerHTML = '<p class="err">Please enter a valid positive original price.</p>';
+      return;
+    }
+
+    var priceAfter1 = p * (1 - Math.min(d1, 100) / 100);
+    var finalPrice = priceAfter1 * (1 - Math.min(d2, 100) / 100);
+    var saved = p - finalPrice;
+    var effectivePct = (saved / p) * 100;
+
+    out.innerHTML = 
+      '<div class="big">' + fmt(finalPrice) + '</div>' +
+      '<p class="sub">Final net checkout price after all promotions</p>' +
+      '<div class="kv"><span>Total Cash Saved</span><b style="color:#2E8560;">' + fmt(saved) + '</b></div>' +
+      '<div class="kv"><span>Effective Compounded Discount</span><b>' + effectivePct.toFixed(1) + '%</b></div>' +
+      (d2 > 0 ? '<div class="kv"><span>Price After Primary Discount (' + d1 + '%)</span><b>' + fmt(priceAfter1) + '</b></div>' : '') +
+      '<div class="kv"><span>Original List Price</span><b>' + fmt(p) + '</b></div>';
+  }
+
+  [priceInput, offInput, off2Input].forEach(function(el){ el.addEventListener('input', calc); });
+
+  document.querySelectorAll('.chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      offInput.value = chip.getAttribute('data-v');
+      calc();
+    });
+  });
+
+  calc();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

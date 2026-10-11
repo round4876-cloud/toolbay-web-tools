@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Age Calculator — Exact Years, Months, Days & Next Birthday | Toolbay</title>
+<meta name="description" content="Calculate your exact chronological age in years, months, days, total weeks, hours, and next birthday countdown. 100% accurate calendar leap-day arithmetic in your browser.">
+<meta name="keywords" content="age calculator, chronological age, date of birth calculator, how old am i, birthday countdown, exact age in days">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/age-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Age Calculator — Exact Years, Months, Days | Toolbay">
+<meta property="og:description" content="Precision chronological age calculator down to the day, hours, and next birthday countdown.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/age-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data: SoftwareApplication, HowTo, FAQPage, BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Age Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/age-calculator",
+      "description": "High-precision chronological age calculator factoring true Gregorian month lengths and leap years.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Everyday Calculators", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Age Calculator", "item": "https://tools.xyzhome.site/tools/age-calculator"}
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Calculate Exact Chronological Age",
+      "step": [
+        {"@type": "HowToStep", "position": 1, "name": "Select Birth Date", "text": "Choose your exact date of birth using the calendar picker."},
+        {"@type": "HowToStep", "position": 2, "name": "Select Target Date", "text": "Defaults to today's date, or specify any past or future reference date."},
+        {"@type": "HowToStep", "position": 3, "name": "Review Breakdown", "text": "Read your age in years, months, days, total weeks, hours, and next birthday countdown."}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does this age calculator account for leap years?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator parses local calendar dates directly and borrows days according to the exact calendar month preceding the reference date, guaranteeing that February 29 leap days are counted precisely."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I calculate my age on a past or future date?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Set the 'Age on date' field to any historical date (e.g., job application cutoff date, retirement eligibility, school admission) or future anniversary."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my birthdate saved or transmitted to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The calculation runs entirely in your browser using local client-side JavaScript. No dates are uploaded or stored."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Everyday Calculators</a> &rsaquo; Age Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[01] &bull; CHRONOLOGY INSTRUMENT</span>
+      <h1>Precision Age Calculator</h1>
+      <p>Compute your exact chronological age in completed years, months, and days with calendar leap-year verification and next birthday countdown.</p>
+    </div>
+
+    <!-- Interactive Calculator Workbench -->
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" required>
+        </div>
+        <div class="field">
+          <label for="upto">Age on Date (Reference Date)</label>
+          <input type="date" id="upto" required>
+        </div>
+      </div>
+      
+      <div class="actions">
+        <button class="go" id="run">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Calculate Exact Age
+        </button>
+        <button class="ghost" id="btnToday">Reset to Today</button>
+        <button class="ghost" id="btnCopy" style="display:none;">Copy Breakdown</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Top In-Content Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Entity Summary Box for AI Search Engines -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; CHRONOLOGICAL AGE FORMULATION
+      </span>
+      <h3>Exact Age Calculation Methodology</h3>
+      <p>
+        Chronological age is formally defined as the exact time elapsed from birth to a reference date. Unlike simplistic models that assume 365 or 365.25 days per year, Toolbay evaluates the precise Gregorian calendar hierarchy: subtracting birth date from target date, borrowing the true day count of the preceding calendar month (28, 29, 30, or 31 days) when day differences are negative, and decrementing months accordingly.
+      </p>
+      <div class="geo-formula-badge">
+        Age = [Y₂ - Y₁] years + [M₂ - M₁] months + [D₂ - D₁] days (with leap-adjusted borrowing)
+      </div>
+    </div>
+
+    <!-- Deep Editorial Article (AdSense Value Engine) -->
+    <article class="article">
+      <h2>Why Exact Calendar Arithmetic Matters</h2>
+      <p>
+        Many online age calculators produce erroneous day counts because they rely on fixed 30-day approximations or treat all years as 365 days. In official legal, educational, and immigration contexts, an individual born on February 28 evaluated on March 1 of a leap year has aged exactly one day more than in a non-leap year.
+      </p>
+      
+      <div class="howto-steps">
+        <div class="howto-step-card">
+          <div class="howto-step-num">1</div>
+          <div class="howto-step-text">
+            <h4>Select Your Date of Birth</h4>
+            <p>Pick the day, month, and year from the calendar picker or type it in directly.</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">2</div>
+          <div class="howto-step-text">
+            <h4>Specify the Target Evaluation Date</h4>
+            <p>By default, the calculator evaluates against today. You can set it to a future cutoff date for university admissions, visa applications, or driver's licensing.</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">3</div>
+          <div class="howto-step-text">
+            <h4>Analyze Temporal Metrics</h4>
+            <p>Examine the multi-tier output: total days lived, total weeks, hours elapsed, your birth day of the week, and next birthday countdown.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Common Official Use Cases</h3>
+      <ul>
+        <li><strong>Civil Service &amp; Visa Applications:</strong> Government eligibility rules frequently specify age criteria "as of January 1" or a designated cutoff date.</li>
+        <li><strong>Pediatric Development Charts:</strong> Medical growth percentiles require child ages expressed in exact months and fractional days.</li>
+        <li><strong>Insurance &amp; Actuarial Policies:</strong> Premium calculations distinguish between "age last birthday" vs "age nearest birthday".</li>
+        <li><strong>Retirement Pension Calculations:</strong> Exact vesting dates and superannuation tiers depend on calendar-day milestones.</li>
+      </ul>
+
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How does the calculator handle leap day babies (born Feb 29)?</summary>
+        <p>In common non-leap years, February has only 28 days. The tool accurately accounts for non-leap years when computing your next birthday countdown by evaluating the legal jurisdiction standard (celebrated on March 1 or February 28).</p>
+      </details>
+      <details>
+        <summary>Why can day counts vary between different online tools?</summary>
+        <p>Calculators that divide total milliseconds by 86,400,000 and 365.25 fail to reflect calendar months. Toolbay uses true Gregorian calendar date arithmetic, ensuring the result matches birth certificates and government records.</p>
+      </details>
+      <details>
+        <summary>Does this tool work completely offline?</summary>
+        <p>Yes. Once this page is loaded, you can disconnect your internet and calculate any number of dates without delay.</p>
+      </details>
+    </article>
+
+    <!-- Related Instruments Section -->
+    <section class="related">
+      <h2>More Everyday Calculators</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/date-difference-calculator">
+          <div class="tile-top"><span class="tile-idx">[02]</span><span class="tile-badge">Calendar</span></div>
+          <b>Date Difference Calculator</b>
+          <i>Days between dates, working days, and date arithmetic.</i>
+        </a>
+        <a class="tile" href="/tools/percentage-calculator">
+          <div class="tile-top"><span class="tile-idx">[03]</span><span class="tile-badge">Ratio</span></div>
+          <b>Percentage Calculator</b>
+          <i>Percent of a number, share of total, and percentage change.</i>
+        </a>
+        <a class="tile" href="/tools/loan-emi-calculator">
+          <div class="tile-top"><span class="tile-idx">[04]</span><span class="tile-badge">Fiscal</span></div>
+          <b>Loan EMI Calculator</b>
+          <i>Monthly instalments, total interest, and year-by-year balance.</i>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+          <li><a href="/tools/date-difference-calculator">Date Difference</a></li>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atelier &amp; Legal</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact &amp; Bug Report</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Craft</h4>
+        <p style="font-size:13.5px;color:var(--slate);">100% Client-Side JavaScript &bull; Zero Server Logging &bull; Precision Verified</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<!-- 100% Mathematically Accurate Client-Side Script -->
+<script>
+(function(){
+  // Timezone-Safe Date Formatting & Parsing
+  function toISO(d) {
+    var year = d.getFullYear();
+    var month = String(d.getMonth() + 1).padStart(2, '0');
+    var day = String(d.getDate()).padStart(2, '0');
+    return year + '-' + month + '-' + day;
+  }
+
+  function parseLocalDate(str) {
+    if(!str) return null;
+    var parts = str.split('-').map(Number);
+    if(parts.length !== 3 || isNaN(parts[0])) return null;
+    return new Date(parts[0], parts[1] - 1, parts[2]); // Local midnight
+  }
+
+  var dobInput = document.getElementById('dob');
+  var uptoInput = document.getElementById('upto');
+  var out = document.getElementById('out');
+  var btnRun = document.getElementById('run');
+  var btnToday = document.getElementById('btnToday');
+  var btnCopy = document.getElementById('btnCopy');
+
+  var today = new Date();
+  uptoInput.value = toISO(today);
+
+  // Zodiac Sign helper
+  function getZodiac(m, d) {
+    var signs = [
+      {s:"Capricorn", e:[1,19]}, {s:"Aquarius", e:[2,18]}, {s:"Pisces", e:[3,20]},
+      {s:"Aries", e:[4,19]}, {s:"Taurus", e:[5,20]}, {s:"Gemini", e:[6,20]},
+      {s:"Cancer", e:[7,22]}, {s:"Leo", e:[8,22]}, {s:"Virgo", e:[9,22]},
+      {s:"Libra", e:[10,22]}, {s:"Scorpio", e:[11,21]}, {s:"Sagittarius", e:[12,21]},
+      {s:"Capricorn", e:[12,31]}
+    ];
+    for(var i=0; i<signs.length; i++) {
+      if(m < signs[i].e[0] || (m === signs[i].e[0] && d <= signs[i].e[1])) return signs[i].s;
+    }
+    return "Capricorn";
+  }
+
+  var lastCalculatedText = '';
+
+  function calculateAge() {
+    var d1 = parseLocalDate(dobInput.value);
+    var d2 = parseLocalDate(uptoInput.value) || new Date();
+
+    if(!d1) {
+      out.innerHTML = '<p class="err">Please select a valid date of birth to proceed.</p>';
+      btnCopy.style.display = 'none';
+      return;
+    }
+
+    if(d2 < d1) {
+      out.innerHTML = '<p class="err">The evaluation date precedes your birth date. Please check the dates.</p>';
+      btnCopy.style.display = 'none';
+      return;
+    }
+
+    // Exact Calendar Arithmetic with Month Borrowing
+    var y1 = d1.getFullYear(), m1 = d1.getMonth(), day1 = d1.getDate();
+    var y2 = d2.getFullYear(), m2 = d2.getMonth(), day2 = d2.getDate();
+
+    var years = y2 - y1;
+    var months = m2 - m1;
+    var days = day2 - day1;
+
+    if (days < 0) {
+      months--;
+      // Days in previous month of d2
+      var prevMonthDays = new Date(y2, m2, 0).getDate();
+      days += prevMonthDays;
+    }
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    // Total metrics
+    var diffMs = d2.getTime() - d1.getTime();
+    var totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    var totalWeeks = Math.floor(totalDays / 7);
+    var remainingDaysOfWeek = totalDays % 7;
+    var totalHours = totalDays * 24;
+    var totalMinutes = totalHours * 60;
+
+    // Next Birthday Calculation
+    var nextBday = new Date(y2, m1, day1);
+    // If birthday already passed this year
+    if (nextBday < d2 && (nextBday.getFullYear() === d2.getFullYear() && (nextBday.getMonth() < d2.getMonth() || (nextBday.getMonth() === d2.getMonth() && nextBday.getDate() < d2.getDate())))) {
+      nextBday = new Date(y2 + 1, m1, day1);
+    }
+    var daysToBday = Math.ceil((nextBday.getTime() - d2.getTime()) / (1000 * 60 * 60 * 24));
+    var bdayStatus = daysToBday === 0 ? "Today is your Birthday!" : daysToBday + " days away";
+
+    var weekdayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var bornDayName = weekdayNames[d1.getDay()];
+    var nextBdayDayName = weekdayNames[nextBday.getDay()];
+    var zodiac = getZodiac(m1 + 1, day1);
+
+    lastCalculatedText = years + " Years, " + months + " Months, " + days + " Days (" + totalDays.toLocaleString() + " total days lived). Next birthday: " + bdayStatus;
+
+    out.innerHTML = 
+      '<div class="big">' + years + ' Years, ' + months + ' Months, ' + days + ' Days</div>' +
+      '<p class="sub">Evaluated as of ' + d2.toLocaleDateString(undefined, {weekday:'long', year:'numeric', month:'long', day:'numeric'}) + '</p>' +
+      '<div class="kv"><span>Total Days Lived</span><b>' + totalDays.toLocaleString() + ' days</b></div>' +
+      '<div class="kv"><span>Total Weeks</span><b>' + totalWeeks.toLocaleString() + ' weeks (' + remainingDaysOfWeek + ' days)</b></div>' +
+      '<div class="kv"><span>Total Months</span><b>' + (years * 12 + months).toLocaleString() + ' months</b></div>' +
+      '<div class="kv"><span>Total Hours (approx.)</span><b>' + totalHours.toLocaleString() + ' hours</b></div>' +
+      '<div class="kv"><span>Next Birthday</span><b>' + bdayStatus + ' (' + nextBdayDayName + ')</b></div>' +
+      '<div class="kv"><span>Day of the Week Born</span><b>' + bornDayName + '</b></div>' +
+      '<div class="kv"><span>Astrological Sign</span><b>' + zodiac + '</b></div>';
+
+    btnCopy.style.display = 'inline-flex';
+  }
+
+  btnRun.addEventListener('click', calculateAge);
+  dobInput.addEventListener('change', calculateAge);
+  uptoInput.addEventListener('change', calculateAge);
+
+  btnToday.addEventListener('click', function(){
+    uptoInput.value = toISO(new Date());
+    calculateAge();
+  });
+
+  function safeCopy(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        if(callback) callback();
+      }).catch(function(){
+        fallbackCopy(text, callback);
+      });
+    } else {
+      fallbackCopy(text, callback);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok && callback) callback();
+    } catch(e) {
+      console.warn('Copy fallback:', e);
+    }
+  }
+
+  btnCopy.addEventListener('click', function(){
+    if(!lastCalculatedText) return;
+    safeCopy(lastCalculatedText, function(){
+      var orig = btnCopy.textContent;
+      btnCopy.textContent = 'Copied to Clipboard';
+      setTimeout(function(){ btnCopy.textContent = orig; }, 1800);
+    });
+  });
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

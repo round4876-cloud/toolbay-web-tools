@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Text Case Converter — UPPERCASE, Title Case, camelCase & snake_case | Toolbay</title>
+<meta name="description" content="Free text case converter. Transform text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and CONSTANT_CASE with one click.">
+<meta name="keywords" content="case converter, uppercase to lowercase, title case converter, sentence case, camelcase, snake case, kebab case, text transforms">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/case-converter">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Text Case Converter — 10 Typographic Formats | Toolbay">
+<meta property="og:description" content="Transform prose and code variables across 10 typographical casing formats instantly.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/case-converter">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Text Case Converter",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/case-converter",
+      "description": "Multi-format linguistic and code casing mutation engine.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Writing & Typography", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Case Converter", "item": "https://tools.xyzhome.site/tools/case-converter"}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Writing &amp; Typography</a> &rsaquo; Case Converter</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[10] &bull; GLYPH INSTRUMENT</span>
+      <h1>Precision Text Case Converter</h1>
+      <p>Mutate prose, headlines, and software variables across 10 typographical casing conventions with one-click clipboard copying.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="field">
+        <label for="txt">Input Text</label>
+        <textarea id="txt" placeholder="Paste or type text to transform...">The quick brown fox jumps over the lazy dog</textarea>
+      </div>
+
+      <div class="field">
+        <label>Select Target Casing Format</label>
+        <div class="chips">
+          <button class="chip" data-m="title">Title Case</button>
+          <button class="chip" data-m="sent">Sentence case</button>
+          <button class="chip" data-m="up">UPPERCASE</button>
+          <button class="chip" data-m="low">lowercase</button>
+          <button class="chip" data-m="camel">camelCase</button>
+          <button class="chip" data-m="pascal">PascalCase</button>
+          <button class="chip" data-m="snake">snake_case</button>
+          <button class="chip" data-m="kebab">kebab-case</button>
+          <button class="chip" data-m="const">CONSTANT_CASE</button>
+          <button class="chip" data-m="alt">aLtErNaTiNg</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="go" id="cp">Copy Transformed Text</button>
+        <button class="ghost" id="clr">Clear</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; PROGRAMMING &amp; EDITORIAL CONVENTIONS
+      </span>
+      <h3>Where Different Casing Standards Apply</h3>
+      <ul>
+        <li><strong>camelCase:</strong> Standard for JavaScript and TypeScript variable and function names.</li>
+        <li><strong>PascalCase:</strong> Used for class names, React components, and C# types.</li>
+        <li><strong>snake_case:</strong> Standard for Python variables, functions, and relational database column names.</li>
+        <li><strong>kebab-case:</strong> Ideal for SEO-friendly URL slugs, REST API endpoints, and CSS class selectors.</li>
+        <li><strong>CONSTANT_CASE:</strong> Standard for global configuration keys and environment variables.</li>
+      </ul>
+    </div>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Typographic Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/word-counter">
+          <div class="tile-top"><span class="tile-idx">[09]</span><span class="tile-badge">Prose</span></div>
+          <b>Word Counter</b>
+          <i>Count words, characters, sentences, and reading duration.</i>
+        </a>
+        <a class="tile" href="/tools/json-formatter">
+          <div class="tile-top"><span class="tile-idx">[14]</span><span class="tile-badge">Syntax</span></div>
+          <b>JSON Formatter</b>
+          <i>Format, validate, and minify structured payloads.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/case-converter">Case Converter</a></li>
+          <li><a href="/tools/word-counter">Word Counter</a></li>
+          <li><a href="/tools/json-formatter">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Processing</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Processed synchronously in browser RAM. Never stored.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var txt = document.getElementById('txt');
+  var out = document.getElementById('out');
+  var btnCp = document.getElementById('cp');
+  var btnClr = document.getElementById('clr');
+  var lastConverted = '';
+
+  function getWords(t) {
+    return t.replace(/[^a-zA-Z0-9]+/g, ' ').trim().split(/\s+/).filter(Boolean);
+  }
+
+  var F = {
+    up: function(t) { return t.toUpperCase(); },
+    low: function(t) { return t.toLowerCase(); },
+    title: function(t) { return t.toLowerCase().replace(/\b\w/g, function(c){ return c.toUpperCase(); }); },
+    sent: function(t) { return t.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g, function(c){ return c.toUpperCase(); }); },
+    camel: function(t) {
+      return getWords(t).map(function(w, i){
+        return i ? w[0].toUpperCase() + w.slice(1).toLowerCase() : w.toLowerCase();
+      }).join('');
+    },
+    pascal: function(t) {
+      return getWords(t).map(function(w){
+        return w[0].toUpperCase() + w.slice(1).toLowerCase();
+      }).join('');
+    },
+    snake: function(t) { return getWords(t).map(function(w){ return w.toLowerCase(); }).join('_'); },
+    kebab: function(t) { return getWords(t).map(function(w){ return w.toLowerCase(); }).join('-'); },
+    const: function(t) { return getWords(t).map(function(w){ return w.toUpperCase(); }).join('_'); },
+    alt: function(t) {
+      return Array.prototype.map.call(t, function(c, i){
+        return i % 2 === 0 ? c.toLowerCase() : c.toUpperCase();
+      }).join('');
+    }
+  };
+
+  function transform(mode) {
+    var raw = txt.value;
+    if(!raw) {
+      out.innerHTML = '<p class="err">Please provide input text to transform.</p>';
+      return;
+    }
+    lastConverted = F[mode](raw);
+    out.innerHTML = 
+      '<p class="sub">Transformed Output (' + mode.toUpperCase() + ')</p>' +
+      '<pre style="white-space:pre-wrap;font-size:16px;">' + lastConverted.replace(/</g, '&lt;') + '</pre>';
+  }
+
+  document.querySelectorAll('.chip').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      transform(chip.getAttribute('data-m'));
+    });
+  });
+
+  btnClr.addEventListener('click', function(){
+    txt.value = '';
+    out.innerHTML = '';
+    lastConverted = '';
+  });
+
+  function safeCopy(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        if(callback) callback();
+      }).catch(function(){
+        fallbackCopy(text, callback);
+      });
+    } else {
+      fallbackCopy(text, callback);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok && callback) callback();
+    } catch(e) {
+      console.warn('Copy fallback:', e);
+    }
+  }
+
+  btnCp.addEventListener('click', function(){
+    if(!lastConverted) transform('title');
+    if(!lastConverted) return;
+    safeCopy(lastConverted, function(){
+      var orig = btnCp.textContent;
+      btnCp.textContent = 'Copied to Clipboard!';
+      setTimeout(function(){ btnCp.textContent = orig; }, 1800);
+    });
+  });
+
+  transform('title');
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

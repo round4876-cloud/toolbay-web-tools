@@ -1,0 +1,60 @@
+# ==============================================================================
+# Toolbay Atelier - Netlify Deployment Configuration
+# ==============================================================================
+
+[build]
+  # The folder containing the production ready static HTML/CSS/JS files
+  publish = "website"
+  # Zero build command needed - pre-rendered static site
+  command = ""
+
+[build.processing]
+  skip_processing = false
+
+[build.processing.html]
+  pretty_urls = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Static File Rewrites for Clean URLs (Guarantees genuine 200 OK responses)
+[[redirects]]
+  from = "/about"
+  to = "/about.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from = "/tools/:slug"
+  to = "/tools/:slug.html"
+  status = 200
+
+# Custom 404 handler (Prevents soft 404s from SPA wildcards)
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

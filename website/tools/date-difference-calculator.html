@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Date Difference Calculator — Exact Calendar &amp; Business Days | Toolbay</title>
+<meta name="description" content="Calculate the exact difference between two dates in years, months, days, weeks, and business days. Add or subtract calendar days with 100% leap-year accuracy.">
+<meta name="keywords" content="date difference calculator, days between dates, business days calculator, working days calculator, count days between two dates, add days to date">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/date-difference-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Date Difference Calculator — Exact Calendar &amp; Business Days | Toolbay">
+<meta property="og:description" content="Compute exact calendar duration and working days between any two dates with timezone-safe leap year metrology.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/date-difference-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Chronometric Date Difference Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/date-difference-calculator",
+      "description": "Browser-native date difference and business days calculator with Gregorian leap year metrology.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Everyday Calculators", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Date Difference Calculator", "item": "https://tools.xyzhome.site/tools/date-difference-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does the calculator account for leap years and months of varying lengths?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The calculator implements the Gregorian borrowing algorithm using local calendar dates. Leap days (February 29) are fully factored into day counts, and month-borrowing inspects the actual 28, 29, 30, or 31 days of the preceding month."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are both the start date and end date counted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "By default, the calculator measures the elapsed duration (end date minus start date). If your contract or legal notice requires including both endpoints, enable the 'Include End Day (+1)' toggle."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What days are counted as working business days?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Working days include Monday through Friday (5 days per full week). Saturdays and Sundays are categorized as weekend days. Public holidays vary by country and are not subtracted."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Everyday Calculators</a> &rsaquo; Date Difference Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[15] &bull; CHRONOMETRIC CALCULATOR</span>
+      <h1>Date Difference &amp; Business Days Calculator</h1>
+      <p>Measure exact intervals between two calendar dates in years, months, days, and working business days. Add or subtract calendar intervals with timezone-safe leap year precision.</p>
+    </div>
+
+    <!-- Panel 1: Interval Between Two Dates -->
+    <div class="panel">
+      <div style="font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:14px;color:var(--ink);">
+        1. Measure Duration Between Two Dates
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="d1">Start Date</label>
+          <input type="date" id="d1">
+        </div>
+        <div class="field">
+          <label for="d2">End Date</label>
+          <input type="date" id="d2">
+        </div>
+      </div>
+
+      <div style="display:flex;gap:16px;align-items:center;margin-top:12px;flex-wrap:wrap;">
+        <label style="font-size:14.5px;display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="chkInclusive" style="width:auto;"> Include End Day (+1 Day for inclusive legal periods)
+        </label>
+        <button class="ghost chip" id="btnToday1" style="font-size:12px;padding:3px 10px;">Set Start to Today</button>
+        <button class="ghost chip" id="btnNextMonth" style="font-size:12px;padding:3px 10px;">End +30 Days</button>
+        <button class="ghost chip" id="btnNextYear" style="font-size:12px;padding:3px 10px;">End +1 Year</button>
+      </div>
+
+      <div class="out" id="outDiff" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- Panel 2: Date Addition and Subtraction -->
+    <div class="panel" style="margin-top:28px;">
+      <div style="font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:14px;color:var(--ink);">
+        2. Add or Subtract Days from a Date
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="dAddStart">Base Calendar Date</label>
+          <input type="date" id="dAddStart">
+        </div>
+        <div class="field">
+          <label for="numShift">Quantity of Days</label>
+          <div style="display:flex;gap:8px;">
+            <select id="dirShift" style="width:130px;">
+              <option value="add">Add (+)</option>
+              <option value="sub">Subtract (-)</option>
+            </select>
+            <input type="number" id="numShift" value="30" min="0" max="36500">
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <label style="font-size:14.5px;display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="chkBizOnly" style="width:auto;"> Business Days Only (Skip Saturdays and Sundays)
+        </label>
+      </div>
+
+      <div class="out" id="outAdd" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; GREGORIAN CHRONOMETRIC SPECIFICATION
+      </span>
+      <h3>How is the Exact Difference Between Two Dates Calculated?</h3>
+      <p>
+        The calendar difference between two dates is evaluated by resolving variable-length Gregorian intervals. Years are computed as whole multi-annual cycles ($Y_2 - Y_1$), months represent fractional annual cycles ($M_2 - M_1$), and days borrow the exact calendar length (28, 29, 30, or 31 days) of the preceding month when day subtraction produces a negative remainder. Total days are determined by absolute midnight millisecond deltas divided by 86,400,000. Working business days exclude Saturdays and Sundays via modular arithmetic ($W = 5 \times \lfloor \Delta / 7 \rfloor + \text{residual weekdays}$).
+      </p>
+    </div>
+
+    <!-- Educational Editorial Content -->
+    <article class="article">
+      <h2>The Mathematics of Time: Gregorian Calendar Anomalies and Business Day Metrology</h2>
+      <p>
+        In financial auditing, judicial contract administration, visa expiration enforcement, and project sprint management, calculating the elapsed duration between two dates is rarely as straightforward as subtracting two numbers. Human civilization measures time using the Gregorian calendar—introduced by Pope Gregory XIII in October 1582 to rectify the Julian calendar’s drift against the solar equinox.
+      </p>
+
+      <h3>1. Gregorian Calendar Invariants and Variable Month Geometry</h3>
+      <p>
+        A mean tropical year comprises approximately $365.2422$ solar days. To reconcile this fractional astronomical reality, the Gregorian system establishes a quadrennial leap rule:
+      </p>
+      <ul>
+        <li>Every year evenly divisible by 4 is a leap year (366 days, adding February 29).</li>
+        <li><strong>Centurial Exception:</strong> Years divisible by 100 are NOT leap years (e.g., 1900, 2100).</li>
+        <li><strong>Quadricenturial Exception:</strong> Years divisible by 400 ARE leap years (e.g., 1600, 2000, 2400).</li>
+      </ul>
+      <p>
+        Because months range in duration from 28 to 31 days, finding the exact duration between, for example, January 31 and March 1 requires inspecting the specific leap status of the intervening February. Naive algorithms that divide total days by 30 or 30.4375 introduce errors of up to 3 days.
+      </p>
+
+      <h3>2. The Gregorian Borrowing Algorithm Explained</h3>
+      <p>
+        To output the human-readable breakdown of <em>Y years, M months, and D days</em>, the Toolbay calculator applies recursive calendar borrowing:
+      </p>
+      <div style="background:var(--blush);padding:14px 18px;border-radius:8px;font-family:var(--font-mono);font-size:13.5px;margin:16px 0;line-height:1.6;">
+        Let D1 = (Y1, M1, D1) and D2 = (Y2, M2, D2) where D2 &ge; D1.<br>
+        1. diff_days = D2 - D1<br>
+        2. If diff_days &lt; 0:<br>
+        &nbsp;&nbsp;&nbsp;M2 = M2 - 1<br>
+        &nbsp;&nbsp;&nbsp;days_in_prev_month = DaysInMonth(Y2, M2)<br>
+        &nbsp;&nbsp;&nbsp;diff_days = diff_days + days_in_prev_month<br>
+        3. diff_months = M2 - M1<br>
+        4. If diff_months &lt; 0:<br>
+        &nbsp;&nbsp;&nbsp;Y2 = Y2 - 1<br>
+        &nbsp;&nbsp;&nbsp;diff_months = diff_months + 12<br>
+        5. diff_years = Y2 - Y1
+      </div>
+
+      <h3>3. Working Days vs. Calendar Days: Contractual Implications</h3>
+      <p>
+        A legal notice specifying "30 business days" is substantially longer than "30 calendar days." Thirty calendar days equates to approximately 4 weeks and 2 days. Thirty business days spans exactly 6 complete calendar weeks (42 calendar days).
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Timeline Duration</th>
+              <th>Calendar Days</th>
+              <th>Working Days (Mon–Fri)</th>
+              <th>Weekend Days (Sat–Sun)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Standard 2-Week Sprint</td>
+              <td>14 Days</td>
+              <td>10 Working Days</td>
+              <td>4 Weekend Days</td>
+            </tr>
+            <tr>
+              <td>Standard 30-Day Notice</td>
+              <td>30 Days</td>
+              <td>~21–22 Working Days</td>
+              <td>8–9 Weekend Days</td>
+            </tr>
+            <tr>
+              <td>90-Day Probation Period</td>
+              <td>90 Days</td>
+              <td>~64–65 Working Days</td>
+              <td>25–26 Weekend Days</td>
+            </tr>
+            <tr>
+              <td>1 Calendar Year</td>
+              <td>365 / 366 Days</td>
+              <td>260–262 Working Days</td>
+              <td>104 Weekend Days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>4. Timezone Safety: Eradicating UTC Offset Jitter</h3>
+      <p>
+        A frequent bug in web calculators occurs when date strings like <code>"2026-06-01"</code> are passed directly into JavaScript's <code>new Date("2026-06-01")</code> constructor. Per ECMAScript specifications, ISO date-only strings are interpreted as midnight UTC ($00:00:00\text{Z}$). In Western Hemisphere timezones (such as US Eastern Time UTC-5 or Pacific Time UTC-8), UTC midnight corresponds to 7:00 PM or 4:00 PM on the <em>preceding day</em> (May 31), producing off-by-one errors.
+      </p>
+      <p>
+        The Toolbay Atelier eliminates this flaw by splitting input strings into explicit integer components (<code>[year, month, day]</code>) and initializing dates within the local device timezone, guaranteeing 100% calendar fidelity worldwide.
+      </p>
+
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How does the calculator account for leap years and months of varying lengths?</summary>
+        <p>The calculator implements the Gregorian borrowing algorithm using local calendar dates. Leap days (February 29) are fully factored into day counts, and month-borrowing inspects the actual 28, 29, 30, or 31 days of the preceding month.</p>
+      </details>
+      <details>
+        <summary>Are both the start date and end date counted?</summary>
+        <p>By default, the calculator measures the elapsed duration (end date minus start date). If your contract or legal notice requires including both endpoints, enable the 'Include End Day (+1)' toggle.</p>
+      </details>
+      <details>
+        <summary>What days are counted as working business days?</summary>
+        <p>Working days include Monday through Friday (5 days per full week). Saturdays and Sundays are categorized as weekend days. Public holidays vary by country and are not subtracted.</p>
+      </details>
+      <details>
+        <summary>Can I project dates across past centuries or future millennia?</summary>
+        <p>Yes. The calculator leverages 64-bit floating point timestamp arithmetic capable of evaluating calendar dates across hundreds of years with zero precision degradation.</p>
+      </details>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Everyday Calculators</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/age-calculator">
+          <div class="tile-top"><span class="tile-idx">[1]</span><span class="tile-badge">Chronometry</span></div>
+          <b>Age Calculator</b>
+          <i>Exact chronological age in years, months, and days plus birthday countdown.</i>
+        </a>
+        <a class="tile" href="/tools/percentage-calculator">
+          <div class="tile-top"><span class="tile-idx">[4]</span><span class="tile-badge">Ratio</span></div>
+          <b>Percentage Calculator</b>
+          <i>Compute proportion ratios, share percentages, and compound increases.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/date-difference-calculator">Date Difference Calculator</a></li>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Calendar Standard</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Conforms rigorously to ISO 8601 calendar representations and Gregorian astronomical rules.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var d1Input = document.getElementById('d1');
+  var d2Input = document.getElementById('d2');
+  var chkInclusive = document.getElementById('chkInclusive');
+  var outDiff = document.getElementById('outDiff');
+  var btnToday1 = document.getElementById('btnToday1');
+  var btnNextMonth = document.getElementById('btnNextMonth');
+  var btnNextYear = document.getElementById('btnNextYear');
+
+  var dAddStart = document.getElementById('dAddStart');
+  var dirShift = document.getElementById('dirShift');
+  var numShift = document.getElementById('numShift');
+  var chkBizOnly = document.getElementById('chkBizOnly');
+  var outAdd = document.getElementById('outAdd');
+
+  // Timezone-safe date formatting YYYY-MM-DD
+  function toISO(date) {
+    var y = date.getFullYear();
+    var m = String(date.getMonth() + 1).padStart(2, '0');
+    var d = String(date.getDate()).padStart(2, '0');
+    return y + '-' + m + '-' + d;
+  }
+
+  // Timezone-safe date parser
+  function parseLocalDate(str) {
+    if (!str) return null;
+    var parts = str.split('-').map(Number);
+    if (parts.length !== 3 || isNaN(parts[0])) return null;
+    return new Date(parts[0], parts[1] - 1, parts[2]);
+  }
+
+  // Days in specific month
+  function getDaysInMonth(year, monthIndex) {
+    return new Date(year, monthIndex + 1, 0).getDate();
+  }
+
+  // Initialize dates
+  var today = new Date();
+  var defaultEnd = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+  d1Input.value = toISO(today);
+  d2Input.value = toISO(defaultEnd);
+  dAddStart.value = toISO(today);
+
+  // Business days calculation
+  function calculateBusinessDays(startDate, totalDays) {
+    var workingDays = 0;
+    var cur = new Date(startDate.getTime());
+    for (var i = 0; i < totalDays; i++) {
+      var dayOfWeek = cur.getDay(); // 0 is Sunday, 6 is Saturday
+      if (dayOfWeek !== 0 && dayOfWeek !== 6) {
+        workingDays++;
+      }
+      cur.setDate(cur.getDate() + 1);
+    }
+    return workingDays;
+  }
+
+  // Module 1: Compute Date Difference
+  function calcDifference() {
+    var date1 = parseLocalDate(d1Input.value);
+    var date2 = parseLocalDate(d2Input.value);
+
+    if (!date1 || !date2) {
+      outDiff.innerHTML = '<p class="err" style="margin:0;">Please select both a start date and an end date.</p>';
+      return;
+    }
+
+    var isInclusive = chkInclusive.checked;
+    var isInverted = date2 < date1;
+    var start = isInverted ? date2 : date1;
+    var end = isInverted ? date1 : date2;
+
+    // Calendar Duration calculation (Years, Months, Days)
+    var y1 = start.getFullYear(), m1 = start.getMonth(), day1 = start.getDate();
+    var y2 = end.getFullYear(), m2 = end.getMonth(), day2 = end.getDate();
+
+    var dDiff = day2 - day1;
+    var mDiff = m2 - m1;
+    var yDiff = y2 - y1;
+
+    if (dDiff < 0) {
+      mDiff--;
+      var prevMonthDays = getDaysInMonth(y2, m2 - 1);
+      dDiff += prevMonthDays;
+    }
+    if (mDiff < 0) {
+      yDiff--;
+      mDiff += 12;
+    }
+
+    if (isInclusive) {
+      dDiff += 1;
+      var currentMonthDays = getDaysInMonth(y2, m2);
+      if (dDiff >= currentMonthDays) {
+        dDiff -= currentMonthDays;
+        mDiff += 1;
+        if (mDiff >= 12) {
+          mDiff -= 12;
+          yDiff += 1;
+        }
+      }
+    }
+
+    // Total absolute days
+    var msDelta = Math.abs(end.getTime() - start.getTime());
+    var totalDays = Math.round(msDelta / (1000 * 60 * 60 * 24)) + (isInclusive ? 1 : 0);
+    var weeks = Math.floor(totalDays / 7);
+    var remainingDays = totalDays % 7;
+
+    // Working days
+    var workingDays = calculateBusinessDays(start, totalDays);
+    var weekendDays = totalDays - workingDays;
+
+    var hours = totalDays * 24;
+    var minutes = hours * 60;
+
+    var formattedStart = start.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+    var formattedEnd = end.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+
+    var html = '<div class="big" style="font-family:var(--font-head);font-size:38px;color:var(--dusty-pink);margin-bottom:4px;">' +
+      totalDays.toLocaleString() + ' Total Calendar Days' +
+      '</div>' +
+      '<p class="sub" style="font-size:16px;color:var(--ink);margin:0 0 16px;">' +
+      '<b>' + yDiff + ' Years, ' + mDiff + ' Months, and ' + dDiff + ' Days</b>' +
+      (isInverted ? ' <span style="color:#C92A2A;">(End date precedes start date)</span>' : '') +
+      '</p>' +
+
+      '<div class="kv">' +
+        '<span>Interval Span</span>' +
+        '<b>' + formattedStart + ' &rarr; ' + formattedEnd + '</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Working Business Days (Mon–Fri)</span>' +
+        '<b style="color:#2B8A3E;">' + workingDays.toLocaleString() + ' Days (' + (totalDays > 0 ? ((workingDays/totalDays)*100).toFixed(1) : 0) + '%)</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Weekend Days (Sat–Sun)</span>' +
+        '<b>' + weekendDays.toLocaleString() + ' Days</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Weeks Breakdown</span>' +
+        '<b>' + weeks.toLocaleString() + ' Weeks and ' + remainingDays + ' Days</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Total Elapsed Hours</span>' +
+        '<b>' + hours.toLocaleString() + ' Hours</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Total Elapsed Minutes</span>' +
+        '<b>' + minutes.toLocaleString() + ' Minutes</b>' +
+      '</div>';
+
+    outDiff.innerHTML = html;
+  }
+
+  // Module 2: Add or Subtract Days
+  function calcShift() {
+    var baseDate = parseLocalDate(dAddStart.value);
+    if (!baseDate) {
+      outAdd.innerHTML = '<p class="err" style="margin:0;">Please select a base calendar date.</p>';
+      return;
+    }
+
+    var qty = parseInt(numShift.value, 10);
+    if (isNaN(qty) || qty < 0) qty = 0;
+    var isAdd = dirShift.value === 'add';
+    var isBizOnly = chkBizOnly.checked;
+
+    var cur = new Date(baseDate.getTime());
+
+    if (isBizOnly) {
+      var added = 0;
+      var step = isAdd ? 1 : -1;
+      while (added < qty) {
+        cur.setDate(cur.getDate() + step);
+        var dow = cur.getDay();
+        if (dow !== 0 && dow !== 6) {
+          added++;
+        }
+      }
+    } else {
+      var dayDelta = isAdd ? qty : -qty;
+      cur.setDate(cur.getDate() + dayDelta);
+    }
+
+    var formattedResult = cur.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    var formattedBase = baseDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    var html = '<div class="big" style="font-family:var(--font-head);font-size:32px;color:var(--dusty-pink);margin-bottom:4px;">' +
+      formattedResult +
+      '</div>' +
+      '<p class="sub" style="font-size:15px;color:var(--ink);margin:0 0 12px;">' +
+      qty.toLocaleString() + (isBizOnly ? ' working business days ' : ' calendar days ') +
+      (isAdd ? 'after ' : 'before ') + formattedBase +
+      '</p>' +
+      '<div class="kv">' +
+        '<span>Day of Week</span>' +
+        '<b>' + cur.toLocaleDateString('en-US', { weekday: 'long' }) + '</b>' +
+      '</div>' +
+      '<div class="kv">' +
+        '<span>Standard ISO 8601 Format</span>' +
+        '<b style="font-family:var(--font-mono);">' + toISO(cur) + '</b>' +
+      '</div>';
+
+    outAdd.innerHTML = html;
+  }
+
+  // Event Listeners
+  d1Input.addEventListener('change', calcDifference);
+  d2Input.addEventListener('change', calcDifference);
+  chkInclusive.addEventListener('change', calcDifference);
+
+  btnToday1.addEventListener('click', function(){
+    d1Input.value = toISO(new Date());
+    calcDifference();
+  });
+
+  btnNextMonth.addEventListener('click', function(){
+    var d1 = parseLocalDate(d1Input.value) || new Date();
+    var nextM = new Date(d1.getTime());
+    nextM.setDate(nextM.getDate() + 30);
+    d2Input.value = toISO(nextM);
+    calcDifference();
+  });
+
+  btnNextYear.addEventListener('click', function(){
+    var d1 = parseLocalDate(d1Input.value) || new Date();
+    var nextY = new Date(d1.getFullYear() + 1, d1.getMonth(), d1.getDate());
+    d2Input.value = toISO(nextY);
+    calcDifference();
+  });
+
+  dAddStart.addEventListener('change', calcShift);
+  dirShift.addEventListener('change', calcShift);
+  numShift.addEventListener('input', calcShift);
+  chkBizOnly.addEventListener('change', calcShift);
+
+  // Initial Calculation Run
+  calcDifference();
+  calcShift();
+
+  // Dark/Light Theme Switcher
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  var savedTheme = 'light';
+  try {
+    savedTheme = localStorage.getItem('toolbay_theme') || 'light';
+  } catch(e){}
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (themeBtnText) themeBtnText.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+  if(themeBtn) {
+    themeBtn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('toolbay_theme', next); } catch(e){}
+      if (themeBtnText) themeBtnText.textContent = next === 'dark' ? 'Light' : 'Dark';
+    });
+  }
+})();
+</script>
+</body>
+</html>

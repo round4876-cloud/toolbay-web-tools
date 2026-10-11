@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>Toolbay — The Digital Atelier of Precision Online Tools & Calculators</title>
+
+<meta name="description" content="Toolbay is a high-precision digital atelier offering 16 client-side calculators, converters, image optimizers, and cryptographic utilities. Instant, privacy-first, zero server uploads.">
+<meta name="keywords" content="online tools, calculators, age calculator, emi calculator, bmi calculator, unit converter, image compressor, qr generator, json formatter, percentage calculator, hp calculator">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="language" content="English">
+<meta name="geo.region" content="US">
+<meta name="geo.placename" content="Global">
+<meta name="distribution" content="global">
+<link rel="canonical" href="https://tools.xyzhome.site/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Toolbay — The Digital Atelier of Precision Online Tools & Calculators">
+<meta property="og:description" content="16 handcrafted, high-precision tools for everyday calculations, financial analysis, text formatting, and developer workflows. 100% in-browser, zero data transmission.">
+<meta property="og:url" content="https://tools.xyzhome.site/">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Toolbay — The Digital Atelier of Precision Tools">
+<meta name="twitter:description" content="Bespoke online calculators and developer utilities running entirely in your browser with zero server latency.">
+<meta name="twitter:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography: Bodoni Moda, Caveat Brush, Plus Jakarta Sans, JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data: WebSite, Organization & SearchAction (SEO / GEO / AEO by Ghulam Ali) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://tools.xyzhome.site/#website",
+      "url": "https://tools.xyzhome.site/",
+      "name": "Toolbay",
+      "alternateName": "Toolbay Atelier",
+      "description": "Bespoke digital atelier of 16 client-side mathematical calculators, unit converters, and developer utilities.",
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://tools.xyzhome.site/#organization",
+        "name": "Toolbay Atelier",
+        "url": "https://tools.xyzhome.site/",
+        "logo": "https://tools.xyzhome.site/assets/favicon.svg",
+        "founder": {
+          "@type": "Person",
+          "name": "Ghulam Ali",
+          "jobTitle": "Lead Search Architect & Mathematical Metrologist",
+          "url": "https://tools.xyzhome.site/about"
+        },
+        "knowsAbout": [
+          "Generative Engine Optimization",
+          "Mathematical Metrology",
+          "Zero-Knowledge Client-Side Architecture",
+          "Web Crawling and Indexation Optimization",
+          "Core Web Vitals"
+        ]
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://tools.xyzhome.site/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://tools.xyzhome.site/#organization",
+      "name": "Toolbay Atelier",
+      "url": "https://tools.xyzhome.site/",
+      "logo": "https://tools.xyzhome.site/assets/favicon.svg",
+      "founder": {
+        "@type": "Person",
+        "name": "Ghulam Ali",
+        "jobTitle": "Lead Search Architect & Mathematical Metrologist"
+      },
+      "sameAs": [
+        "https://tools.xyzhome.site/about"
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Toolbay Suite of Precision Instruments",
+      "numberOfItems": 16,
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Age Calculator", "url": "https://tools.xyzhome.site/tools/age-calculator"},
+        {"@type": "ListItem", "position": 2, "name": "BMI Calculator", "url": "https://tools.xyzhome.site/tools/bmi-calculator"},
+        {"@type": "ListItem", "position": 3, "name": "Loan EMI Calculator", "url": "https://tools.xyzhome.site/tools/loan-emi-calculator"},
+        {"@type": "ListItem", "position": 4, "name": "Percentage Calculator", "url": "https://tools.xyzhome.site/tools/percentage-calculator"},
+        {"@type": "ListItem", "position": 5, "name": "Discount Calculator", "url": "https://tools.xyzhome.site/tools/discount-calculator"},
+        {"@type": "ListItem", "position": 6, "name": "Sales Tax Calculator", "url": "https://tools.xyzhome.site/tools/sales-tax-calculator"},
+        {"@type": "ListItem", "position": 7, "name": "Unit Converter", "url": "https://tools.xyzhome.site/tools/unit-converter"},
+        {"@type": "ListItem", "position": 8, "name": "Word Counter", "url": "https://tools.xyzhome.site/tools/word-counter"},
+        {"@type": "ListItem", "position": 9, "name": "Text Case Converter", "url": "https://tools.xyzhome.site/tools/case-converter"},
+        {"@type": "ListItem", "position": 10, "name": "Password Generator", "url": "https://tools.xyzhome.site/tools/password-generator"},
+        {"@type": "ListItem", "position": 11, "name": "QR Code Generator", "url": "https://tools.xyzhome.site/tools/qr-code-generator"},
+        {"@type": "ListItem", "position": 12, "name": "Image Compressor", "url": "https://tools.xyzhome.site/tools/image-compressor"},
+        {"@type": "ListItem", "position": 13, "name": "JSON Formatter", "url": "https://tools.xyzhome.site/tools/json-formatter"},
+        {"@type": "ListItem", "position": 14, "name": "Color Converter", "url": "https://tools.xyzhome.site/tools/color-converter"},
+        {"@type": "ListItem", "position": 15, "name": "Date Difference Calculator", "url": "https://tools.xyzhome.site/tools/date-difference-calculator"},
+        {"@type": "ListItem", "position": 16, "name": "D&D 5e Hit Point Calculator", "url": "https://tools.xyzhome.site/tools/hp-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does Toolbay ensure 100% mathematical accuracy for all calculators?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every calculator in Toolbay implements verified ISO algorithms, calendar leap-day correction, reducing-balance compound financial amortization, and exact IEEE 754 precision safeguards running in real-time within your browser."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my files, dates, numbers, or text ever uploaded to a server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Never. Toolbay operates on a strict zero-knowledge, client-side architecture. Image compression, password generation, text analysis, and financial calculations execute entirely in your local browser sandbox."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do Toolbay calculators work offline?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Once loaded, all 16 tools operate seamlessly offline without an active internet connection, making them ideal for field work and remote productivity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are D&D 5e Hit Points calculated with multiclassing and Constitution modifiers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In D&D 5th Edition, your 1st-level starting class provides maximum hit die plus Constitution modifier. Additional class levels added through multiclassing grant either fixed average (rounded up) or rolled average plus Constitution modifier per level, augmented by feats like Tough."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What mathematical formula calculates reducing-balance loan EMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reducing-balance loan EMI is formulated as P × r × [(1 + r)^n / ((1 + r)^n - 1)], where P is loan principal, r is monthly interest rate (APR / 1200), and n is total months of tenure."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<!-- Site Navigation Header -->
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+    </a>
+    
+    <nav class="nav" role="navigation" aria-label="Main Navigation">
+      <a href="#tools">All Tools</a>
+      <a href="/about">About</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Switch between light and dark theme">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <span id="themeBtnText">Dark</span>
+      </button>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Dropdown Drawer -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation" role="navigation">
+    <div class="mobile-nav-list">
+      <a class="mobile-nav-link" href="#tools">
+        <span>🧰 All 16 Tools &amp; Calculators</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="mobile-nav-link" href="/about">
+        <span>📖 About Toolbay</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="mobile-nav-link" href="/privacy">
+        <span>🔒 Zero-Knowledge Privacy</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="mobile-nav-link" href="/terms">
+        <span>📜 Terms of Service</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+      <a class="mobile-nav-link" href="/contact">
+        <span>✉️ Contact &amp; Bug Report</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- Clean White Hero Section -->
+  <section class="hero-clean" aria-label="Hero">
+    <div class="wrap">
+      <h1>Precision Online Tools &amp; Calculators</h1>
+      <p>Fast, free, and secure browser-native instruments engineered for mathematical accuracy. 100% private with instant local client-side computation.</p>
+
+      <!-- Clean Search Bar -->
+      <div class="search-atelier-wrap">
+        <div class="search-atelier">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="q" placeholder="Search any calculator or tool — e.g. HP, Age, EMI, BMI, Percentage..." aria-label="Search tools by keyword or function" autocomplete="off">
+          <button class="search-clear" id="searchClear" aria-label="Clear search input" hidden>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="search-meta" id="searchMeta">
+          <span>Showing all <b>16</b> precision instruments</span>
+        </div>
+        <div class="search-atelier-chips">
+          <button class="search-chip" data-query="hp">D&amp;D HP</button>
+          <button class="search-chip" data-query="age">Age</button>
+          <button class="search-chip" data-query="emi">EMI</button>
+          <button class="search-chip" data-query="bmi">BMI</button>
+          <button class="search-chip" data-query="percentage">Percentage</button>
+          <button class="search-chip" data-query="discount">Discount</button>
+          <button class="search-chip" data-query="password">Password</button>
+          <button class="search-chip" data-query="qr">QR Code</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       GEO & AEO DIRECT ANSWER ENTITY BLOCK
+       Direct structured definitions for AI Search Engines & Google AI Overviews
+       ========================================================================= -->
+  <section class="wrap">
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        AI OVERVIEW &bull; DIRECT CITATION SUMMARY
+      </span>
+      <h3>What is Toolbay and How Does It Function?</h3>
+      <p>
+        <strong>Toolbay</strong> is an open-access, browser-native utility atelier comprising 16 specialized mathematical, fiscal, textual, and developer instruments. Unlike traditional web utilities that offload data to remote servers, Toolbay processes 100% of calculations, image re-encoding, and cryptographic entropy locally within the client's browser using HTML5 Canvas, the Web Cryptography API, and strict IEEE-754 arithmetic.
+      </p>
+      <div class="geo-formula-badge">
+        Zero Latency &bull; Zero Server Logging &bull; 100% Offline Resilience &bull; Free Commercial License
+      </div>
+    </div>
+  </section>
+
+  <!-- Designated AdSense Top Placement Slot -->
+  <div class="wrap">
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box" id="ad-leaderboard-home">
+        <!-- Google AdSense Container: Paste your responsive ad code here -->
+        <span>Responsive Leaderboard Ad Slot &bull; 728x90 / Automatic Display</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       THE 16 PRECISION INSTRUMENTS CURATED CATALOG
+       ========================================================================= -->
+  <section class="tools-atelier-section" id="tools" aria-label="The 16 Instruments Catalog">
+    <div class="wrap">
+      
+      <!-- Live Search Empty State -->
+      <div class="search-empty" id="searchEmpty" hidden role="status" aria-live="polite">
+        <div class="search-empty-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </div>
+        <h3 id="searchEmptyTitle">No instruments found</h3>
+        <p id="searchEmptyDesc">We couldn't find any tool matching your search query. Try searching for popular tools like <strong>HP, Age, EMI, BMI, Percentage, QR, or Password</strong>.</p>
+        <button class="go" id="btnResetSearch" style="padding:8px 18px;font-size:14px;">Clear Search and View All 16 Tools</button>
+      </div>
+      
+      <!-- Category 1: Everyday Calculators -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Everyday Calculators</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; I</span>
+        </div>
+        <div class="tools-grid">
+          
+          <a class="tile" data-name="age calculator dob date of birth how old am i birthday" href="/tools/age-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[01] &bull; CHRONOLOGY</span>
+              <span class="tile-badge">100% Exact</span>
+            </div>
+            <b>Age Calculator</b>
+            <i>Exact age in years, months, days, total weeks, hours, and next birthday countdown with leap-year precision.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="date difference calculator days between dates business working days" href="/tools/date-difference-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[02] &bull; CALENDAR</span>
+              <span class="tile-badge">Dual Mode</span>
+            </div>
+            <b>Date Difference Calculator</b>
+            <i>Calendar span, working business days (Mon–Fri), weekend counts, and forward/backward date arithmetic.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="percentage calculator percent change share increase decrease difference" href="/tools/percentage-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[03] &bull; RATIO</span>
+              <span class="tile-badge">Tri-Matrix</span>
+            </div>
+            <b>Percentage Calculator</b>
+            <i>Percent of a total, relative share percentage, percentage increase or decrease, and relative variance.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="hp calculator dnd 5e hit point barbarian fighter multiclass con mod leveling" href="/tools/hp-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[16] &bull; METROLOGY</span>
+              <span class="tile-badge">D&amp;D 5e</span>
+            </div>
+            <b>D&amp;D 5e HP Calculator</b>
+            <i>Maximum hit points, multiclass hit dice progression, Constitution modifiers, Tough feat, and racial bonuses.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <!-- Category 2: Money & Business -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Money &amp; Financial Engineering</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; II</span>
+        </div>
+        <div class="tools-grid">
+
+          <a class="tile" data-name="loan emi calculator monthly instalment home loan car loan interest schedule" href="/tools/loan-emi-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[04] &bull; FISCAL</span>
+              <span class="tile-badge">Amortization</span>
+            </div>
+            <b>Loan EMI Calculator</b>
+            <i>Equated monthly instalments, cumulative interest, principal share, and complete multi-year balance schedule.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="discount calculator sale price percent off stacked double discount" href="/tools/discount-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[05] &bull; COMMERCE</span>
+              <span class="tile-badge">Stacked</span>
+            </div>
+            <b>Discount Calculator</b>
+            <i>Final net purchase price, gross savings amount, and compounded multi-tier checkout promotions.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="sales tax calculator vat gst add tax remove vat inclusive gross net" href="/tools/sales-tax-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[06] &bull; STATUTORY</span>
+              <span class="tile-badge">Bidirectional</span>
+            </div>
+            <b>Sales Tax Calculator</b>
+            <i>Add statutory sales tax or back out inclusive VAT and GST from gross retail prices with exact cent precision.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <!-- Category 3: Converters & Metrics -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Converters &amp; Metrics</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; III</span>
+        </div>
+        <div class="tools-grid">
+
+          <a class="tile" data-name="unit converter length weight temperature area volume speed data time" href="/tools/unit-converter">
+            <div class="tile-top">
+              <span class="tile-idx">[07] &bull; METRIC</span>
+              <span class="tile-badge">8 Domains</span>
+            </div>
+            <b>Unit Converter</b>
+            <i>Length, mass, temperature scales, area including Marla and Kanal, liquid volume, speed, digital storage, and time.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="bmi calculator body mass index metric imperial healthy weight range" href="/tools/bmi-calculator">
+            <div class="tile-top">
+              <span class="tile-idx">[08] &bull; BIOMETRIC</span>
+              <span class="tile-badge">WHO Standard</span>
+            </div>
+            <b>BMI Calculator</b>
+            <i>Metric and Imperial Body Mass Index, WHO clinical classification bands, and healthy target weight ranges.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <!-- Category 4: Writing & Typography -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Writing &amp; Typography</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; IV</span>
+        </div>
+        <div class="tools-grid">
+
+          <a class="tile" data-name="word counter character count reading time sentences paragraphs keyword density" href="/tools/word-counter">
+            <div class="tile-top">
+              <span class="tile-idx">[09] &bull; PROSE</span>
+              <span class="tile-badge">Live Analytics</span>
+            </div>
+            <b>Word Counter</b>
+            <i>Words, characters with and without whitespace, sentences, paragraphs, reading velocity, and keyword density.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="case converter uppercase lowercase title case sentence case camelcase snake kebab" href="/tools/case-converter">
+            <div class="tile-top">
+              <span class="tile-idx">[10] &bull; GLYPHS</span>
+              <span class="tile-badge">10 Transforms</span>
+            </div>
+            <b>Text Case Converter</b>
+            <i>UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, and alternating casing.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <!-- Category 5: Security & Visual Media -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Security &amp; Visual Media</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; V</span>
+        </div>
+        <div class="tools-grid">
+
+          <a class="tile" data-name="password generator secure strong random entropy cspring offline" href="/tools/password-generator">
+            <div class="tile-top">
+              <span class="tile-idx">[11] &bull; CRYPTO</span>
+              <span class="tile-badge">CSPRNG</span>
+            </div>
+            <b>Password Generator</b>
+            <i>Cryptographically random offline keys with exact entropy bit scoring and guaranteed character distribution.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="qr code generator link wifi phone email free vector png" href="/tools/qr-code-generator">
+            <div class="tile-top">
+              <span class="tile-idx">[12] &bull; MATRIX</span>
+              <span class="tile-badge">Permanent Vector</span>
+            </div>
+            <b>QR Code Generator</b>
+            <i>Permanent static matrix codes for links, text, WiFi credentials, and phone numbers. High-resolution PNG export.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="image compressor reduce jpg png webp photo shrink resize" href="/tools/image-compressor">
+            <div class="tile-top">
+              <span class="tile-idx">[13] &bull; RASTER</span>
+              <span class="tile-badge">Canvas Engine</span>
+            </div>
+            <b>Image Compressor</b>
+            <i>Compress JPG, PNG, and WebP in your browser with quality slider, max dimension constraints, and byte preview.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <!-- Category 6: Developer Tools -->
+      <article class="cat-atelier" data-cat>
+        <div class="cat-head">
+          <h2>Developer Tools</h2>
+          <span class="cat-head-meta">ATELIER NUMÉRIQUE &bull; VI</span>
+        </div>
+        <div class="tools-grid">
+
+          <a class="tile" data-name="json formatter validator beautify minify pretty print" href="/tools/json-formatter">
+            <div class="tile-top">
+              <span class="tile-idx">[14] &bull; SYNTAX</span>
+              <span class="tile-badge">Validator</span>
+            </div>
+            <b>JSON Formatter</b>
+            <i>Format, validate, and minify JSON payloads with line-and-column syntax error pointers and one-click copy.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+          <a class="tile" data-name="color converter hex rgb hsl cmyk contrast checker wcag aa aaa" href="/tools/color-converter">
+            <div class="tile-top">
+              <span class="tile-idx">[15] &bull; CHROMATICS</span>
+              <span class="tile-badge">WCAG AA/AAA</span>
+            </div>
+            <b>Color Converter</b>
+            <i>Convert between HEX, RGB, and HSL with interactive color picking and WCAG 2.1 contrast ratio verification.</i>
+            <div class="tile-foot">
+              <span>Open Instrument</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </article>
+
+      <p class="no-result" id="none" hidden>No instrument matches that keyword yet. Tell us what you need via the <a href="/contact">contact page</a>.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       EDITORIAL LONG-FORM CONTENT & ESSAY (ADSENSE VALUE & TRUST ENGINE)
+       ========================================================================= -->
+  <section class="wrap article" style="padding-top:40px;">
+    <h2>The Philosophy of In-Browser Mathematical Craft</h2>
+    <p>
+      In an era dominated by cloud telemetry and bloated multi-megabyte utility bundles, <strong>Toolbay</strong> was conceived as an homage to the classic European atelier: an environment where precision drafting tools, architectural calipers, and mathematical tables were crafted to last decades with zero reliance on external infrastructure.
+    </p>
+    <p>
+      Every single tool presented on this platform functions entirely through compiled client-side JavaScript, leveraging modern web primitives such as the HTML5 Canvas API, the Web Cryptography engine, and high-precision IEEE-754 floating-point operations.
+    </p>
+
+    <h3>Why Client-Side Execution Is Non-Negotiable</h3>
+    <ol>
+      <li><strong>Absolute Data Privacy:</strong> When you calculate an amortization schedule for a multi-million-dollar mortgage, compress confidential corporate deeds, or generate master administrative credentials, not a single byte leaves your computer.</li>
+      <li><strong>Impervious to Network Disruption:</strong> Once the page is loaded into your browser's cache, the entire calculation suite remains fully operational aboard airplanes, during remote field surveys, or throughout unstable mobile data sessions.</li>
+      <li><strong>Zero Latency:</strong> Without the requirement of round-trip HTTP requests to an API server, inputs render their outputs synchronously at 60 to 120 frames per second.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>Are these calculators free for commercial and professional use?</summary>
+      <p>Yes. Every calculation, compressed image, generated password, and QR vector code produced on Toolbay is 100% free for commercial, academic, and personal use without watermarks or licensing fees.</p>
+    </details>
+    <details>
+      <summary>How can I trust that my files and dates are not being logged?</summary>
+      <p>Toolbay has no backend database, no user session tracker, and no cloud processing endpoints. You can disconnect your device from WiFi or inspect your browser's Network tab in DevTools to verify that zero outgoing requests are initiated when using our instruments.</p>
+    </details>
+    <details>
+      <summary>Can I suggest a new calculator or report a mathematical discrepancy?</summary>
+      <p>We welcome precision bug reports and feature requests. Please reach our editorial team directly through our <a href="/contact">Contact Atelier</a>. Inquiries regarding calculations are given highest development priority.</p>
+    </details>
+  </section>
+
+  <!-- In-Content AdSense Designated Placement Slot -->
+  <div class="wrap">
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box" id="ad-footer-home">
+        <span>Responsive In-Feed Banner Ad Slot &bull; Content Compliant Placement</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Cookie Consent & GDPR Banner (AdSense Compliance Requirement) -->
+<div class="cookie-notice" id="cookieNotice" role="dialog" aria-live="polite" aria-label="Privacy and Cookie Consent">
+  <div>
+    <strong style="color:var(--ink);font-size:15px;display:block;margin-bottom:4px;">Atelier Privacy Commitment</strong>
+    <p>We use essential local storage to remember your light/dark theme preference and standard anonymous analytics to measure tool utility. No tool data or uploaded files ever leave your device.</p>
+  </div>
+  <div class="cookie-notice-actions">
+    <button class="btn-primary" id="acceptCookies" style="padding:8px 18px;font-size:13px;">Accept &amp; Continue</button>
+    <a href="/privacy" class="btn-ghost" style="padding:8px 14px;font-size:13px;text-decoration:none;">Read Policy</a>
+  </div>
+</div>
+
+<!-- Haute Editorial Site Footer -->
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 16 browser-native instruments engineered for uncompromising mathematical accuracy and zero-latency utility.</p>
+        <p style="font-family:var(--font-mono);font-size:12px;color:var(--slate);">
+          EST. 2026 &bull; CLIENT-SIDE ARCHITECTURE
+        </p>
+      </div>
+
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+          <li><a href="/tools/date-difference-calculator">Date Difference</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Converters &amp; Media</h4>
+        <ul>
+          <li><a href="/tools/unit-converter">Unit Converter</a></li>
+          <li><a href="/tools/bmi-calculator">BMI Calculator</a></li>
+          <li><a href="/tools/word-counter">Word Counter</a></li>
+          <li><a href="/tools/case-converter">Text Case Converter</a></li>
+          <li><a href="/tools/image-compressor">Image Compressor</a></li>
+          <li><a href="/tools/color-converter">Color Converter</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Atelier &amp; Legal</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/contact">Contact &amp; Bug Report</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use. No account required.</div>
+      <div style="color:var(--primary); font-weight:700;">100% IN-BROWSER &bull; MODERN RED &amp; SLATE EDITION</div>
+    </div>
+</footer>
+
+<!-- Interactive Logic for Search, Scroll Observer, Theme, and Cookie Notice -->
+<script>
+(function(){
+  // Safe Theme Toggle with LocalStorage guard
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var savedTheme = localStorage.getItem('toolbay_theme');
+    if(savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  } catch(e){}
+
+  function updateThemeLabel() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateThemeLabel();
+
+  if(themeBtn) {
+    themeBtn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateThemeLabel();
+    });
+  }
+
+  // Cookie Consent Notice
+  try {
+    var cookieNotice = document.getElementById('cookieNotice');
+    var acceptCookies = document.getElementById('acceptCookies');
+    if(localStorage.getItem('toolbay_cookies_accepted') === 'yes') {
+      if(cookieNotice) cookieNotice.style.display = 'none';
+    }
+    if(acceptCookies) {
+      acceptCookies.addEventListener('click', function(){
+        try { localStorage.setItem('toolbay_cookies_accepted', 'yes'); } catch(e){}
+        if(cookieNotice) cookieNotice.style.display = 'none';
+      });
+    }
+  } catch(e){}
+
+  // Mobile Navigation Drawer Toggle
+  var navToggle = document.getElementById('navToggle');
+  var mobileNav = document.getElementById('mobileNav');
+  if(navToggle && mobileNav) {
+    function toggleMobileNav() {
+      var isOpen = mobileNav.classList.contains('open');
+      mobileNav.classList.toggle('open', !isOpen);
+      navToggle.setAttribute('aria-expanded', !isOpen ? 'true' : 'false');
+      navToggle.innerHTML = !isOpen
+        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    }
+    navToggle.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleMobileNav();
+    });
+    // Close on link click
+    mobileNav.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      });
+    });
+    // Close on click outside
+    document.addEventListener('click', function(e){
+      if(mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !navToggle.contains(e.target)) {
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      }
+    });
+    // Close on Escape key
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && mobileNav.classList.contains('open')) {
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+      }
+    });
+  }
+
+  // Interactive Live Tool Search Engine (100% Client-Side & Responsive)
+  var searchInput = document.getElementById('q');
+  var searchClear = document.getElementById('searchClear');
+  var searchMeta = document.getElementById('searchMeta');
+  var searchEmpty = document.getElementById('searchEmpty');
+  var searchEmptyTitle = document.getElementById('searchEmptyTitle');
+  var btnResetSearch = document.getElementById('btnResetSearch');
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
+  var catSections = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.search-chip'));
+  var totalToolsCount = tiles.length;
+
+  function escapeHtml(str) {
+    return (str || '').replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m];
+    });
+  }
+
+  function filterTools(query, shouldScroll) {
+    var raw = (query || '').trim();
+    var v = raw.toLowerCase();
+    var terms = v ? v.split(/\s+/) : [];
+    var matchCount = 0;
+
+    // Show or hide clear button
+    if(searchClear) {
+      searchClear.hidden = raw.length === 0;
+    }
+
+    tiles.forEach(function(tile){
+      var haystack = (tile.getAttribute('data-name') || '') + ' ' + 
+                     (tile.querySelector('b') ? tile.querySelector('b').textContent : '') + ' ' + 
+                     (tile.querySelector('i') ? tile.querySelector('i').textContent : '');
+      haystack = haystack.toLowerCase();
+
+      var matches = terms.length === 0 || terms.every(function(term){
+        return haystack.indexOf(term) > -1;
+      });
+
+      tile.style.display = matches ? '' : 'none';
+      if(matches) matchCount++;
+    });
+
+    catSections.forEach(function(sec){
+      var visibleChildren = sec.querySelectorAll('.tile:not([style*="display: none"])');
+      sec.style.display = visibleChildren.length > 0 ? '' : 'none';
+    });
+
+    // Update Telemetry & Counter
+    if(searchMeta) {
+      if(!v) {
+        searchMeta.innerHTML = '<span>Showing all <b>' + totalToolsCount + '</b> precision instruments</span>';
+      } else {
+        searchMeta.innerHTML = '<span>Found <b>' + matchCount + '</b> of ' + totalToolsCount + ' instruments for "<em>' + escapeHtml(raw) + '</em>"</span>';
+      }
+    }
+
+    // Empty state handling
+    if(searchEmpty) {
+      searchEmpty.hidden = matchCount > 0;
+      if(matchCount === 0 && searchEmptyTitle) {
+        searchEmptyTitle.textContent = 'No instruments found for "' + raw + '"';
+      }
+    }
+
+    // Update active chip state
+    chips.forEach(function(chip){
+      var chipQ = chip.getAttribute('data-query');
+      chip.classList.toggle('active', chipQ === v);
+    });
+
+    if(shouldScroll && v) {
+      var toolsSec = document.getElementById('tools');
+      if(toolsSec) toolsSec.scrollIntoView({behavior:'smooth'});
+    }
+  }
+
+  if(searchInput) {
+    searchInput.addEventListener('input', function(e){
+      filterTools(e.target.value, false);
+    });
+    searchInput.addEventListener('search', function(e){
+      filterTools(e.target.value, false);
+    });
+    searchInput.addEventListener('keydown', function(e){
+      if(e.key === 'Escape') {
+        searchInput.value = '';
+        filterTools('', false);
+      }
+    });
+  }
+
+  if(searchClear) {
+    searchClear.addEventListener('click', function(){
+      if(searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+        filterTools('', false);
+      }
+    });
+  }
+
+  if(btnResetSearch) {
+    btnResetSearch.addEventListener('click', function(){
+      if(searchInput) {
+        searchInput.value = '';
+        searchInput.focus();
+        filterTools('', true);
+      }
+    });
+  }
+
+  // Quick chips click / toggle
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      var q = chip.getAttribute('data-query');
+      if(searchInput) {
+        if(searchInput.value.trim().toLowerCase() === q.toLowerCase()) {
+          // Deselect / toggle off
+          searchInput.value = '';
+          filterTools('', false);
+        } else {
+          searchInput.value = q;
+          filterTools(q, true);
+        }
+      }
+    });
+  });
+
+  // URL Query String support (?q=...) for deep-linking & SearchAction schema
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var initialQ = params.get('q');
+    if(initialQ && searchInput) {
+      searchInput.value = initialQ;
+      filterTools(initialQ, true);
+    }
+  } catch(e){}
+
+})();
+</script>
+</body>
+</html>

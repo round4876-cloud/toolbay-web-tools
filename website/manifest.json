@@ -1,0 +1,16 @@
+{
+  "name": "Toolbay — Precision In-Browser Digital Tools",
+  "short_name": "Toolbay",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7fafc",
+  "theme_color": "#c53030",
+  "description": "Curated suite of 16 browser-native calculators and developer instruments running 100% client-side with mathematical precision.",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

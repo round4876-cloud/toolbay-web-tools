@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BMI Calculator — Body Mass Index, WHO Bands & Healthy Weight Range | Toolbay</title>
+<meta name="description" content="Calculate your exact Body Mass Index (BMI) in metric (cm/kg) or imperial (ft/in/lb). See your WHO clinical category, healthy weight range, and Ponderal Index. Free and private.">
+<meta name="keywords" content="bmi calculator, body mass index, healthy weight range, bmi chart, bmi in kg, imperial bmi calculator, who bmi categories">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/bmi-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="BMI Calculator — Body Mass Index in Metric & Imperial | Toolbay">
+<meta property="og:description" content="Calculate exact Body Mass Index with WHO clinical categories and healthy weight targets.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/bmi-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision BMI Calculator",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/bmi-calculator",
+      "description": "Biometric Body Mass Index calculator supporting Metric and Imperial units with WHO clinical categorization.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Converters & Metrics", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "BMI Calculator", "item": "https://tools.xyzhome.site/tools/bmi-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the official WHO healthy BMI range for adults?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "According to the World Health Organization (WHO), a BMI between 18.5 and 24.9 is considered normal/healthy weight for adult men and women."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the formula differ between Metric and Imperial units?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In Metric, BMI = weight (kg) / [height (m)]². In Imperial, BMI = [weight (lbs) × 703] / [height (inches)]². Both produce mathematically identical results."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Converters &amp; Metrics</a> &rsaquo; BMI Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[08] &bull; BIOMETRIC INSTRUMENT</span>
+      <h1>Precision BMI Calculator</h1>
+      <p>Evaluate your Body Mass Index across World Health Organization (WHO) international classification thresholds in both Metric and Imperial units.</p>
+    </div>
+
+    <!-- Calculator Workbench -->
+    <div class="panel">
+      <div class="field">
+        <label for="unit">Measurement Standard</label>
+        <select id="unit">
+          <option value="m">Metric System (Centimeters, Kilograms)</option>
+          <option value="i">Imperial System (Feet / Inches, Pounds)</option>
+        </select>
+      </div>
+
+      <!-- Metric Inputs -->
+      <div id="metricFields">
+        <div class="row">
+          <div class="field">
+            <label for="cm">Height (cm)</label>
+            <input type="number" id="cm" placeholder="175" step="0.5" min="40" max="260">
+          </div>
+          <div class="field">
+            <label for="kg">Weight (kg)</label>
+            <input type="number" id="kg" placeholder="70" step="0.1" min="10" max="400">
+          </div>
+        </div>
+      </div>
+
+      <!-- Imperial Inputs -->
+      <div id="imperialFields" hidden>
+        <div class="row-3">
+          <div class="field">
+            <label for="ft">Height (ft)</label>
+            <input type="number" id="ft" placeholder="5" min="1" max="8">
+          </div>
+          <div class="field">
+            <label for="inch">Height (in)</label>
+            <input type="number" id="inch" placeholder="9" min="0" max="11.9" step="0.5">
+          </div>
+          <div class="field">
+            <label for="lb">Weight (lb)</label>
+            <input type="number" id="lb" placeholder="154" step="0.5" min="20" max="800">
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="go" id="run">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          Compute BMI
+        </button>
+        <button class="ghost" id="btnClear">Clear</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Entity Card -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; CLINICAL WHO SPECIFICATION
+      </span>
+      <h3>What is Body Mass Index (BMI)?</h3>
+      <p>
+        Body Mass Index (BMI) is an anthropometric screening indicator developed by Adolphe Quetelet that correlates body weight with stature. While it does not quantify individual adipose distribution or distinguish muscular mass from skeletal density, it serves as the global clinical benchmark for evaluating epidemiological risks associated with underweight and obesity.
+      </p>
+      <div class="geo-formula-badge">
+        BMI = Weight (kg) / [Height (m)]² &nbsp;|&nbsp; Imperial: [Weight (lb) × 703] / [Height (in)]²
+      </div>
+    </div>
+
+    <!-- Deep Editorial Guide -->
+    <article class="article">
+      <h2>Understanding Your BMI Breakdown</h2>
+      <p>
+        Body Mass Index establishes four primary categories for adults aged 20 and over. Because stature is squared in the denominator, small changes in height produce noticeable shifts in the final score.
+      </p>
+
+      <div class="howto-steps">
+        <div class="howto-step-card">
+          <div class="howto-step-num">1</div>
+          <div class="howto-step-text">
+            <h4>Select Your Preferred Units</h4>
+            <p>Toggle between metric measurements (centimeters and kilograms) or imperial standards (feet, inches, and pounds).</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">2</div>
+          <div class="howto-step-text">
+            <h4>Enter Stature &amp; Body Weight</h4>
+            <p>Provide your barefoot height and morning body weight for the most accurate baseline assessment.</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">3</div>
+          <div class="howto-step-text">
+            <h4>Evaluate Target Healthy Range</h4>
+            <p>The tool automatically calculates your personalized healthy weight target (BMI 18.5 – 24.9) based on your height.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>World Health Organization Adult Classification Tiers</h3>
+      <ul>
+        <li><strong>Severe Thinness:</strong> Below 16.0 kg/m²</li>
+        <li><strong>Moderate Thinness:</strong> 16.0 – 16.9 kg/m²</li>
+        <li><strong>Mild Thinness:</strong> 17.0 – 18.4 kg/m²</li>
+        <li><strong>Normal / Healthy Weight:</strong> 18.5 – 24.9 kg/m²</li>
+        <li><strong>Overweight (Pre-obese):</strong> 25.0 – 29.9 kg/m²</li>
+        <li><strong>Obesity Class I:</strong> 30.0 – 34.9 kg/m²</li>
+        <li><strong>Obesity Class II:</strong> 35.0 – 39.9 kg/m²</li>
+        <li><strong>Obesity Class III (Severe):</strong> 40.0 kg/m² and above</li>
+      </ul>
+
+      <h3>Clinical Limitations of BMI</h3>
+      <p>
+        BMI is a screening metric, not a comprehensive medical diagnosis. It does not measure body fat percentage, visceral fat around internal organs, or muscular density. Competitive bodybuilders and strength athletes frequently classify as "overweight" or "obese" despite extremely low body fat percentages. Always consult healthcare professionals and consider complementary metrics such as waist-to-hip ratio and lipid panels.
+      </p>
+    </article>
+
+    <!-- Related Tools -->
+    <section class="related">
+      <h2>Complementary Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/unit-converter">
+          <div class="tile-top"><span class="tile-idx">[07]</span><span class="tile-badge">Metric</span></div>
+          <b>Unit Converter</b>
+          <i>Convert length, weight, mass, and temperature instantly.</i>
+        </a>
+        <a class="tile" href="/tools/age-calculator">
+          <div class="tile-top"><span class="tile-idx">[01]</span><span class="tile-badge">Chronology</span></div>
+          <b>Age Calculator</b>
+          <i>Exact chronological age down to days and hours.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/bmi-calculator">BMI Calculator</a></li>
+          <li><a href="/tools/unit-converter">Unit Converter</a></li>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atelier &amp; Legal</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Health Notice</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Statistical screening only. Not medical diagnostic advice.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var unitSelect = document.getElementById('unit');
+  var metricFields = document.getElementById('metricFields');
+  var imperialFields = document.getElementById('imperialFields');
+  var out = document.getElementById('out');
+  var btnRun = document.getElementById('run');
+  var btnClear = document.getElementById('btnClear');
+
+  unitSelect.addEventListener('change', function(){
+    var isImp = this.value === 'i';
+    metricFields.hidden = isImp;
+    imperialFields.hidden = !isImp;
+    calculateBMI();
+  });
+
+  function calculateBMI() {
+    var isImp = unitSelect.value === 'i';
+    var heightM = 0, weightKg = 0;
+
+    if(!isImp) {
+      var cm = parseFloat(document.getElementById('cm').value);
+      var kg = parseFloat(document.getElementById('kg').value);
+      if(!cm || !kg || cm < 40 || cm > 260 || kg < 10 || kg > 400) {
+        out.innerHTML = '<p class="err">Please enter realistic height (40–260 cm) and weight (10–400 kg) values.</p>';
+        return;
+      }
+      heightM = cm / 100;
+      weightKg = kg;
+    } else {
+      var ft = parseFloat(document.getElementById('ft').value) || 0;
+      var inch = parseFloat(document.getElementById('inch').value) || 0;
+      var lb = parseFloat(document.getElementById('lb').value) || 0;
+      var totalInches = (ft * 12) + inch;
+      if(totalInches < 18 || totalInches > 105 || lb < 20 || lb > 850) {
+        out.innerHTML = '<p class="err">Please enter realistic height (e.g. 5 ft 10 in) and weight (20–850 lb).</p>';
+        return;
+      }
+      heightM = totalInches * 0.0254;
+      weightKg = lb * 0.45359237;
+    }
+
+    var bmi = weightKg / (heightM * heightM);
+    var category = 'Underweight';
+    var catColor = '#D9535D';
+
+    if (bmi < 16.0) { category = 'Severe Thinness'; catColor = '#C0392B'; }
+    else if (bmi < 17.0) { category = 'Moderate Thinness'; catColor = '#E67E22'; }
+    else if (bmi < 18.5) { category = 'Mild Thinness'; catColor = '#F39C12'; }
+    else if (bmi < 25.0) { category = 'Normal (Healthy Weight)'; catColor = '#2E8560'; }
+    else if (bmi < 30.0) { category = 'Overweight (Pre-obese)'; catColor = '#E67E22'; }
+    else if (bmi < 35.0) { category = 'Obesity Class I'; catColor = '#D35400'; }
+    else if (bmi < 40.0) { category = 'Obesity Class II'; catColor = '#C0392B'; }
+    else { category = 'Obesity Class III (Severe)'; catColor = '#962D3E'; }
+
+    // Healthy weight range for height (18.5 to 24.9)
+    var minHealthyKg = 18.5 * (heightM * heightM);
+    var maxHealthyKg = 24.9 * (heightM * heightM);
+
+    var ponderal = weightKg / Math.pow(heightM, 3);
+    var prime = bmi / 25;
+
+    var formatWeight = function(kgVal) {
+      if(!isImp) return kgVal.toFixed(1) + ' kg';
+      var lbVal = kgVal / 0.45359237;
+      return lbVal.toFixed(1) + ' lb';
+    };
+
+    out.innerHTML = 
+      '<div class="big" style="color:' + catColor + '">' + bmi.toFixed(1) + '</div>' +
+      '<p class="sub"><strong style="color:' + catColor + '">' + category + '</strong> &bull; WHO Clinical Standard</p>' +
+      '<div class="kv"><span>Recommended Healthy Weight for Your Height</span><b>' + formatWeight(minHealthyKg) + ' &ndash; ' + formatWeight(maxHealthyKg) + '</b></div>' +
+      '<div class="kv"><span>BMI Prime (Relative to 25.0 target)</span><b>' + prime.toFixed(2) + '</b></div>' +
+      '<div class="kv"><span>Ponderal Index</span><b>' + ponderal.toFixed(2) + ' kg/m³</b></div>' +
+      '<div class="kv"><span>Underweight Band</span><b>Below 18.5</b></div>' +
+      '<div class="kv"><span>Healthy Weight Band</span><b>18.5 &ndash; 24.9</b></div>' +
+      '<div class="kv"><span>Overweight Band</span><b>25.0 &ndash; 29.9</b></div>' +
+      '<div class="kv"><span>Obesity Band</span><b>30.0 and above</b></div>';
+  }
+
+  btnRun.addEventListener('click', calculateBMI);
+  ['cm','kg','ft','inch','lb'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el) el.addEventListener('input', calculateBMI);
+  });
+
+  btnClear.addEventListener('click', function(){
+    ['cm','kg','ft','inch','lb'].forEach(function(id){
+      var el = document.getElementById(id);
+      if(el) el.value = '';
+    });
+    out.innerHTML = '';
+  });
+
+  // Pre-fill initial demonstration value
+  document.getElementById('cm').value = '175';
+  document.getElementById('kg').value = '68';
+  calculateBMI();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

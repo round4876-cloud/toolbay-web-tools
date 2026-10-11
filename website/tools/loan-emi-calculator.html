@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loan EMI Calculator — Monthly Payment & Amortization Schedule | Toolbay</title>
+<meta name="description" content="Calculate your exact Equated Monthly Instalment (EMI), total interest, and annual amortization schedule. Compounded monthly reducing-balance precision with custom currency formatting.">
+<meta name="keywords" content="loan emi calculator, monthly instalment, home loan emi, car loan emi, interest schedule, reducing balance calculator">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/loan-emi-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Loan EMI Calculator — Monthly Payment & Amortization | Toolbay">
+<meta property="og:description" content="Calculate equated monthly instalment (EMI) and multi-year repayment schedule with banking precision.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/loan-emi-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Loan EMI Calculator",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/loan-emi-calculator",
+      "description": "Standardized reducing-balance loan EMI and amortization schedule calculator.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Money & Financial Engineering", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Loan EMI Calculator", "item": "https://tools.xyzhome.site/tools/loan-emi-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What mathematical formula is used to calculate loan EMI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The standardized formula is EMI = [P × r × (1+r)^n] / [(1+r)^n - 1], where P is Principal, r is Monthly Interest Rate (Annual Rate / 1200), and n is Total Months."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is early repayment weighted towards interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In a reducing-balance loan, interest is calculated on the outstanding balance. Early in the loan term, the principal balance is at its highest, meaning monthly interest charges represent the largest proportion of your payment."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Money &amp; Business</a> &rsaquo; Loan EMI Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[04] &bull; FISCAL INSTRUMENT</span>
+      <h1>Loan EMI &amp; Amortization Calculator</h1>
+      <p>Calculate your exact equated monthly installment, total cumulative interest, and multi-year reducing-balance repayment schedule with banking accuracy.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="curr">Currency Symbol</label>
+          <select id="curr">
+            <option value="$">USD ($)</option>
+            <option value="€">EUR (€)</option>
+            <option value="£">GBP (£)</option>
+            <option value="₹">INR (₹)</option>
+            <option value="₨">PKR (₨)</option>
+            <option value="C$">CAD (C$)</option>
+            <option value="A$">AUD (A$)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="amt">Principal Loan Amount</label>
+          <input type="number" id="amt" placeholder="100000" min="100" step="1000" value="100000">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="rate">Annual Interest Rate (%)</label>
+          <input type="number" id="rate" placeholder="8.5" min="0" max="100" step="0.05" value="8.5">
+        </div>
+        <div class="field">
+          <label for="yrs">Loan Tenure (Years)</label>
+          <input type="number" id="yrs" placeholder="5" min="0.25" max="40" step="0.5" value="5">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="go" id="run">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          Compute Schedule
+        </button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; COMPOUND FINANCIAL AMORTIZATION
+      </span>
+      <h3>How is Loan EMI Formulated?</h3>
+      <p>
+        An Equated Monthly Instalment (EMI) represents the fixed cash outflow paid by a borrower to a lender each calendar month to retire both principal and compound interest over a specified duration. The exact mathematical formula applied across global banking systems is:
+      </p>
+      <div class="geo-formula-badge">
+        EMI = P &times; r &times; [ (1 + r)^n / ((1 + r)^n - 1) ]
+      </div>
+      <p style="margin-top:10px;font-size:14px;color:var(--slate);">
+        Where P = Principal borrowed, r = Monthly interest rate (Annual % / 1200), and n = Total months of tenure (Years &times; 12).
+      </p>
+    </div>
+
+    <!-- Deep Editorial Guide -->
+    <article class="article">
+      <h2>The Mechanics of Reducing-Balance Amortization</h2>
+      <p>
+        In a standard reducing-balance amortizing loan, your payment amount remains fixed each month, but the internal allocation changes continually. In month one, interest is assessed against the full principal balance. As you make each monthly payment, a portion retires principal, reducing the base on which the next month's interest is charged.
+      </p>
+
+      <div class="howto-steps">
+        <div class="howto-step-card">
+          <div class="howto-step-num">1</div>
+          <div class="howto-step-text">
+            <h4>Input Principal &amp; Currency</h4>
+            <p>Select your operational currency and enter the net amount borrowed.</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">2</div>
+          <div class="howto-step-text">
+            <h4>Specify Annual Rate &amp; Term</h4>
+            <p>Enter the quoted annual percentage rate (APR) and tenure in years.</p>
+          </div>
+        </div>
+        <div class="howto-step-card">
+          <div class="howto-step-num">3</div>
+          <div class="howto-step-text">
+            <h4>Audit Annual Balance Milestones</h4>
+            <p>Review the calculated monthly outflow, cumulative financing charge, and year-by-year remaining equity balance.</p>
+          </div>
+        </div>
+      </div>
+
+      <h3>Three Critical Levers in Loan Engineering</h3>
+      <ol>
+        <li><strong>Tenure Extension:</strong> Lengthening a loan term from 15 to 30 years lowers the monthly payment, but can double the total interest paid.</li>
+        <li><strong>Early Prepayments:</strong> Extra principal payments made early in the loan term directly diminish the balance before compounding escalates, producing outsized savings.</li>
+        <li><strong>Interest Rate Delta:</strong> Even a 0.25% variance in mortgage APR equates to thousands of dollars across a multi-decade loan.</li>
+      </ol>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Financial Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/discount-calculator">
+          <div class="tile-top"><span class="tile-idx">[05]</span><span class="tile-badge">Commerce</span></div>
+          <b>Discount Calculator</b>
+          <i>Compute net sale price and multi-tier checkout discounts.</i>
+        </a>
+        <a class="tile" href="/tools/sales-tax-calculator">
+          <div class="tile-top"><span class="tile-idx">[06]</span><span class="tile-badge">Statutory</span></div>
+          <b>Sales Tax Calculator</b>
+          <i>Add or strip VAT and GST from retail prices with cent precision.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Financial Notice</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Calculations are for analytical comparison. Not formal bank quotes.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var currSelect = document.getElementById('curr');
+  var amtInput = document.getElementById('amt');
+  var rateInput = document.getElementById('rate');
+  var yrsInput = document.getElementById('yrs');
+  var out = document.getElementById('out');
+  var btnRun = document.getElementById('run');
+
+  function fmt(num, curr) {
+    return curr + ' ' + Number(Math.round(num)).toLocaleString();
+  }
+
+  function calculateEMI() {
+    var c = currSelect.value;
+    var P = parseFloat(amtInput.value);
+    var R = parseFloat(rateInput.value);
+    var Y = parseFloat(yrsInput.value);
+
+    if(!P || P <= 0 || isNaN(R) || R < 0 || !Y || Y <= 0) {
+      out.innerHTML = '<p class="err">Please enter valid positive values for loan principal, interest rate, and tenure.</p>';
+      return;
+    }
+
+    var n = Math.round(Y * 12);
+    var emi = 0;
+    var r = R / 1200;
+
+    if (R === 0) {
+      emi = P / n;
+    } else {
+      var factor = Math.pow(1 + r, n);
+      emi = P * r * factor / (factor - 1);
+    }
+
+    var totalRepayment = emi * n;
+    var totalInterest = totalRepayment - P;
+    var interestShare = (totalInterest / totalRepayment) * 100;
+
+    // Build Amortization annual milestones
+    var balance = P;
+    var scheduleRows = '';
+    for(var k = 1; k <= n; k++) {
+      var intPmt = balance * r;
+      var princPmt = emi - intPmt;
+      balance = Math.max(0, balance - princPmt);
+
+      if (k % 12 === 0 || k === n) {
+        var yearNum = k / 12;
+        var label = (yearNum >= 1 ? 'Year ' + Math.round(yearNum * 10) / 10 : k + ' Months');
+        scheduleRows += '<div class="kv"><span>End of ' + label + ' Remaining Balance</span><b>' + fmt(balance, c) + '</b></div>';
+      }
+    }
+
+    out.innerHTML = 
+      '<div class="big">' + fmt(emi, c) + ' <span style="font-size:20px;font-family:var(--font-sans);font-weight:600;color:var(--slate);">/ month</span></div>' +
+      '<p class="sub">Fixed Equated Monthly Instalment across ' + n + ' months at ' + R + '% annual interest</p>' +
+      '<div class="kv"><span>Principal Loan Amount</span><b>' + fmt(P, c) + '</b></div>' +
+      '<div class="kv"><span>Total Interest Charges</span><b style="color:var(--dusty-pink);">' + fmt(totalInterest, c) + '</b></div>' +
+      '<div class="kv"><span>Total Repayment Amount</span><b>' + fmt(totalRepayment, c) + '</b></div>' +
+      '<div class="kv"><span>Interest as Share of Total Outflow</span><b>' + interestShare.toFixed(1) + '%</b></div>' +
+      '<h3 style="font-family:var(--font-didone);margin:24px 0 10px;font-size:20px;">Amortization Balance Milestones</h3>' + scheduleRows;
+  }
+
+  btnRun.addEventListener('click', calculateEMI);
+  [amtInput, rateInput, yrsInput].forEach(function(el){
+    el.addEventListener('input', calculateEMI);
+  });
+  currSelect.addEventListener('change', calculateEMI);
+  calculateEMI();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

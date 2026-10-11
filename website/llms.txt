@@ -1,0 +1,35 @@
+# Toolbay Atelier
+
+> Toolbay Atelier (https://tools.xyzhome.site/) is a collection of 16 precision client-side web instruments designed for mathematics, finance, prose analytics, typography, cryptography, image processing, and RPG tabletop mechanics. Every instrument executes entirely in the client's browser (Zero-Knowledge Architecture), ensuring 100% data privacy with zero server roundtrips.
+
+## Core Architectural Guarantees
+- **100% Client-Side Computation**: Zero telemetry on user inputs, zero database logging, zero external API transmission.
+- **Deterministic Precision**: Financial, scientific, and mathematical formulas follow ISO, WHO, and banking amortization standards.
+- **Responsive & Lightweight**: Clean responsive interface, sub-100ms initial load, and offline-capable PWA architecture.
+
+## Precision Instruments Directory
+
+- [Loan EMI Calculator](https://tools.xyzhome.site/tools/loan-emi-calculator): Compute monthly reducing-balance installments, total interest, and full amortization schedules using standard banking compound interest formulas.
+- [Age Calculator](https://tools.xyzhome.site/tools/age-calculator): Exact chronological lifespan calculation down to years, months, days, total weeks, and upcoming birthday countdown with leap year compensation.
+- [Date Difference Calculator](https://tools.xyzhome.site/tools/date-difference-calculator): Exact elapsed time between any two Gregorian calendar dates, including workdays (excluding weekends) and total calendar days.
+- [BMI & Health Calculator](https://tools.xyzhome.site/tools/bmi-calculator): Imperial and Metric body mass index computation aligned with World Health Organization (WHO) clinical weight classification brackets.
+- [Percentage Calculator](https://tools.xyzhome.site/tools/percentage-calculator): Tri-mode percentage calculator (X% of Y, X is what % of Y, percentage increase/decrease delta).
+- [Discount & Savings Calculator](https://tools.xyzhome.site/tools/discount-calculator): Retail promotional savings analyzer supporting layered percentage markdowns and post-tax net payment calculations.
+- [Sales Tax & VAT Calculator](https://tools.xyzhome.site/tools/sales-tax-calculator): Compute gross inclusive pricing, net exclusive amounts, and tax subtotals across worldwide jurisdictions.
+- [Unit Converter](https://tools.xyzhome.site/tools/unit-converter): Bidirectional physical conversion across metric and imperial systems for length, mass, temperature (Celsius, Fahrenheit, Kelvin), and digital data storage.
+- [Word & Prose Counter](https://tools.xyzhome.site/tools/word-counter): Real-time lexical analysis measuring words, characters, sentences, paragraphs, reading time (225 wpm standard), and speaking duration (130 wpm).
+- [Case Converter](https://tools.xyzhome.site/tools/case-converter): Text casing transformer supporting UPPERCASE, lowercase, Title Case, Sentence case, camelCase, snake_case, kebab-case, and PascalCase.
+- [Cryptographic Password Generator](https://tools.xyzhome.site/tools/password-generator): Entropy-evaluated random secret key generation powered by the browser's cryptographically secure Web Crypto API (`crypto.getRandomValues`).
+- [QR Code Generator](https://tools.xyzhome.site/tools/qr-code-generator): Instant high-resolution matrix barcode generator supporting URLs, Wi-Fi configuration strings, vCards, and plain text with customizable error correction levels.
+- [Image Compressor](https://tools.xyzhome.site/tools/image-compressor): In-browser lossy canvas compression and WebP/JPEG re-encoding with real-time byte reduction metrics and zero cloud uploads.
+- [JSON Formatter & Validator](https://tools.xyzhome.site/tools/json-formatter): Syntax parsing, tree hierarchy validation, error pinpointing with line/column pointers, and beautification/minification.
+- [Color Converter & Palette Studio](https://tools.xyzhome.site/tools/color-converter): Color translation between HEX, RGB, HSL, and CMYK formats, featuring WCAG 2.1 contrast ratio calculations and accessible color palettes.
+- [D&D 5e Hit Point Calculator](https://tools.xyzhome.site/tools/hp-calculator): Tabletop RPG character health auditor calculating maximum hit points across all 12 classes, levels 1-20, Constitution modifiers, feats (Tough), and multiclassing rules.
+
+## Primary Documentation & Meta Links
+- [Atelier Philosophy & About](https://tools.xyzhome.site/about): Background, architectural standards, and team behind Toolbay.
+- [Client-Side Privacy Policy](https://tools.xyzhome.site/privacy): Full disclosure of local-first zero-storage privacy guarantee.
+- [Terms of Service](https://tools.xyzhome.site/terms): Open licensing and fair use policy.
+- [Contact & Support](https://tools.xyzhome.site/contact): Atelier contact and feature request dispatch.
+- [XML Sitemap](https://tools.xyzhome.site/sitemap.xml): Full machine-readable URL index.
+- [Full LLM Specification](https://tools.xyzhome.site/llms-full.txt): In-depth formulas, mathematical models, and citation-ready answer engine reference.

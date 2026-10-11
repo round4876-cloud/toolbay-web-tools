@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit Converter — Length, Weight, Temperature, Area, Volume & Speed | Toolbay</title>
+<meta name="description" content="Free multi-domain unit converter for length, mass, temperature, area (including marla and kanal), liquid volume, speed, digital storage, and time. Exact international conversion constants.">
+<meta name="keywords" content="unit converter, cm to inches, kg to lbs, celsius to fahrenheit, km to miles, marla to kanal, metric to imperial">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/unit-converter">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Unit Converter — Multi-Domain Metric & Imperial | Toolbay">
+<meta property="og:description" content="Exact international unit conversions across 8 scientific and engineering categories.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/unit-converter">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Unit Converter",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/unit-converter",
+      "description": "Multi-category scientific and commercial metric/imperial unit converter.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Converters & Metrics", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Unit Converter", "item": "https://tools.xyzhome.site/tools/unit-converter"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are the conversion factors mathematically exact?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All conversion factors are based on internationally ratified ISO and NIST standards (e.g. exactly 1 inch = 2.54 centimeters, 1 avoirdupois pound = 0.45359237 kilograms)."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Converters &amp; Metrics</a> &rsaquo; Unit Converter</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[07] &bull; METRIC INSTRUMENT</span>
+      <h1>Universal Unit Converter</h1>
+      <p>Convert seamlessly across 8 scientific, engineering, and architectural domains with verified international conversion constants.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="field">
+        <label for="cat">Domain Category</label>
+        <select id="cat"></select>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="fromUnit">Convert From</label>
+          <select id="fromUnit"></select>
+        </div>
+        <div class="field">
+          <label for="toUnit">Convert To</label>
+          <select id="toUnit"></select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="val">Input Magnitude</label>
+        <input type="number" id="val" value="1" step="any">
+      </div>
+
+      <div class="actions">
+        <button class="ghost" id="swap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 5h18"/><polyline points="7 23 3 19 7 15"/><path d="M21 19H3"/></svg>
+          Swap Units
+        </button>
+        <button class="ghost" id="btnCopy">Copy Result</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; ISO REFERENCE CONSTANTS
+      </span>
+      <h3>Exact International Standards Applied</h3>
+      <ul>
+        <li><strong>Linear Distance:</strong> 1 inch $\equiv 0.0254$ meters, 1 mile $\equiv 1609.344$ meters, 1 nautical mile $\equiv 1852$ meters.</li>
+        <li><strong>Mass:</strong> 1 pound $\equiv 0.45359237$ kilograms, 1 ounce $\equiv 28.349523125$ grams.</li>
+        <li><strong>Affine Temperature:</strong> $T_C = (T_F - 32) \times 5/9 = T_K - 273.15$.</li>
+      </ul>
+    </div>
+
+    <!-- Deep Editorial Article -->
+    <article class="article">
+      <h2>Why Temperature Calculations Require Special Treatment</h2>
+      <p>
+        Most unit conversions represent direct linear ratios through an origin of zero: ten centimeters is exactly double five centimeters. Temperature scales possess arbitrary zero points (e.g. 0°C is 32°F, while 0 K is absolute zero). This converter routes all thermodynamic queries through standardized Celsius pivot functions, preventing proportional skew.
+      </p>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/bmi-calculator">
+          <div class="tile-top"><span class="tile-idx">[08]</span><span class="tile-badge">Biometric</span></div>
+          <b>BMI Calculator</b>
+          <i>Body Mass Index across Metric and Imperial standards.</i>
+        </a>
+        <a class="tile" href="/tools/percentage-calculator">
+          <div class="tile-top"><span class="tile-idx">[03]</span><span class="tile-badge">Ratio</span></div>
+          <b>Percentage Calculator</b>
+          <i>Proportional percentage changes and shares.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/unit-converter">Unit Converter</a></li>
+          <li><a href="/tools/bmi-calculator">BMI Calculator</a></li>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Accuracy Notice</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Complies with NIST Special Publication 811 &amp; ISO 80000.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var U = {
+    Length: {
+      'Meter (m)': 1, 'Kilometer (km)': 1000, 'Centimeter (cm)': 0.01, 'Millimeter (mm)': 0.001,
+      'Mile (mi)': 1609.344, 'Yard (yd)': 0.9144, 'Foot (ft)': 0.3048, 'Inch (in)': 0.0254, 'Nautical Mile': 1852
+    },
+    Weight: {
+      'Kilogram (kg)': 1, 'Gram (g)': 0.001, 'Milligram (mg)': 1e-6, 'Metric Tonne (t)': 1000,
+      'Pound (lb)': 0.45359237, 'Ounce (oz)': 0.028349523125, 'Stone': 6.35029318
+    },
+    Area: {
+      'Square Meter (m²)': 1, 'Square Kilometer (km²)': 1e6, 'Square Centimeter (cm²)': 1e-4,
+      'Hectare (ha)': 1e4, 'Acre': 4046.8564224, 'Square Foot (ft²)': 0.09290304, 'Square Yard (yd²)': 0.83612736,
+      'Marla (PK)': 25.2928526, 'Kanal (PK)': 505.857053
+    },
+    Volume: {
+      'Liter (L)': 1, 'Milliliter (mL)': 0.001, 'Cubic Meter (m³)': 1000,
+      'US Gallon': 3.785411784, 'UK Imperial Gallon': 4.54609, 'US Fluid Ounce': 0.0295735295625, 'Cup': 0.24
+    },
+    Speed: {
+      'Kilometers per hour (km/h)': 1, 'Meters per second (m/s)': 3.6,
+      'Miles per hour (mph)': 1.609344, 'Knot (kn)': 1.852
+    },
+    Data: {
+      'Megabyte (MB)': 1, 'Kilobyte (KB)': 0.0009765625, 'Gigabyte (GB)': 1024,
+      'Terabyte (TB)': 1048576, 'Byte': 9.5367431640625e-7, 'Bit': 1.1920928955078125e-7
+    },
+    Time: {
+      'Second': 1, 'Minute': 60, 'Hour': 3600, 'Day': 86400, 'Week': 604800, 'Year (365.25d)': 31557600
+    }
+  };
+
+  var catSelect = document.getElementById('cat');
+  var fromSelect = document.getElementById('fromUnit');
+  var toSelect = document.getElementById('toUnit');
+  var valInput = document.getElementById('val');
+  var out = document.getElementById('out');
+  var btnSwap = document.getElementById('swap');
+  var btnCopy = document.getElementById('btnCopy');
+
+  var categories = Object.keys(U).concat(['Temperature']);
+  categories.forEach(function(c){ catSelect.add(new Option(c, c)); });
+
+  function populateUnits() {
+    var k = catSelect.value;
+    fromSelect.innerHTML = '';
+    toSelect.innerHTML = '';
+    var units = (k === 'Temperature') ? ['Celsius (°C)', 'Fahrenheit (°F)', 'Kelvin (K)'] : Object.keys(U[k]);
+    units.forEach(function(u){
+      fromSelect.add(new Option(u, u));
+      toSelect.add(new Option(u, u));
+    });
+    if(units.length > 1) toSelect.selectedIndex = 1;
+    calc();
+  }
+
+  function toCelsius(val, u) {
+    if(u.indexOf('Celsius') > -1) return val;
+    if(u.indexOf('Fahrenheit') > -1) return (val - 32) * 5 / 9;
+    return val - 273.15; // Kelvin
+  }
+
+  function fromCelsius(cVal, u) {
+    if(u.indexOf('Celsius') > -1) return cVal;
+    if(u.indexOf('Fahrenheit') > -1) return (cVal * 9 / 5) + 32;
+    return cVal + 273.15; // Kelvin
+  }
+
+  var lastResultText = '';
+
+  function calc() {
+    var k = catSelect.value;
+    var v = parseFloat(valInput.value);
+    if(isNaN(v)) { out.innerHTML = ''; return; }
+
+    var fromU = fromSelect.value;
+    var toU = toSelect.value;
+    var res = 0;
+
+    if(k === 'Temperature') {
+      res = fromCelsius(toCelsius(v, fromU), toU);
+    } else {
+      res = v * (U[k][fromU] / U[k][toU]);
+    }
+
+    var formatted = (Math.abs(res) >= 1e7 || (Math.abs(res) < 1e-4 && res !== 0))
+      ? res.toExponential(6)
+      : Number((Math.round(res * 1e7) / 1e7)).toLocaleString(undefined, {maximumFractionDigits: 6});
+
+    lastResultText = v + ' ' + fromU + ' = ' + formatted + ' ' + toU;
+
+    out.innerHTML = 
+      '<div class="big">' + formatted + ' <span style="font-size:22px;color:var(--ink);">' + toU + '</span></div>' +
+      '<p class="sub">' + v.toLocaleString() + ' ' + fromU + ' converted to ' + toU + '</p>';
+  }
+
+  catSelect.addEventListener('change', populateUnits);
+  [fromSelect, toSelect].forEach(function(el){ el.addEventListener('change', calc); });
+  valInput.addEventListener('input', calc);
+
+  function safeCopy(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        if(callback) callback();
+      }).catch(function(){
+        fallbackCopy(text, callback);
+      });
+    } else {
+      fallbackCopy(text, callback);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok && callback) callback();
+    } catch(e) {
+      console.warn('Copy fallback:', e);
+    }
+  }
+
+  btnSwap.addEventListener('click', function(){
+    var temp = fromSelect.value;
+    fromSelect.value = toSelect.value;
+    toSelect.value = temp;
+    calc();
+  });
+
+  btnCopy.addEventListener('click', function(){
+    if(!lastResultText) return;
+    safeCopy(lastResultText, function(){
+      var orig = btnCopy.textContent;
+      btnCopy.textContent = 'Copied';
+      setTimeout(function(){ btnCopy.textContent = orig; }, 1500);
+    });
+  });
+
+  populateUnits();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

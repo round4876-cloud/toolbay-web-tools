@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>D&D 5e HP Calculator — Hit Points & Multiclass Progression | Toolbay</title>
+<meta name="description" content="Calculate maximum D&D 5e hit points for single-class and multiclass characters with fixed average or rolled hit dice, Constitution modifiers, Tough feat, and racial traits.">
+<meta name="keywords" content="dnd 5e hp calculator, hit point calculator 5e, dnd hit points, multiclass hp calculator, constitution modifier hp, dnd 5e character calculator">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/hp-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="D&D 5e HP Calculator — Hit Points & Multiclass Progression | Toolbay">
+<meta property="og:description" content="Calculate maximum D&D 5e hit points for single-class and multiclass characters with fixed or rolled averages, Constitution modifier, and feats.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/hp-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay D&D 5e Hit Point Calculator",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/hp-calculator",
+      "description": "D&D 5th Edition Hit Point Calculator for single-class and multiclass characters with leveling progression methods and feat modifiers.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Gaming & Metrology", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "D&D 5e HP Calculator", "item": "https://tools.xyzhome.site/tools/hp-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How are 1st level hit points determined in D&D 5e?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At 1st level, a character starts with their starting class's maximum hit die value plus their Constitution modifier. For example, a Barbarian (d12) with a +2 Con modifier begins with 12 + 2 = 14 maximum HP."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Fixed Average and Rolled Average?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Fixed Average uses standard 5e rules rounded up (d12 = 7, d10 = 6, d8 = 5, d6 = 4). The Rolled Average uses the exact statistical mean of the die (d12 = 6.5, d10 = 5.5, d8 = 4.5, d6 = 3.5), with final hit points rounded down."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does multiclassing affect HP calculations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only your designated 1st-level class grants the full maximum hit die. Any subsequent class levels added through multiclassing follow the chosen progression method (fixed or rolled average) plus Constitution modifier."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* ==========================================================================
+   D&D 5E HP CALCULATOR ATELIER STYLES
+   Bespoke integration with Toolbay's Didone Editorial Design System
+   ========================================================================== */
+
+.dnd-workbench {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(24px, 3.5vw, 40px);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .dnd-workbench {
+    grid-template-columns: 1fr;
+  }
+}
+
+.dnd-section-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+:root[data-theme="dark"] .dnd-section-card {
+  background: rgba(27, 21, 22, 0.65);
+}
+
+.dnd-section-card h3 {
+  font-family: var(--font-didone);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dnd-section-card h3 span.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dusty-pink);
+  background: var(--dusty-pink-soft);
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+}
+
+/* Modifier Stepper Input */
+.con-mod-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.con-mod-box input[type="number"] {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px 14px;
+  max-width: 110px;
+}
+
+.con-hint {
+  font-size: 13.5px;
+  color: var(--slate);
+  line-height: 1.4;
+}
+
+/* Custom Styled Checkbox Group */
+.traits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--trans-fast);
+  user-select: none;
+}
+
+.checkbox-card:hover {
+  border-color: var(--dusty-pink);
+  transform: translateX(3px);
+}
+
+.checkbox-card input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--dusty-pink);
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.checkbox-card .trait-label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-card .trait-label small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--slate);
+}
+
+/* Class Level Grid */
+.class-header-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12px 8px;
+  margin-bottom: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+  border-bottom: 1px solid var(--line);
+}
+
+.class-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.class-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  transition: var(--trans-fast);
+}
+
+.class-row:hover {
+  border-color: rgba(239, 111, 121, 0.4);
+}
+
+.class-row.active-starting {
+  border-color: var(--dusty-pink);
+  background: var(--blush-wash);
+}
+
+:root[data-theme="dark"] .class-row.active-starting {
+  background: rgba(239, 111, 121, 0.1);
+}
+
+.class-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  cursor: pointer;
+}
+
+.class-info input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--dusty-pink);
+  cursor: pointer;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.class-info label {
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.die-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: var(--plaster);
+  border: 1px solid var(--line-strong);
+  color: var(--ink-secondary);
+  letter-spacing: 0.05em;
+}
+
+.active-starting .die-badge {
+  background: var(--dusty-pink);
+  color: #FFFFFF;
+  border-color: var(--dusty-pink);
+}
+
+/* Stepper for Class Level */
+.level-stepper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.step-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: var(--plaster);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  transition: var(--trans-fast);
+}
+
+.step-btn:hover {
+  background: var(--dusty-pink);
+  color: #FFFFFF;
+  border-color: var(--dusty-pink);
+}
+
+.class-level-input {
+  width: 50px;
+  padding: 6px 4px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  border: 1.5px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  -moz-appearance: textfield;
+}
+
+.class-level-input::-webkit-outer-spin-button,
+.class-level-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.class-level-input:focus {
+  border-color: var(--dusty-pink);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--dusty-pink-soft);
+}
+
+/* Results Display Panel */
+.hp-results-card {
+  background: var(--surface);
+  border: 2px solid var(--dusty-pink);
+  border-radius: var(--radius-lg);
+  padding: clamp(24px, 4vw, 36px);
+  text-align: center;
+  position: relative;
+  box-shadow: 0 16px 40px var(--dusty-pink-soft);
+  margin-top: 28px;
+  overflow: hidden;
+}
+
+.hp-results-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--dusty-pink), var(--brass), var(--dusty-pink));
+}
+
+.total-level-badge {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: var(--dusty-pink);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px var(--dusty-pink-glow);
+}
+
+.results-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--slate);
+  margin-bottom: 8px;
+}
+
+.total-hp-display {
+  font-family: var(--font-didone);
+  font-size: clamp(56px, 9vw, 84px);
+  font-weight: 900;
+  line-height: 1;
+  color: var(--dusty-pink);
+  margin: 8px 0;
+  letter-spacing: -0.04em;
+}
+
+.breakdown-display {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+  background: var(--plaster);
+  border: 1px solid var(--line);
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  word-break: break-word;
+  max-width: 100%;
+}
+
+:root[data-theme="dark"] .breakdown-display {
+  background: var(--surface-alt);
+}
+
+.dnd-disclaimer {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  color: var(--slate-light);
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .dnd-section-card {
+    padding: 16px 12px;
+  }
+  .class-row {
+    padding: 8px 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .class-info {
+    gap: 8px;
+  }
+  .class-info label {
+    font-size: 14px;
+    gap: 6px;
+  }
+  .total-level-badge {
+    position: static;
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  .hp-results-card {
+    padding: 20px 14px;
+  }
+  .total-hp-display {
+    font-size: 52px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Tools</a>
+      <a class="hide-sm" href="/about">About</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs">
+      <a href="/">Atelier</a> &rsaquo; 
+      <a href="/#tools">Gaming &amp; Metrology</a> &rsaquo; 
+      D&amp;D 5e Hit Point Calculator
+    </p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[16] &bull; GAMING &amp; METROLOGY INSTRUMENT</span>
+      <h1>D&amp;D 5e Hit Point Calculator</h1>
+      <p>Precision hit point calculator for D&amp;D 5th Edition. Calculate maximum hit points with 1st-level base die rules, Constitution modifiers, multiclassing progression, and feats.</p>
+    </div>
+
+    <!-- Main Workbench Panel -->
+    <div class="panel">
+      <div class="dnd-workbench">
+        
+        <!-- Left Column: Global Modifiers & Feats -->
+        <div class="dnd-col-left">
+          
+          <div class="dnd-section-card">
+            <h3>
+              Global Modifiers
+              <span class="tag">Modifiers</span>
+            </h3>
+            
+            <div class="field">
+              <label for="conMod">Constitution Modifier</label>
+              <div class="con-mod-box">
+                <input type="number" id="conMod" value="2" min="-5" max="10" step="1" aria-describedby="conModHelp">
+                <div class="con-hint" id="conModHelp">
+                  Added to every hit die (e.g., Score 14–15 = +2, 16–17 = +3)
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="hpMethod">Leveling Progression Method</label>
+              <select id="hpMethod">
+                <option value="fixed">Fixed Average (Rounded Up &bull; Standard Rule)</option>
+                <option value="rolled">Average Rolled (Statistical Mean &bull; d6=3.5, d8=4.5...)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dnd-section-card">
+            <h3>
+              Feats &amp; Racial Traits
+              <span class="tag">Bonuses</span>
+            </h3>
+            <p style="font-size:13px; color:var(--slate); margin-top:0; margin-bottom:12px;">
+              Select all active traits and feats that modify maximum hit points.
+            </p>
+
+            <div class="traits-list">
+              <label class="checkbox-card" for="featTough">
+                <input type="checkbox" id="featTough">
+                <div class="trait-label">
+                  Tough Feat
+                  <small>+2 Hit Points per character level</small>
+                </div>
+              </label>
+
+              <label class="checkbox-card" for="traitHillDwarf">
+                <input type="checkbox" id="traitHillDwarf">
+                <div class="trait-label">
+                  Hill Dwarf (Dwarven Toughness)
+                  <small>+1 Hit Point per character level</small>
+                </div>
+              </label>
+
+              <label class="checkbox-card" for="traitDraconic">
+                <input type="checkbox" id="traitDraconic">
+                <div class="trait-label">
+                  Draconic Bloodline Sorcerer
+                  <small>+1 Hit Point per Sorcerer level</small>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="actions" style="margin-top: 18px;">
+            <button type="button" class="btn-ghost" id="resetBtn" style="width: 100%;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:6px;">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+              Reset Calculator
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Class Levels Grid -->
+        <div class="dnd-col-right">
+          <div class="dnd-section-card" style="margin-bottom:0;">
+            <h3>
+              Character Class Levels
+              <span class="tag">12 Classes</span>
+            </h3>
+
+            <div class="class-header-labels">
+              <span>1st Level Class &bull; Hit Die</span>
+              <span>Class Level</span>
+            </div>
+            
+            <div class="class-grid" id="classGrid">
+              <!-- Dynamically populated or rendered cleanly -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Live Results Display Card -->
+      <div class="hp-results-card" role="region" aria-live="polite" id="resultsPanel">
+        <div class="total-level-badge" id="totalLevelBadge">Total Level: 1</div>
+        <div class="results-eyebrow">Maximum Character Hit Points</div>
+        <div class="total-hp-display" id="hpResult">14</div>
+        <div class="breakdown-display" id="hpBreakdown">(12 [1st lvl base] + 2 [Con]) = 14</div>
+      </div>
+
+      <!-- Legal OGL / Fan Content Disclaimer -->
+      <div class="dnd-disclaimer" data-html2canvas-ignore="true">
+        This tool is unofficial Fan Content permitted under the Fan Content Policy. Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. &copy;Wizards of the Coast LLC.
+      </div>
+    </div>
+
+    <!-- Direct Editorial Answer Block -->
+    <div class="geo-answer-block" style="margin-top:36px;">
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        D&amp;D 5E METROLOGY &bull; HIT POINT CALCULATION RULES
+      </span>
+      <h3>How Maximum Hit Points are Determined in D&amp;D 5th Edition</h3>
+      <p>
+        In Dungeons &amp; Dragons 5e, your character's hit points determine survivability in encounters. At 1st level, your character receives the <strong>maximum value of their class hit die</strong> plus their Constitution modifier.
+      </p>
+      <div class="geo-formula-badge">
+        Level 1 HP = Max Class Hit Die + Constitution Modifier
+      </div>
+      <p>
+        For subsequent levels, players either roll their class hit die or take the fixed average (rounded up): <strong>d12 = 7</strong>, <strong>d10 = 6</strong>, <strong>d8 = 5</strong>, <strong>d6 = 4</strong>, and add their Constitution modifier for each level gained.
+      </p>
+    </div>
+
+    <!-- Editorial Deep Dive Article -->
+    <article class="article">
+      <h2>Understanding Multiclassing &amp; Hit Point Mechanics</h2>
+      <p>
+        When multiclassing in D&amp;D 5e, you only receive maximum hit die hit points for your <em>starting</em> 1st-level class. Every subsequent class level you take — whether in your primary class or a new class — grants hit points using the standard level-up method (fixed or rolled average plus Constitution modifier).
+      </p>
+      <h3>Retroactive Constitution Adjustments</h3>
+      <p>
+        In 5th Edition rules, if your Constitution modifier increases (such as through an Ability Score Improvement at level 4 or 8), your maximum hit points increase retroactively for <em>every level you have already gained</em>. For instance, increasing Constitution from 14 (+2) to 16 (+3) at level 8 grants +8 additional maximum HP immediately.
+      </p>
+      <h3>Feats and Racial Traits Stack Compounding HP</h3>
+      <p>
+        The <strong>Tough</strong> feat adds +2 HP per level retroactively and for every subsequent level gained. The <strong>Hill Dwarf</strong> trait grants +1 HP per level, and the Sorcerer's <strong>Draconic Resilience</strong> grants +1 HP per Sorcerer level. All three bonuses stack cumulatively with class hit dice and Constitution modifiers.
+      </p>
+    </article>
+
+    <!-- Related Atelier Instruments -->
+    <section class="related">
+      <h2>Related Metrology &amp; Everyday Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/percentage-calculator">
+          <div class="tile-top"><span class="tile-idx">[03]</span><span class="tile-badge">Ratio</span></div>
+          <b>Percentage Calculator</b>
+          <i>Multi-mode proportional ratio engine.</i>
+        </a>
+        <a class="tile" href="/tools/date-difference-calculator">
+          <div class="tile-top"><span class="tile-idx">[15]</span><span class="tile-badge">Time</span></div>
+          <b>Date Difference Calculator</b>
+          <i>Exact day, week, month duration analysis.</i>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/hp-calculator">D&amp;D 5e HP Calculator</a></li>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Client-Side Sovereignty</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Zero server transmission. Compute executes locally in your device browser sandbox.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink); font-weight:700;">MODERN RED &amp; SLATE EDITION</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  // 12 Standard D&D 5e Classes with corresponding Hit Die
+  const classData = [
+    { id: 'barbarian', name: 'Barbarian', die: 12 },
+    { id: 'fighter',   name: 'Fighter',   die: 10 },
+    { id: 'paladin',   name: 'Paladin',   die: 10 },
+    { id: 'ranger',    name: 'Ranger',    die: 10 },
+    { id: 'bard',      name: 'Bard',      die: 8 },
+    { id: 'cleric',    name: 'Cleric',    die: 8 },
+    { id: 'druid',     name: 'Druid',     die: 8 },
+    { id: 'monk',      name: 'Monk',      die: 8 },
+    { id: 'rogue',     name: 'Rogue',     die: 8 },
+    { id: 'warlock',   name: 'Warlock',   die: 8 },
+    { id: 'sorcerer',  name: 'Sorcerer',  die: 6 },
+    { id: 'wizard',    name: 'Wizard',    die: 6 }
+  ];
+
+  // DOM Elements Cache
+  const conModInput    = document.getElementById('conMod');
+  const hpMethodSelect = document.getElementById('hpMethod');
+  const featToughCheck = document.getElementById('featTough');
+  const traitDwarfCheck = document.getElementById('traitHillDwarf');
+  const traitDraconicCheck = document.getElementById('traitDraconic');
+  const resetBtn       = document.getElementById('resetBtn');
+  const classGridEl    = document.getElementById('classGrid');
+  const hpResultEl     = document.getElementById('hpResult');
+  const hpBreakdownEl  = document.getElementById('hpBreakdown');
+  const totalLevelBadgeEl = document.getElementById('totalLevelBadge');
+
+  // Build Class Rows once during initialization (Optimized: No DOM recreation on reset)
+  function initClassGrid() {
+    let fragment = document.createDocumentFragment();
+
+    classData.forEach((c, index) => {
+      const isBarbarian = index === 0;
+      const row = document.createElement('div');
+      row.className = 'class-row' + (isBarbarian ? ' active-starting' : '');
+      row.id = `row-${c.id}`;
+
+      row.innerHTML = `
+        <div class="class-info">
+          <input type="radio" name="startingClass" id="radio-${c.id}" value="${c.id}" ${isBarbarian ? 'checked' : ''} aria-label="Starting class ${c.name}">
+          <label for="radio-${c.id}">
+            <span>${c.name}</span>
+            <span class="die-badge">d${c.die}</span>
+          </label>
+        </div>
+        <div class="level-stepper">
+          <button type="button" class="step-btn" data-action="dec" data-target="lvl-${c.id}" aria-label="Decrease ${c.name} level">&minus;</button>
+          <input type="number" id="lvl-${c.id}" class="class-level-input" min="0" max="20" value="${isBarbarian ? 1 : 0}" aria-label="${c.name} level">
+          <button type="button" class="step-btn" data-action="inc" data-target="lvl-${c.id}" aria-label="Increase ${c.name} level">&plus;</button>
+        </div>
+      `;
+
+      fragment.appendChild(row);
+    });
+
+    classGridEl.appendChild(fragment);
+  }
+
+  // Format modifier sign cleanly (+2 or -1)
+  function formatMod(mod) {
+    return mod >= 0 ? `+ ${mod}` : `- ${Math.abs(mod)}`;
+  }
+
+  // Core Hit Point Calculation (Maintains 100% exact math & rules)
+  function calculateHP() {
+    const conMod = parseInt(conModInput.value, 10) || 0;
+    const hpMethod = hpMethodSelect.value;
+    const isTough = featToughCheck.checked;
+    const isDwarf = traitDwarfCheck.checked;
+    const isDraconic = traitDraconicCheck.checked;
+
+    const checkedRadio = document.querySelector('input[name="startingClass"]:checked');
+    const startingClassId = checkedRadio ? checkedRadio.value : 'barbarian';
+    const startingLvlInput = document.getElementById(`lvl-${startingClassId}`);
+    const startingClassLvl = startingLvlInput ? (parseInt(startingLvlInput.value, 10) || 0) : 0;
+
+    // Highlight the starting class row visually
+    document.querySelectorAll('.class-row').forEach(row => {
+      row.classList.toggle('active-starting', row.id === `row-${startingClassId}`);
+    });
+
+    // Check validity of starting class level
+    if (startingClassLvl < 1) {
+      hpResultEl.textContent = "0";
+      hpBreakdownEl.textContent = "Your selected 1st Level Class must have at least 1 level assigned to it.";
+      totalLevelBadgeEl.textContent = "Total Level: 0";
+      return;
+    }
+
+    let totalHP = 0;
+    let totalLevels = 0;
+    let sorcLevels = 0;
+    let startingClassProcessed = false;
+    let mathBreakdownParts = [];
+
+    classData.forEach(c => {
+      const lvlInput = document.getElementById(`lvl-${c.id}`);
+      const lvl = lvlInput ? Math.max(0, parseInt(lvlInput.value, 10) || 0) : 0;
+
+      if (lvl > 0) {
+        totalLevels += lvl;
+        if (c.id === 'sorcerer') sorcLevels = lvl;
+
+        let levelsToProcess = lvl;
+        let classHP = 0;
+
+        // Process Level 1 Maximum Base Die for Starting Class
+        if (c.id === startingClassId && !startingClassProcessed) {
+          classHP += (c.die + conMod);
+          mathBreakdownParts.push(`(${c.die} [1st lvl base] ${formatMod(conMod)} [Con])`);
+          levelsToProcess -= 1;
+          startingClassProcessed = true;
+        }
+
+        // Process Remaining Levels for this Class
+        if (levelsToProcess > 0) {
+          const step = hpMethod === 'fixed' ? Math.ceil(c.die / 2 + 1) : (c.die / 2 + 0.5);
+          classHP += levelsToProcess * (step + conMod);
+          mathBreakdownParts.push(`${levelsToProcess} × (${step} [base] ${formatMod(conMod)} [Con])`);
+        }
+
+        totalHP += classHP;
+      }
+    });
+
+    if (totalLevels === 0) {
+      hpResultEl.textContent = "0";
+      hpBreakdownEl.textContent = "Add character levels to calculate HP.";
+      totalLevelBadgeEl.textContent = "Total Level: 0";
+      return;
+    }
+
+    // Process Feats & Traits Bonuses
+    let extraHP = 0;
+    let extraParts = [];
+    if (isTough) {
+      extraHP += (totalLevels * 2);
+      extraParts.push(`${totalLevels * 2} [Tough]`);
+    }
+    if (isDwarf) {
+      extraHP += (totalLevels * 1);
+      extraParts.push(`${totalLevels * 1} [Dwarf]`);
+    }
+    if (isDraconic && sorcLevels > 0) {
+      extraHP += (sorcLevels * 1);
+      extraParts.push(`${sorcLevels * 1} [Draconic]`);
+    }
+
+    if (extraParts.length > 0) {
+      mathBreakdownParts.push(extraParts.join(" + "));
+    }
+
+    totalHP += extraHP;
+    totalHP = Math.floor(totalHP); // Catch floating point fractions from rolled average calculation
+
+    // Update UI elements
+    totalLevelBadgeEl.textContent = `Total Level: ${totalLevels}`;
+    hpResultEl.textContent = totalHP;
+    hpBreakdownEl.textContent = mathBreakdownParts.join(" + ") + ` = ${totalHP}`;
+  }
+
+  // Optimized Reset (Resets values directly without reconstructing DOM elements)
+  function resetForm() {
+    conModInput.value = "2";
+    hpMethodSelect.value = "fixed";
+    featToughCheck.checked = false;
+    traitDwarfCheck.checked = false;
+    traitDraconicCheck.checked = false;
+
+    classData.forEach((c, index) => {
+      const radio = document.getElementById(`radio-${c.id}`);
+      const lvlInput = document.getElementById(`lvl-${c.id}`);
+      if (radio) radio.checked = (index === 0);
+      if (lvlInput) lvlInput.value = (index === 0 ? 1 : 0);
+    });
+
+    calculateHP();
+  }
+
+  // Stepper Button Handling (+ and -)
+  classGridEl.addEventListener('click', function(e) {
+    const btn = e.target.closest('.step-btn');
+    if (!btn) return;
+    
+    const targetId = btn.getAttribute('data-target');
+    const input = document.getElementById(targetId);
+    if (!input) return;
+
+    let val = parseInt(input.value, 10) || 0;
+    if (btn.getAttribute('data-action') === 'inc') {
+      if (val < 20) val++;
+    } else {
+      if (val > 0) val--;
+    }
+    input.value = val;
+    calculateHP();
+  });
+
+  // Delegated event listening for inputs and selects
+  document.querySelector('.panel').addEventListener('input', calculateHP);
+  document.querySelector('.panel').addEventListener('change', calculateHP);
+  resetBtn.addEventListener('click', resetForm);
+
+  // Initialize UI & compute initial state
+  initClassGrid();
+  calculateHP();
+
+  // Atelier Theme Switcher (Synchronized with localStorage & Toolbay design system)
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if (themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

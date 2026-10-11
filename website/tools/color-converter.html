@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Color Converter &amp; WCAG Contrast Checker — HEX, RGB, HSL &amp; CMYK | Toolbay</title>
+<meta name="description" content="Convert colors between HEX, RGB, HSL, and CMYK with mathematical precision. Calculate WCAG 2.1 AA/AAA accessibility contrast ratios and generate harmonic palettes.">
+<meta name="keywords" content="color converter, hex to rgb, rgb to hex, hsl converter, cmyk converter, wcag contrast checker, color contrast ratio, accessibility contrast">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/color-converter">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Color Converter &amp; WCAG Contrast Checker — HEX, RGB, HSL &amp; CMYK | Toolbay">
+<meta property="og:description" content="Convert colors between HEX, RGB, HSL, and CMYK with mathematical precision and WCAG 2.1 contrast validation.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/color-converter">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Chromatic Converter and WCAG Contrast Metrology",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/color-converter",
+      "description": "Browser-native color space converter for HEX, RGB, HSL, and CMYK with WCAG 2.1 contrast metrology.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Developer & Text Engineering", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Color Converter", "item": "https://tools.xyzhome.site/tools/color-converter"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is the WCAG 2.1 contrast ratio calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WCAG 2.1 calculates relative luminance (L) using sRGB gamma expansion (L = 0.2126*R_lin + 0.7152*G_lin + 0.0722*B_lin). The contrast ratio is defined as (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What contrast ratio is required to pass WCAG AA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WCAG Level AA requires a minimum contrast ratio of 4.5:1 for regular text and 3:1 for large text (18pt or bold 14pt). Level AAA requires 7:1 for regular text and 4.5:1 for large text."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can CMYK be converted to RGB with 100% mathematical fidelity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Theoretical subtractive CMYK translates cleanly to RGB via standard color space formulas (R = 255 * (1-C) * (1-K)), but physical printing depends on specific press ICC profiles (like SWOP or FOGRA39) and paper absorptivity."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Developer &amp; Text Engineering</a> &rsaquo; Color Converter</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[14] &bull; CHROMATIC METROLOGY</span>
+      <h1>Color Converter &amp; WCAG Contrast Metrology</h1>
+      <p>Translate chromatic values across HEX, RGB, HSL, and CMYK with mathematical precision. Audit WCAG 2.1 AA/AAA accessibility ratios and generate harmonious palette schemes.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="row">
+        <div class="field">
+          <label for="colorPicker">Visual Palette Swatch</label>
+          <div style="display:flex;gap:12px;align-items:center;">
+            <input type="color" id="colorPicker" value="#EF6F79" style="width:72px;height:48px;padding:2px;cursor:pointer;border-radius:6px;border:1px solid var(--plaster-dark);background:transparent;">
+            <span style="font-size:14px;color:var(--slate);">Click to pick any spectrum shade</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="hexInput">HEX Hexadecimal Code</label>
+          <input type="text" id="hexInput" value="#EF6F79" maxlength="9" placeholder="#EF6F79" style="font-family:var(--font-mono);font-size:15px;text-transform:uppercase;">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:14px;">
+        <div class="field">
+          <label for="rgbInput">RGB Notation</label>
+          <input type="text" id="rgbInput" value="rgb(239, 111, 121)" placeholder="rgb(239, 111, 121)" style="font-family:var(--font-mono);font-size:14px;">
+        </div>
+        <div class="field">
+          <label for="hslInput">HSL Cylindrical Coordinates</label>
+          <input type="text" id="hslInput" value="hsl(355, 79%, 69%)" placeholder="hsl(355, 79%, 69%)" style="font-family:var(--font-mono);font-size:14px;">
+        </div>
+      </div>
+
+      <!-- Quick Preset Editorial Swatches -->
+      <div style="margin-top:16px;">
+        <label style="margin-bottom:8px;">Curated Atelier Shades</label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="ghost chip" data-hex="#EF6F79" style="background:#EF6F79;color:#fff;border-color:#EF6F79;">#EF6F79 Dusty Pink</button>
+          <button class="ghost chip" data-hex="#FAF7F2" style="background:#FAF7F2;color:#1D1718;border-color:#E2DCD4;">#FAF7F2 Plaster</button>
+          <button class="ghost chip" data-hex="#1D1718" style="background:#1D1718;color:#FAF7F2;border-color:#1D1718;">#1D1718 Charcoal</button>
+          <button class="ghost chip" data-hex="#2743D6" style="background:#2743D6;color:#fff;border-color:#2743D6;">#2743D6 Cobalt</button>
+          <button class="ghost chip" data-hex="#0F766E" style="background:#0F766E;color:#fff;border-color:#0F766E;">#0F766E Forest Teal</button>
+          <button class="ghost chip" data-hex="#B45309" style="background:#B45309;color:#fff;border-color:#B45309;">#B45309 Ochre Brass</button>
+        </div>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; COLORIMETRIC COLOR CONVERSION &amp; CONTRAST
+      </span>
+      <h3>How Do Color Conversions and WCAG Contrast Audits Work?</h3>
+      <p>
+        Color representations express positions in the CIE sRGB color space. HEX encodes red, green, and blue components as base-16 bytes (00 to FF). HSL projects Cartesian RGB into a cylindrical coordinate system of Hue ($0^\circ \text{ to } 360^\circ$), Saturation ($0\% \text{ to } 100\%$), and Lightness ($0\% \text{ to } 100\%$). WCAG 2.1 contrast compliance measures the ratio between the relative luminance of two colors: $(L_1 + 0.05) / (L_2 + 0.05)$, requiring a minimum ratio of <strong>4.5:1</strong> for Level AA normal text and <strong>7.0:1</strong> for Level AAA to ensure readability for users with low vision or color vision deficiencies.
+      </p>
+    </div>
+
+    <!-- Educational Editorial Content -->
+    <article class="article">
+      <h2>The Physics and Mathematics of Chromatic Coordinate Spaces</h2>
+      <p>
+        In digital interface engineering and graphic design, color is not an arbitrary aesthetic property; it is a precisely calibrated physical stimulus. Modern digital displays conform to the sRGB color space standard established by HP and Microsoft in 1996, standardized internationally under IEC 61966-2-1. Translating colors between HEX, RGB, HSL, and CMYK requires understanding their underlying mathematical projections.
+      </p>
+
+      <h3>1. Additive RGB and Base-16 Hexadecimal Representation</h3>
+      <p>
+        Electronic monitors synthesize millions of perceived colors through additive chromatic synthesis, firing micro-emitters of Red, Green, and Blue light. In standard 24-bit TrueColor depth, each primary channel is allocated an 8-bit unsigned integer spanning values from <code>0</code> (zero luminous output) to <code>255</code> (maximum emitter intensity):
+      </p>
+      <ul>
+        <li><code>#EF6F79</code> decomposes into <code>EF</code> (239 Red), <code>6F</code> (111 Green), and <code>79</code> (121 Blue).</li>
+        <li>Shorthand 3-digit HEX syntax (e.g., <code>#F79</code>) duplicates each hexadecimal nybble into byte pairs (<code>#FF7799</code>).</li>
+      </ul>
+
+      <h3>2. Cylindrical HSL Projection: Hue, Saturation, and Lightness</h3>
+      <p>
+        While RGB aligns with display hardware, it is unintuitive for human designers. If a button's background is too dark, adjusting RGB values requires tweaking all three channels simultaneously. HSL solves this by mapping RGB cubes into a bi-hexcone cylinder:
+      </p>
+      <ul>
+        <li><strong>Hue ($H$):</strong> An angular position on the standard color wheel from $0^\circ$ to $360^\circ$ ($0^\circ$ Red, $120^\circ$ Green, $240^\circ$ Blue).</li>
+        <li><strong>Saturation ($S$):</strong> Purity or chromatic intensity relative to lightness, where $0\%$ is achromatic gray and $100\%$ is the most saturated spectral pigment.</li>
+        <li><strong>Lightness ($L$):</strong> The arithmetic midpoint between the minimum and maximum RGB channel components: $L = \frac{\max(R, G, B) + \min(R, G, B)}{2 \times 255}$.</li>
+      </ul>
+
+      <h3>3. Subtractive CMYK Formulation for Print Pre-Press</h3>
+      <p>
+        Unlike glowing monitors, physical ink on paper absorbs light rather than emitting it. Subtractive primary inks—Cyan (absorbs Red), Magenta (absorbs Green), and Yellow (absorbs Blue)—are complemented by Key Black ($K$) to achieve rich contrast without saturating paper fibers. The standard theoretical transformation from normalized RGB ($R', G', B' \in [0, 1]$) is:
+      </p>
+      <div style="background:var(--blush);padding:14px 18px;border-radius:8px;font-family:var(--font-mono);font-size:13.5px;margin:16px 0;">
+        K = 1 - max(R', G', B')<br>
+        C = (1 - R' - K) / (1 - K)<br>
+        M = (1 - G' - K) / (1 - K)<br>
+        Y = (1 - B' - K) / (1 - K)
+      </div>
+
+      <h3>4. WCAG 2.1 Relative Luminance and Accessibility Auditing</h3>
+      <p>
+        The Web Content Accessibility Guidelines (WCAG 2.1) enforce rigorous contrast requirements to protect users with macular degeneration, diabetic retinopathy, or color blindness. Because human cone photoreceptors are dramatically more sensitive to green wavelengths than blue wavelengths, computing luminance requires non-linear gamma un-companding:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>WCAG Compliance Level</th>
+              <th>Body / Regular Text (&lt; 18pt)</th>
+              <th>Large Text (&ge; 18pt or Bold 14pt)</th>
+              <th>UI Components &amp; Graphical Objects</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Level AA (Mandatory Standard)</strong></td>
+              <td>Minimum 4.5:1 ratio</td>
+              <td>Minimum 3.0:1 ratio</td>
+              <td>Minimum 3.0:1 ratio</td>
+            </tr>
+            <tr>
+              <td><strong>Level AAA (Enhanced Criterion)</strong></td>
+              <td>Minimum 7.0:1 ratio</td>
+              <td>Minimum 4.5:1 ratio</td>
+              <td>Recommended 4.5:1 ratio</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>How is the WCAG 2.1 contrast ratio calculated?</summary>
+        <p>WCAG 2.1 calculates relative luminance (L) using sRGB gamma expansion (L = 0.2126*R_lin + 0.7152*G_lin + 0.0722*B_lin). The contrast ratio is defined as (L1 + 0.05) / (L2 + 0.05), where L1 is the lighter color.</p>
+      </details>
+      <details>
+        <summary>What contrast ratio is required to pass WCAG AA?</summary>
+        <p>WCAG Level AA requires a minimum contrast ratio of 4.5:1 for regular text and 3:1 for large text (18pt or bold 14pt). Level AAA requires 7:1 for regular text and 4.5:1 for large text.</p>
+      </details>
+      <details>
+        <summary>Can CMYK be converted to RGB with 100% mathematical fidelity?</summary>
+        <p>Theoretical subtractive CMYK translates cleanly to RGB via standard color space formulas, but physical printing depends on specific press ICC profiles (like SWOP or FOGRA39) and paper absorptivity.</p>
+      </details>
+      <details>
+        <summary>Why does text on a colored button fail accessibility checks even if it looks readable on my laptop?</summary>
+        <p>High-end modern screens feature elevated contrast ratios and dynamic brightness. On mobile devices in direct outdoor sunlight, or for people with mild vision impairment, marginal contrast ratios immediately degrade into unreadable text.</p>
+      </details>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Developer &amp; Metrology Tools</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/json-formatter">
+          <div class="tile-top"><span class="tile-idx">[13]</span><span class="tile-badge">Data</span></div>
+          <b>JSON Formatter</b>
+          <i>Validate and beautify JSON payloads with RFC 8259 error diagnostics.</i>
+        </a>
+        <a class="tile" href="/tools/unit-converter">
+          <div class="tile-top"><span class="tile-idx">[7]</span><span class="tile-badge">Metrology</span></div>
+          <b>Unit Converter</b>
+          <i>8-domain measurement conversion verified against NIST physical constants.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/color-converter">Color Converter</a></li>
+          <li><a href="/tools/json-formatter">JSON Formatter</a></li>
+          <li><a href="/tools/date-difference-calculator">Date Difference Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Colorimetric Standard</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Complies with W3C WCAG 2.1 Recommendation and IEC 61966-2-1 sRGB standards.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var colorPicker = document.getElementById('colorPicker');
+  var hexInput = document.getElementById('hexInput');
+  var rgbInput = document.getElementById('rgbInput');
+  var hslInput = document.getElementById('hslInput');
+  var out = document.getElementById('out');
+  var chips = document.querySelectorAll('.chip');
+
+  // Math: Hex to RGB
+  function parseHex(h) {
+    var clean = h.trim().replace(/^#/, '');
+    if (clean.length === 3) {
+      clean = clean[0] + clean[0] + clean[1] + clean[1] + clean[2] + clean[2];
+    }
+    if (!/^[0-9a-fA-F]{6}$/.test(clean)) return null;
+    return {
+      r: parseInt(clean.substring(0, 2), 16),
+      g: parseInt(clean.substring(2, 4), 16),
+      b: parseInt(clean.substring(4, 6), 16),
+      hex: '#' + clean.toUpperCase()
+    };
+  }
+
+  // Math: RGB to Hex
+  function rgbToHex(r, g, b) {
+    function pad(v) {
+      var s = Math.max(0, Math.min(255, Math.round(v))).toString(16);
+      return s.length === 1 ? '0' + s : s;
+    }
+    return ('#' + pad(r) + pad(g) + pad(b)).toUpperCase();
+  }
+
+  // Math: RGB to HSL
+  function rgbToHsl(r, g, b) {
+    var r1 = r / 255, g1 = g / 255, b1 = b / 255;
+    var max = Math.max(r1, g1, b1), min = Math.min(r1, g1, b1);
+    var h, s, l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // achromatic
+    } else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r1: h = ((g1 - b1) / d + (g1 < b1 ? 6 : 0)) / 6; break;
+        case g1: h = ((b1 - r1) / d + 2) / 6; break;
+        case b1: h = ((r1 - g1) / d + 4) / 6; break;
+      }
+    }
+    return {
+      h: Math.round(h * 360),
+      s: Math.round(s * 100),
+      l: Math.round(l * 100)
+    };
+  }
+
+  // Math: HSL to RGB
+  function hslToRgb(h, s, l) {
+    h = h / 360; s = s / 100; l = l / 100;
+    var r, g, b;
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      function hue2rgb(p, q, t) {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      }
+      var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      var p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+    return {
+      r: Math.round(r * 255),
+      g: Math.round(g * 255),
+      b: Math.round(b * 255)
+    };
+  }
+
+  // Math: RGB to CMYK
+  function rgbToCmyk(r, g, b) {
+    var r1 = r / 255, g1 = g / 255, b1 = b / 255;
+    var k = 1 - Math.max(r1, g1, b1);
+    if (k >= 0.9999) {
+      return { c: 0, m: 0, y: 0, k: 100 };
+    }
+    var c = (1 - r1 - k) / (1 - k);
+    var m = (1 - g1 - k) / (1 - k);
+    var y = (1 - b1 - k) / (1 - k);
+    return {
+      c: Math.round(c * 100),
+      m: Math.round(m * 100),
+      y: Math.round(y * 100),
+      k: Math.round(k * 100)
+    };
+  }
+
+  // Math: Relative Luminance (sRGB standard)
+  function getLuminance(r, g, b) {
+    function chan(val) {
+      var v = val / 255;
+      return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    }
+    return 0.2126 * chan(r) + 0.7152 * chan(g) + 0.0722 * chan(b);
+  }
+
+  function getContrastBadge(ratio, isLarge) {
+    var thresholdAA = isLarge ? 3.0 : 4.5;
+    var thresholdAAA = isLarge ? 4.5 : 7.0;
+
+    if (ratio >= thresholdAAA) {
+      return '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:#EBFBEE;color:#2B8A3E;">PASS AAA (' + ratio.toFixed(2) + ':1)</span>';
+    } else if (ratio >= thresholdAA) {
+      return '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:#E7F5FF;color:#1971C2;">PASS AA (' + ratio.toFixed(2) + ':1)</span>';
+    } else {
+      return '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700;background:#FFF0F2;color:#C92A2A;">FAIL (' + ratio.toFixed(2) + ':1)</span>';
+    }
+  }
+
+  function render(colorObj) {
+    var r = colorObj.r, g = colorObj.g, b = colorObj.b, hex = colorObj.hex;
+    var hsl = rgbToHsl(r, g, b);
+    var cmyk = rgbToCmyk(r, g, b);
+    var lum = getLuminance(r, g, b);
+
+    // WCAG contrast ratios
+    var contrastWhite = (1.0 + 0.05) / (lum + 0.05);
+    var contrastBlack = (lum + 0.05) / (0.0 + 0.05);
+
+    // Update synced fields
+    colorPicker.value = hex;
+    hexInput.value = hex;
+    rgbInput.value = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    hslInput.value = 'hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)';
+
+    // Harmonic schemes
+    var compH = (hsl.h + 180) % 360;
+    var compColor = rgbToHex.apply(null, Object.values(hslToRgb(compH, hsl.s, hsl.l)));
+
+    var ana1H = (hsl.h - 30 + 360) % 360;
+    var ana2H = (hsl.h + 30) % 360;
+    var ana1 = rgbToHex.apply(null, Object.values(hslToRgb(ana1H, hsl.s, hsl.l)));
+    var ana2 = rgbToHex.apply(null, Object.values(hslToRgb(ana2H, hsl.s, hsl.l)));
+
+    var tri1H = (hsl.h + 120) % 360;
+    var tri2H = (hsl.h + 240) % 360;
+    var tri1 = rgbToHex.apply(null, Object.values(hslToRgb(tri1H, hsl.s, hsl.l)));
+    var tri2 = rgbToHex.apply(null, Object.values(hslToRgb(tri2H, hsl.s, hsl.l)));
+
+    var shade1 = rgbToHex.apply(null, Object.values(hslToRgb(hsl.h, hsl.s, Math.max(10, hsl.l - 30))));
+    var tint1 = rgbToHex.apply(null, Object.values(hslToRgb(hsl.h, hsl.s, Math.min(95, hsl.l + 25))));
+
+    var html = '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;margin-bottom:16px;">' +
+      // Swatch Card
+      '<div style="background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;">' +
+        '<div style="height:110px;border-radius:8px;background:' + hex + ';box-shadow:inset 0 0 0 1px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;color:' + (contrastWhite > contrastBlack ? '#FFFFFF' : '#000000') + ';font-family:var(--font-mono);font-size:16px;font-weight:700;">' +
+          hex +
+        '</div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13.5px;"><span style="color:var(--slate);">RGB Code</span><b>rgb(' + r + ', ' + g + ', ' + b + ')</b></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13.5px;"><span style="color:var(--slate);">HSL Values</span><b>hsl(' + hsl.h + ', ' + hsl.s + '%, ' + hsl.l + '%)</b></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13.5px;"><span style="color:var(--slate);">CMYK (Print)</span><b>cmyk(' + cmyk.c + '%, ' + cmyk.m + '%, ' + cmyk.y + '%, ' + cmyk.k + '%)</b></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13.5px;"><span style="color:var(--slate);">Relative Luminance</span><b>' + lum.toFixed(4) + '</b></div>' +
+      '</div>' +
+
+      // Contrast Audit Card
+      '<div style="background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:12px;">' +
+        '<div style="font-family:var(--font-head);font-size:17px;font-weight:700;color:var(--ink);">WCAG 2.1 Accessibility Audit</div>' +
+        
+        '<div style="background:var(--blush);padding:10px 14px;border-radius:6px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+            '<span style="font-size:13px;font-weight:600;">Text on White (#FFF)</span>' +
+            getContrastBadge(contrastWhite, false) +
+          '</div>' +
+          '<div style="font-size:12px;color:var(--slate);display:flex;justify-content:space-between;">' +
+            '<span>Large Text Target:</span>' + getContrastBadge(contrastWhite, true) +
+          '</div>' +
+        '</div>' +
+
+        '<div style="background:var(--blush);padding:10px 14px;border-radius:6px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">' +
+            '<span style="font-size:13px;font-weight:600;">Text on Black (#000)</span>' +
+            getContrastBadge(contrastBlack, false) +
+          '</div>' +
+          '<div style="font-size:12px;color:var(--slate);display:flex;justify-content:space-between;">' +
+            '<span>Large Text Target:</span>' + getContrastBadge(contrastBlack, true) +
+          '</div>' +
+        '</div>' +
+
+        '<div style="font-size:12px;color:var(--slate);line-height:1.4;">' +
+          'Standard text requires &ge; 4.5:1 (AA) or &ge; 7:1 (AAA). Large text (&ge; 18pt or bold 14pt) requires &ge; 3.0:1 (AA).' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    // Harmonic Swatches Section
+    html += '<div style="margin-top:12px;">' +
+      '<div style="font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:8px;">Harmonic Chromatic Schemes (Click Any Swatch to Inspect)</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;">' +
+        '<div class="palette-pick" data-hex="' + hex + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + hex + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Base</span><br><b style="font-size:12px;">' + hex + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + compColor + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + compColor + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Complement</span><br><b style="font-size:12px;">' + compColor + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + ana1 + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + ana1 + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Analogous -30°</span><br><b style="font-size:12px;">' + ana1 + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + ana2 + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + ana2 + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Analogous +30°</span><br><b style="font-size:12px;">' + ana2 + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + tri1 + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + tri1 + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Triadic 1</span><br><b style="font-size:12px;">' + tri1 + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + shade1 + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + shade1 + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Deep Shade</span><br><b style="font-size:12px;">' + shade1 + '</b>' +
+        '</div>' +
+        '<div class="palette-pick" data-hex="' + tint1 + '" style="cursor:pointer;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:6px;padding:8px;text-align:center;">' +
+          '<div style="height:36px;border-radius:4px;background:' + tint1 + ';margin-bottom:6px;"></div>' +
+          '<span style="font-size:11px;color:var(--slate);text-transform:uppercase;">Soft Tint</span><br><b style="font-size:12px;">' + tint1 + '</b>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+    out.innerHTML = html;
+
+    // Attach click events to palette pickers
+    var palettePicks = document.querySelectorAll('.palette-pick');
+    for (var i = 0; i < palettePicks.length; i++) {
+      palettePicks[i].addEventListener('click', function(e){
+        var h = this.getAttribute('data-hex');
+        var parsed = parseHex(h);
+        if (parsed) render(parsed);
+      });
+    }
+  }
+
+  // Event Listeners
+  colorPicker.addEventListener('input', function(e){
+    var parsed = parseHex(e.target.value);
+    if (parsed) render(parsed);
+  });
+
+  hexInput.addEventListener('input', function(e){
+    var parsed = parseHex(e.target.value);
+    if (parsed) render(parsed);
+  });
+
+  rgbInput.addEventListener('input', function(e){
+    var match = e.target.value.match(/(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+    if (match) {
+      var r = parseInt(match[1], 10), g = parseInt(match[2], 10), b = parseInt(match[3], 10);
+      if (r <= 255 && g <= 255 && b <= 255) {
+        render({ r: r, g: g, b: b, hex: rgbToHex(r, g, b) });
+      }
+    }
+  });
+
+  hslInput.addEventListener('input', function(e){
+    var match = e.target.value.match(/(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?/);
+    if (match) {
+      var h = parseInt(match[1], 10) % 360, s = Math.min(100, parseInt(match[2], 10)), l = Math.min(100, parseInt(match[3], 10));
+      var rgb = hslToRgb(h, s, l);
+      render({ r: rgb.r, g: rgb.g, b: rgb.b, hex: rgbToHex(rgb.r, rgb.g, rgb.b) });
+    }
+  });
+
+  for (var c = 0; c < chips.length; c++) {
+    chips[c].addEventListener('click', function(){
+      var h = this.getAttribute('data-hex');
+      var parsed = parseHex(h);
+      if (parsed) render(parsed);
+    });
+  }
+
+  // Initial render with Dusty Pink #EF6F79
+  var init = parseHex('#EF6F79');
+  if (init) render(init);
+
+  // Dark/Light Theme Switcher
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  var savedTheme = 'light';
+  try {
+    savedTheme = localStorage.getItem('toolbay_theme') || 'light';
+  } catch(e){}
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (themeBtnText) themeBtnText.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+  if(themeBtn) {
+    themeBtn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('toolbay_theme', next); } catch(e){}
+      if (themeBtnText) themeBtnText.textContent = next === 'dark' ? 'Light' : 'Dark';
+    });
+  }
+})();
+</script>
+</body>
+</html>

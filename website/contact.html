@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact the Atelier | Toolbay</title>
+<meta name="description" content="Contact the Toolbay engineering desk. Report calculation bugs, request new mathematical instruments, or inquire about advertising partnerships.">
+<meta name="keywords" content="contact toolbay, bug report, calculator feedback, toolbay support">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/contact">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Contact the Atelier | Toolbay">
+<meta property="og:description" content="Report calculation bugs, request new instruments, or inquire about advertising partnerships.">
+<meta property="og:url" content="https://tools.xyzhome.site/contact">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- ContactPage Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Toolbay Atelier",
+  "url": "https://tools.xyzhome.site/contact",
+  "description": "Direct communication channel for technical bug reporting and partnerships.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Toolbay Atelier",
+    "url": "https://tools.xyzhome.site/",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "technical support",
+      "email": "hello@toolbay.atelier",
+      "availableLanguage": ["English"]
+    }
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">The Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Switch between light and dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap article" style="padding-top:48px;">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; Contact</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">COMMUNICATIONS &bull; DIRECT DESK</span>
+      <h1>Contact the Atelier</h1>
+      <p>Report calculation bugs, propose new mathematical instruments, or discuss partnerships with our engineering team.</p>
+    </div>
+
+    <!-- Contact Workbench Form Card -->
+    <div class="panel" style="margin-bottom:36px;">
+      <h3 style="font-family:var(--font-didone);margin:0 0 16px;font-size:24px;">Send a Direct Dispatch</h3>
+      <form id="contactForm" onsubmit="event.preventDefault(); document.getElementById('formSuccess').hidden = false; this.reset();">
+        <div class="row">
+          <div class="field">
+            <label for="cName">Your Name</label>
+            <input type="text" id="cName" placeholder="e.g. Elena Rostova" required>
+          </div>
+          <div class="field">
+            <label for="cEmail">Your Email Address</label>
+            <input type="email" id="cEmail" placeholder="elena@example.com" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="cTopic">Inquiry Category</label>
+          <select id="cTopic">
+            <option value="bug">Mathematical Inaccuracy or Edge Case Bug</option>
+            <option value="feature">Instrument Feature Request</option>
+            <option value="ad">Advertising &amp; Commercial Partnerships</option>
+            <option value="privacy">Privacy &amp; Data Protection</option>
+            <option value="other">General Feedback</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="cMessage">Message Details</label>
+          <textarea id="cMessage" placeholder="If reporting an inaccurate calculation, please state the input values, expected result, and browser used." required></textarea>
+        </div>
+        <div class="actions">
+          <button type="submit" class="go">Send Dispatch</button>
+        </div>
+        <div id="formSuccess" class="note" style="background:rgba(46, 133, 96, 0.12);border-color:#2E8560;color:#2E8560;" hidden>
+          <strong>Dispatch Received.</strong> Thank you for helping us maintain mathematical perfection. Our engineering desk replies within two business days.
+        </div>
+      </form>
+    </div>
+
+    <h2>Direct Channels</h2>
+    <p>
+      If you prefer standard email clients:
+    </p>
+    <ul>
+      <li><strong>General &amp; Technical Support:</strong> <code>hello@toolbay.atelier</code></li>
+      <li><strong>Advertising &amp; Sponsorships:</strong> <code>partnerships@toolbay.atelier</code> (Subject: "Advertising Inquiries")</li>
+      <li><strong>Privacy Desk:</strong> <code>privacy@toolbay.atelier</code></li>
+    </ul>
+
+    <h2>Expected Response Time</h2>
+    <p>
+      Reports concerning mathematical discrepancies, edge-case rounding flaws, or browser rendering regressions are treated with highest urgency and typically reviewed within 24 to 48 hours.
+    </p>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/age-calculator">Age Calculator</a></li>
+          <li><a href="/tools/loan-emi-calculator">Loan EMI Calculator</a></li>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Standards</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Response within 48h &bull; Continuous Mathematical Verification</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink); font-weight:700;">MODERN RED &amp; SLATE EDITION</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function update() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  update();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      update();
+    };
+  }
+})();
+</script>
+</body>
+</html>

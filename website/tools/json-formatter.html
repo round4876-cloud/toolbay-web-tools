@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JSON Formatter &amp; Validator — Beautify, Minify &amp; Tree Inspector | Toolbay</title>
+<meta name="description" content="Format, beautify, validate, and minify JSON data offline in your browser. Precise line and column error diagnostics, key counts, byte telemetry, and one-click copy.">
+<meta name="keywords" content="json formatter, json beautifier, json validator, minify json, json parser online, format json offline, json error finder">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/json-formatter">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="JSON Formatter &amp; Validator — Beautify, Minify &amp; Tree Inspector | Toolbay">
+<meta property="og:description" content="Format, beautify, validate, and minify JSON data offline with line-level syntax diagnostics and structural telemetry.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/json-formatter">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay JSON Formatter and Validator",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/json-formatter",
+      "description": "Browser-native JSON beautifier, validator, and minifier with RFC 8259 compliance diagnostics.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Developer & Text Engineering", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "JSON Formatter", "item": "https://tools.xyzhome.site/tools/json-formatter"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is my confidential JSON data uploaded to external servers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Toolbay JSON Formatter operates strictly within your browser's local V8 JavaScript sandbox using JSON.parse and JSON.stringify. Zero bytes leave your device."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does JSON validation fail on single quotes or trailing commas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The official JSON grammar (RFC 8259) strictly forbids single quotes around strings or keys and disallows trailing commas after trailing array elements or object properties. Standard JavaScript allows these, but standardized JSON does not."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does minification reduce network payload size?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Minification eliminates all non-essential whitespace characters (spaces, tabs, carriage returns, and line feeds) outside of string literals, typically reducing payload size by 20% to 45% without altering data semantics."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Developer &amp; Text Engineering</a> &rsaquo; JSON Formatter</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[13] &bull; DATA ARCHITECTURE</span>
+      <h1>JSON Formatter &amp; Validator</h1>
+      <p>Beautify, inspect, and minify hierarchical data payloads offline. Pinpoint syntax errors with exact character positions and structural telemetry.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="field">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <label for="jsonInput" style="margin:0;">Input JSON Payload</label>
+          <div style="display:flex;gap:8px;">
+            <button class="ghost" id="btnSample" style="padding:4px 10px;font-size:12px;">Load Sample</button>
+            <button class="ghost" id="btnClear" style="padding:4px 10px;font-size:12px;">Clear</button>
+          </div>
+        </div>
+        <textarea id="jsonInput" placeholder='{"atelier": "Toolbay", "instruments": [1, 2, 3], "status": "active"}' style="font-family:var(--font-mono);font-size:13.5px;min-height:180px;line-height:1.5;"></textarea>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="indentSelect">Indentation Style</label>
+          <select id="indentSelect">
+            <option value="2">2 Spaces (Standard Web)</option>
+            <option value="4">4 Spaces (Backend / Pythonic)</option>
+            <option value="tab">Tab Character (\t)</option>
+            <option value="min">0 Spaces (Minified Compact)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>&nbsp;</label>
+          <div class="actions">
+            <button class="go" id="btnFormat">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              Beautify JSON
+            </button>
+            <button class="ghost" id="btnMinify">Compact (Minify)</button>
+            <button class="ghost" id="btnCopy">Copy Output</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; RFC 8259 JSON VALIDATION SPECIFICATION
+      </span>
+      <h3>How Does JSON Formatting and Validation Work?</h3>
+      <p>
+        JSON (JavaScript Object Notation) is a strict text serialization format standardized under RFC 8259 and ECMA-404. Validation executes an LL(1) or recursive-descent tokenization parse across unicode codepoints. Any deviation—including trailing commas (<code>[1, 2,]</code>), unquoted dictionary keys (<code>{name: "value"}</code>), single-quoted strings (<code>'text'</code>), comments (<code>// comment</code>), or circular object graphs—immediately triggers a syntax exception. Formatting normalizes structural depth into hierarchical tabs or space indentations, whereas minification strips all insignificant ASCII whitespace (0x20, 0x09, 0x0A, 0x0D) to optimize network transit time.
+      </p>
+    </div>
+
+    <!-- Educational Editorial Content -->
+    <article class="article">
+      <h2>The Anatomy of Strict JSON: Standards, Grammar, and Parsing Integrity</h2>
+      <p>
+        In contemporary software architecture, JSON serves as the universal lingua franca for Representational State Transfer (REST) APIs, GraphQL responses, Microservice event streams, configuration manifests, and NoSQL document storage engines like MongoDB and CouchDB. However, because JSON was originally derived from JavaScript object literal syntax, developers frequently confuse JavaScript's permissive object syntax with JSON's unforgiving, formalized grammar.
+      </p>
+
+      <h3>Core Invariants of RFC 8259 JSON Specification</h3>
+      <p>
+        To guarantee unambiguous deserialization across diverse runtime environments—from C++ and Rust to Python, Go, and Java—the JSON specification enforces rigid mathematical invariants:
+      </p>
+      <ul>
+        <li><strong>Strict Double Quoting:</strong> All object keys and string values must be enclosed within double quotation marks (<code>"..."</code>). Single quotes (<code>'...'</code>) and unquoted identifiers produce fatal syntax errors.</li>
+        <li><strong>No Trailing Commas:</strong> Unlike modern ECMAScript array literals, JSON strictly forbids a trailing comma after the terminal item in an array or object. A comma signifies an adjacent succeeding element; omitting that element breaks token parser states.</li>
+        <li><strong>Absence of Comments:</strong> Douglas Crockford deliberately excluded comments (such as <code>/* ... */</code> or <code>// ...</code>) from the JSON grammar to prevent developers from storing parsing directives or compiler macros inside data streams.</li>
+        <li><strong>Primitive Value Bounds:</strong> Permitted scalar primitives are strictly limited to strings, finite numbers (scientific notation <code>1e10</code> supported, but <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are illegal), booleans (<code>true</code> / <code>false</code>), and literal <code>null</code>. Functions, <code>undefined</code>, and symbol types are completely disallowed.</li>
+      </ul>
+
+      <h3>Error Diagnostics: Diagnosing Common Parser Failures</h3>
+      <p>
+        When a JSON parser encounters an invalid token, it halts at the exact byte offset where grammar rules were violated. The Toolbay JSON Formatter inspects this offset to compute the exact line and column coordinates:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Syntax Error Variant</th>
+              <th>Invalid Syntax Example</th>
+              <th>RFC 8259 Compliant Correction</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Unquoted Object Key</td>
+              <td><code>{ atelier: "Toolbay" }</code></td>
+              <td><code>{ "atelier": "Toolbay" }</code></td>
+            </tr>
+            <tr>
+              <td>Single-Quoted String</td>
+              <td><code>{ "theme": 'dusty-pink' }</code></td>
+              <td><code>{ "theme": "dusty-pink" }</code></td>
+            </tr>
+            <tr>
+              <td>Trailing Array Comma</td>
+              <td><code>[ "caliper", "scale", ]</code></td>
+              <td><code>[ "caliper", "scale" ]</code></td>
+            </tr>
+            <tr>
+              <td>Illegal Non-Finite Number</td>
+              <td><code>{ "ratio": NaN, "limit": Infinity }</code></td>
+              <td><code>{ "ratio": null, "limit": 999999 }</code></td>
+            </tr>
+            <tr>
+              <td>Inline Code Comments</td>
+              <td><code>{ "id": 101 /* primary key */ }</code></td>
+              <td><code>{ "id": 101, "_comment": "primary key" }</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Payload Minification vs. Pretty-Printing in Production Environments</h3>
+      <p>
+        Pretty-printing adds between 2 and 4 spaces per nesting level, plus newline delimiters for every key-value pair. In an 8-level nested data hierarchy, indentations can easily account for 30% to 50% of the raw byte size. Minifying your JSON payload before transmitting it over HTTP/2 or WebSockets strips all non-essential formatting whitespace, slashing bandwidth overhead, speeding up browser DOM parsing times, and conserving cloud egress costs.
+      </p>
+
+      <h3>Client-Side Sovereignty: Total Privacy for Confidential Payloads</h3>
+      <p>
+        Enterprise API logs, production database dumps, and developer JWT tokens frequently contain Personally Identifiable Information (PII), proprietary business metrics, or authorization tokens. Online formatters that upload pasted text to remote servers create severe data leakage risks under GDPR and CCPA. The Toolbay Atelier executes all parsing, tree analysis, and serialization within your browser's local sandbox memory. Zero network packets are dispatched.
+      </p>
+
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>Is my confidential JSON data uploaded to external servers?</summary>
+        <p>No. The Toolbay JSON Formatter operates strictly within your browser's local V8 JavaScript sandbox using native JSON.parse and JSON.stringify. Zero bytes leave your device.</p>
+      </details>
+      <details>
+        <summary>Why does JSON validation fail on single quotes or trailing commas?</summary>
+        <p>The official JSON grammar (RFC 8259) strictly forbids single quotes around strings or keys and disallows trailing commas after trailing array elements or object properties. Standard JavaScript allows these, but standardized JSON does not.</p>
+      </details>
+      <details>
+        <summary>How does minification reduce network payload size?</summary>
+        <p>Minification eliminates all non-essential whitespace characters (spaces, tabs, carriage returns, and line feeds) outside of string literals, typically reducing payload size by 20% to 45% without altering data semantics.</p>
+      </details>
+      <details>
+        <summary>Can this tool process JSON files containing several megabytes?</summary>
+        <p>Yes. Because execution relies on the browser's hardware-optimized native C++ parsing engine, multi-megabyte payloads format in tens of milliseconds on modern consumer devices.</p>
+      </details>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Developer &amp; Metrology Tools</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/color-converter">
+          <div class="tile-top"><span class="tile-idx">[14]</span><span class="tile-badge">Chromatic</span></div>
+          <b>Color Converter</b>
+          <i>Convert HEX, RGB, HSL, and CMYK with WCAG contrast verification.</i>
+        </a>
+        <a class="tile" href="/tools/case-converter">
+          <div class="tile-top"><span class="tile-idx">[10]</span><span class="tile-badge">Typography</span></div>
+          <b>Case Converter</b>
+          <i>Convert strings across camelCase, snake_case, Title Case, and PascalCase.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/json-formatter">JSON Formatter</a></li>
+          <li><a href="/tools/color-converter">Color Converter</a></li>
+          <li><a href="/tools/date-difference-calculator">Date Difference Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Grammar Specification</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Conforms rigorously to IETF RFC 8259 and ECMA-404 specifications.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var jsonInput = document.getElementById('jsonInput');
+  var indentSelect = document.getElementById('indentSelect');
+  var btnFormat = document.getElementById('btnFormat');
+  var btnMinify = document.getElementById('btnMinify');
+  var btnCopy = document.getElementById('btnCopy');
+  var btnSample = document.getElementById('btnSample');
+  var btnClear = document.getElementById('btnClear');
+  var out = document.getElementById('out');
+
+  var currentProcessedJSON = '';
+
+  var sampleData = {
+    "atelier": "Toolbay Curated Instruments",
+    "version": "2.4.0",
+    "registry": {
+      "founded": 2026,
+      "aesthetic": "Didone Editorial",
+      "signature_palette": ["#EF6F79", "#FAF7F2", "#1D1718"],
+      "typography": {
+        "display": "Bodoni Moda",
+        "accent": "Caveat Brush",
+        "body": "Plus Jakarta Sans",
+        "telemetry": "JetBrains Mono"
+      }
+    },
+    "instruments": [
+      {"id": 1, "name": "Age Chronometer", "accuracy": "100%"},
+      {"id": 13, "name": "JSON Inspector", "rfc_spec": "RFC 8259"},
+      {"id": 14, "name": "Chromatic Metrology", "wcag": "2.1 AA/AAA"}
+    ],
+    "client_sovereign": true,
+    "cloud_telemetry_dispatched": false
+  };
+
+  btnSample.addEventListener('click', function(){
+    jsonInput.value = JSON.stringify(sampleData, null, 2);
+    processJSON(false);
+  });
+
+  btnClear.addEventListener('click', function(){
+    jsonInput.value = '';
+    currentProcessedJSON = '';
+    out.innerHTML = '';
+  });
+
+  function countKeysAndDepth(obj, currentDepth) {
+    if (currentDepth === undefined) currentDepth = 1;
+    var keys = 0;
+    var maxDepth = currentDepth;
+    var arrays = 0;
+    var objects = 0;
+
+    if (Array.isArray(obj)) {
+      arrays++;
+      for (var i = 0; i < obj.length; i++) {
+        if (typeof obj[i] === 'object' && obj[i] !== null) {
+          var res = countKeysAndDepth(obj[i], currentDepth + 1);
+          keys += res.keys;
+          arrays += res.arrays;
+          objects += res.objects;
+          if (res.maxDepth > maxDepth) maxDepth = res.maxDepth;
+        }
+      }
+    } else if (typeof obj === 'object' && obj !== null) {
+      objects++;
+      var objKeys = Object.keys(obj);
+      keys += objKeys.length;
+      for (var j = 0; j < objKeys.length; j++) {
+        var val = obj[objKeys[j]];
+        if (typeof val === 'object' && val !== null) {
+          var r = countKeysAndDepth(val, currentDepth + 1);
+          keys += r.keys;
+          arrays += r.arrays;
+          objects += r.objects;
+          if (r.maxDepth > maxDepth) maxDepth = r.maxDepth;
+        }
+      }
+    }
+    return { keys: keys, maxDepth: maxDepth, arrays: arrays, objects: objects };
+  }
+
+  function getSyntaxErrorLocation(str, errMessage) {
+    var posMatch = errMessage.match(/position\s+(\d+)/i) || errMessage.match(/at\s+position\s+(\d+)/i);
+    var lineMatch = errMessage.match(/line\s+(\d+)/i);
+    var colMatch = errMessage.match(/column\s+(\d+)/i);
+
+    if (lineMatch && colMatch) {
+      return { line: parseInt(lineMatch[1], 10), col: parseInt(colMatch[1], 10), snippet: '' };
+    }
+
+    if (posMatch) {
+      var pos = parseInt(posMatch[1], 10);
+      var lines = str.substring(0, pos).split('\n');
+      var line = lines.length;
+      var col = lines[lines.length - 1].length + 1;
+      var allLines = str.split('\n');
+      var faultyLine = allLines[line - 1] || '';
+      return { line: line, col: col, snippet: faultyLine };
+    }
+
+    return null;
+  }
+
+  function escapeHtml(text) {
+    return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function processJSON(isMinify) {
+    var raw = jsonInput.value.trim();
+    if (!raw) {
+      out.innerHTML = '<p class="err" style="margin:0;">Please paste or type a JSON payload above to format.</p>';
+      currentProcessedJSON = '';
+      return;
+    }
+
+    var parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (e) {
+      currentProcessedJSON = '';
+      var loc = getSyntaxErrorLocation(raw, e.message);
+      var locInfo = '';
+      if (loc) {
+        locInfo = '<div style="margin-top:8px;font-family:var(--font-mono);font-size:13px;color:var(--ink);background:var(--blush);padding:10px 14px;border-radius:6px;border-left:4px solid var(--dusty-pink);">' +
+          '<strong>Syntax Anomaly:</strong> Line ' + loc.line + ', Column ' + loc.col + '<br>' +
+          (loc.snippet ? '<pre style="margin:6px 0 0;font-size:12px;overflow-x:auto;">' + escapeHtml(loc.snippet) + '\n' + ' '.repeat(Math.max(0, loc.col - 1)) + '^</pre>' : '') +
+          '</div>';
+      }
+
+      out.innerHTML = '<div style="padding:14px;background:#FFF0F2;border:1px solid #FFCCD2;border-radius:8px;">' +
+        '<strong style="color:#C92A2A;display:flex;align-items:center;gap:6px;">' +
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+        'RFC 8259 JSON Syntax Violation</strong>' +
+        '<p style="margin:6px 0 0;font-size:13.5px;color:#A61E1E;">' + escapeHtml(e.message) + '</p>' +
+        locInfo +
+        '<p style="margin:10px 0 0;font-size:12.5px;color:var(--slate);">Check for trailing commas, single quotation marks, missing brackets, or unquoted keys.</p>' +
+        '</div>';
+      return;
+    }
+
+    var indentVal = indentSelect.value;
+    var spacer;
+    if (isMinify || indentVal === 'min') {
+      spacer = 0;
+    } else if (indentVal === 'tab') {
+      spacer = '\t';
+    } else {
+      spacer = parseInt(indentVal, 10);
+    }
+
+    var formatted = (spacer === 0) ? JSON.stringify(parsed) : JSON.stringify(parsed, null, spacer);
+    currentProcessedJSON = formatted;
+
+    var metrics = countKeysAndDepth(parsed);
+    var rawBytes = new Blob([raw]).size;
+    var outBytes = new Blob([formatted]).size;
+    var byteDiff = outBytes - rawBytes;
+    var byteDiffText = (byteDiff <= 0) ? Math.abs(byteDiff) + ' B reduced (' + (rawBytes > 0 ? ((Math.abs(byteDiff)/rawBytes)*100).toFixed(1) : 0) + '%)' : '+' + byteDiff + ' B expanded';
+
+    var html = '<div class="kv" style="background:var(--blush);padding:14px;border-radius:8px;margin-bottom:14px;">' +
+      '<div><span style="font-size:12px;text-transform:uppercase;color:var(--slate);">Status</span><br><b style="color:#2B8A3E;">Valid RFC 8259 JSON</b></div>' +
+      '<div><span style="font-size:12px;text-transform:uppercase;color:var(--slate);">Key Count</span><br><b>' + metrics.keys.toLocaleString() + ' Keys</b></div>' +
+      '<div><span style="font-size:12px;text-transform:uppercase;color:var(--slate);">Max Depth</span><br><b>Level ' + metrics.maxDepth + '</b></div>' +
+      '<div><span style="font-size:12px;text-transform:uppercase;color:var(--slate);">Size Telemetry</span><br><b>' + outBytes.toLocaleString() + ' B (' + byteDiffText + ')</b></div>' +
+      '</div>';
+
+    html += '<div style="position:relative;">' +
+      '<pre style="max-height:420px;overflow:auto;background:var(--plaster);border:1px solid var(--plaster-dark);border-radius:8px;padding:16px;font-family:var(--font-mono);font-size:13px;line-height:1.55;color:var(--ink);">' +
+      escapeHtml(formatted) +
+      '</pre>' +
+      '</div>';
+
+    out.innerHTML = html;
+  }
+
+  btnFormat.addEventListener('click', function(){ processJSON(false); });
+  btnMinify.addEventListener('click', function(){ processJSON(true); });
+
+  function safeCopy(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        if(callback) callback();
+      }).catch(function(){
+        fallbackCopy(text, callback);
+      });
+    } else {
+      fallbackCopy(text, callback);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok && callback) callback();
+    } catch(e) {
+      console.warn('Copy fallback:', e);
+    }
+  }
+
+  btnCopy.addEventListener('click', function(){
+    if (!currentProcessedJSON) {
+      if (jsonInput.value.trim()) processJSON(false);
+      else return;
+    }
+    if (!currentProcessedJSON) return;
+
+    safeCopy(currentProcessedJSON, function(){
+      var oldText = btnCopy.textContent;
+      btnCopy.textContent = 'Copied to Clipboard!';
+      btnCopy.style.background = 'var(--dusty-pink)';
+      btnCopy.style.color = '#fff';
+      setTimeout(function(){
+        btnCopy.textContent = oldText;
+        btnCopy.style.background = '';
+        btnCopy.style.color = '';
+      }, 1800);
+    });
+  });
+
+  // Dark/Light Theme Switcher
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  var savedTheme = 'light';
+  try {
+    savedTheme = localStorage.getItem('toolbay_theme') || 'light';
+  } catch(e){}
+  document.documentElement.setAttribute('data-theme', savedTheme);
+  if (themeBtnText) themeBtnText.textContent = savedTheme === 'dark' ? 'Light' : 'Dark';
+
+  if(themeBtn) {
+    themeBtn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || 'light';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('toolbay_theme', next); } catch(e){}
+      if (themeBtnText) themeBtnText.textContent = next === 'dark' ? 'Light' : 'Dark';
+    });
+  }
+})();
+</script>
+</body>
+</html>

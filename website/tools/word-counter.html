@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Word Counter — Words, Characters, Reading Time & Keyword Density | Toolbay</title>
+<meta name="description" content="Free real-time word counter. Count words, characters with/without spaces, sentences, paragraphs, estimated reading and speaking time, and keyword frequency. 100% private.">
+<meta name="keywords" content="word counter, character counter, word count tool, reading time calculator, keyword density, social media character limit">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/word-counter">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Word Counter — Real-Time Text Analytics | Toolbay">
+<meta property="og:description" content="Count words, characters, sentences, paragraphs, reading speed, and keyword distribution.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/word-counter">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Word Counter",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/word-counter",
+      "description": "Client-side prose statistics and reading velocity analyzer.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Writing & Typography", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Word Counter", "item": "https://tools.xyzhome.site/tools/word-counter"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is estimated reading and speaking time calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Reading time assumes an average adult silent comprehension velocity of 225 words per minute (wpm), while speaking time is estimated at 130 words per minute for clear oratorical delivery."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Writing &amp; Typography</a> &rsaquo; Word Counter</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[09] &bull; PROSE INSTRUMENT</span>
+      <h1>Precision Word &amp; Character Counter</h1>
+      <p>Analyze prose statistics, character constraints, oratorical speaking duration, and lexical keyword density in real-time without transmitting text.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="field">
+        <label for="txt">Manuscript or Text</label>
+        <textarea id="txt" placeholder="Paste or compose your prose here..." autofocus></textarea>
+      </div>
+
+      <div class="actions">
+        <button class="ghost" id="cp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Text
+        </button>
+        <button class="ghost" id="clr">Clear All</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite"></div>
+    </div>
+
+    <!-- AdSense Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; PROSE METRIC STANDARDS
+      </span>
+      <h3>Platform Character &amp; Length Benchmarks</h3>
+      <ul>
+        <li><strong>Google Search Engine Title:</strong> 55–60 characters (approx. 600px desktop threshold)</li>
+        <li><strong>Meta Description:</strong> 150–160 characters before SERP snippet truncation</li>
+        <li><strong>Twitter / X Posts:</strong> 280 single-byte characters</li>
+        <li><strong>SMS Segment Limit:</strong> 160 characters (GSM-7 standard)</li>
+      </ul>
+    </div>
+
+    <!-- Deep Editorial Article -->
+    <article class="article">
+      <h2>The Critical Difference Between Space and Non-Space Counts</h2>
+      <p>
+        Publishing houses, academic journals, and translation bureaus frequently price work based on character counts excluding spaces, or words defined strictly by word boundaries. This atelier parses text through international unicode regular expressions, preventing hyphenated compounds or stray whitespace from distorting statistical reality.
+      </p>
+    </article>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Typographic Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/case-converter">
+          <div class="tile-top"><span class="tile-idx">[10]</span><span class="tile-badge">Glyphs</span></div>
+          <b>Text Case Converter</b>
+          <i>UPPERCASE, lowercase, Title Case, camelCase, snake_case.</i>
+        </a>
+        <a class="tile" href="/tools/json-formatter">
+          <div class="tile-top"><span class="tile-idx">[14]</span><span class="tile-badge">Syntax</span></div>
+          <b>JSON Formatter</b>
+          <i>Beautify, validate, and minify structured payloads.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/word-counter">Word Counter</a></li>
+          <li><a href="/tools/case-converter">Case Converter</a></li>
+          <li><a href="/tools/json-formatter">JSON Formatter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Confidentiality</h4>
+        <p style="font-size:13.5px;color:var(--slate);">All text remains strictly inside your local browser memory.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var txt = document.getElementById('txt');
+  var out = document.getElementById('out');
+  var btnCp = document.getElementById('cp');
+  var btnClr = document.getElementById('clr');
+
+  function update() {
+    var raw = txt.value;
+    var trimmed = raw.trim();
+
+    var words = trimmed ? trimmed.split(/\s+/).filter(Boolean) : [];
+    var charWithSpaces = raw.length;
+    var charNoSpaces = raw.replace(/\s/g, '').length;
+
+    var sentences = trimmed ? raw.split(/[.!?]+(?:\s|$)/).filter(function(s){ return s.trim().length > 0; }).length : 0;
+    var paragraphs = trimmed ? raw.split(/\n+/).filter(function(p){ return p.trim().length > 0; }).length : 0;
+
+    var readTimeMin = Math.ceil(words.length / 225);
+    var speakTimeMin = Math.ceil(words.length / 130);
+
+    // Keyword density analysis
+    var freq = {};
+    words.forEach(function(w){
+      var clean = w.toLowerCase().replace(/[^a-z0-9']/g, '');
+      if(clean.length > 3) freq[clean] = (freq[clean] || 0) + 1;
+    });
+    var topWords = Object.entries(freq).sort(function(a,b){ return b[1] - a[1]; }).slice(0, 5);
+
+    var densityHtml = '';
+    if(topWords.length > 0 && words.length > 5) {
+      densityHtml = '<h3 style="font-family:var(--font-didone);margin:24px 0 10px;font-size:20px;">Top Keywords (4+ characters)</h3>';
+      topWords.forEach(function(pair){
+        var pct = ((pair[1] / words.length) * 100).toFixed(1);
+        densityHtml += '<div class="kv"><span>"' + pair[0] + '"</span><b>' + pair[1] + ' occurrences (' + pct + '%)</b></div>';
+      });
+    }
+
+    out.innerHTML = 
+      '<div class="big">' + words.length.toLocaleString() + ' <span style="font-size:24px;font-family:var(--font-sans);font-weight:600;color:var(--ink);">Words</span></div>' +
+      '<p class="sub">' + charWithSpaces.toLocaleString() + ' characters total &bull; ' + sentences + ' sentences</p>' +
+      '<div class="kv"><span>Characters (excluding spaces)</span><b>' + charNoSpaces.toLocaleString() + '</b></div>' +
+      '<div class="kv"><span>Characters (including spaces)</span><b>' + charWithSpaces.toLocaleString() + '</b></div>' +
+      '<div class="kv"><span>Sentences Count</span><b>' + sentences + '</b></div>' +
+      '<div class="kv"><span>Paragraphs Count</span><b>' + paragraphs + '</b></div>' +
+      '<div class="kv"><span>Estimated Silent Reading Duration</span><b>' + (words.length ? readTimeMin + ' min' : '0 min') + ' (at 225 wpm)</b></div>' +
+      '<div class="kv"><span>Estimated Speaking Duration</span><b>' + (words.length ? speakTimeMin + ' min' : '0 min') + ' (at 130 wpm)</b></div>' +
+      densityHtml;
+  }
+
+  function safeCopy(text, callback) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){
+        if(callback) callback();
+      }).catch(function(){
+        fallbackCopy(text, callback);
+      });
+    } else {
+      fallbackCopy(text, callback);
+    }
+  }
+
+  function fallbackCopy(text, callback) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      if(ok && callback) callback();
+    } catch(e) {
+      console.warn('Copy fallback:', e);
+    }
+  }
+
+  txt.addEventListener('input', update);
+  btnClr.addEventListener('click', function(){ txt.value = ''; update(); });
+  btnCp.addEventListener('click', function(){
+    if(!txt.value) return;
+    safeCopy(txt.value, function(){
+      var orig = btnCp.textContent;
+      btnCp.textContent = 'Copied';
+      setTimeout(function(){ btnCp.textContent = orig; }, 1500);
+    });
+  });
+
+  // Sample prompt prefill
+  txt.value = "Toolbay is an open-access client-side utility atelier. Every calculation, cryptographic password generation, and photo compression happens strictly inside your browser sandbox.";
+  update();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

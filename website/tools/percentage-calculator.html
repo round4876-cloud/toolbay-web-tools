@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Percentage Calculator — Percent of Number, Change & Difference | Toolbay</title>
+<meta name="description" content="Free multi-mode percentage calculator. Calculate percent of a number, what percent one number is of another, percentage increase or decrease, and percentage difference. Instant and live.">
+<meta name="keywords" content="percentage calculator, percent of a number, percentage increase, percentage decrease, percentage change, percent difference">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/percentage-calculator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="Percentage Calculator — Multi-Mode Ratio Engine | Toolbay">
+<meta property="og:description" content="Calculate percentages, proportional shares, and percentage increase or decrease instantly.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/percentage-calculator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Precision Percentage Calculator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/percentage-calculator",
+      "description": "Multi-mode percentage calculator evaluating fractions, proportional ratios, and percentage variance.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Everyday Calculators", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "Percentage Calculator", "item": "https://tools.xyzhome.site/tools/percentage-calculator"}
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between percentage change and percentage points?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Percentage change measures the relative proportion of change against the starting baseline [(New - Old) / Old × 100]. Percentage points represent the simple arithmetic difference between two percentage numbers (e.g. 5% to 7% is a 2 percentage point increase, but a 40% percentage increase)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a 50% loss require a 100% gain to break even?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because percentage change is measured against the new lower base: if $100 drops by 50%, you have $50. To return from $50 to $100 requires adding $50, which is 100% of $50."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Everyday Calculators</a> &rsaquo; Percentage Calculator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[03] &bull; RATIO INSTRUMENT</span>
+      <h1>Multi-Mode Percentage Calculator</h1>
+      <p>Resolve every common percentage problem across three unified workbench modules updating instantaneously as you type.</p>
+    </div>
+
+    <!-- Multi-Module Workbench Panel -->
+    <div class="panel">
+      <!-- Mode 1: What is X% of Y? -->
+      <h3 style="font-family:var(--font-didone);margin:0 0 12px;font-size:22px;color:var(--ink);">Module I: What is X% of Y?</h3>
+      <div class="row">
+        <div class="field">
+          <label for="p1">Percentage (X %)</label>
+          <input type="number" id="p1" placeholder="15" step="any" value="15">
+        </div>
+        <div class="field">
+          <label for="n1">Of Total Number (Y)</label>
+          <input type="number" id="n1" placeholder="2400" step="any" value="2400">
+        </div>
+      </div>
+      <div class="out" id="o1" style="margin-top:10px;margin-bottom:32px;"></div>
+
+      <!-- Mode 2: X is what percent of Y? -->
+      <h3 style="font-family:var(--font-didone);margin:24px 0 12px;font-size:22px;color:var(--ink);border-top:1px dashed var(--line);padding-top:24px;">Module II: X is what percent of Y?</h3>
+      <div class="row">
+        <div class="field">
+          <label for="a2">Portion Value (X)</label>
+          <input type="number" id="a2" placeholder="45" step="any" value="45">
+        </div>
+        <div class="field">
+          <label for="b2">Whole Total (Y)</label>
+          <input type="number" id="b2" placeholder="180" step="any" value="180">
+        </div>
+      </div>
+      <div class="out" id="o2" style="margin-top:10px;margin-bottom:32px;"></div>
+
+      <!-- Mode 3: Percentage Change from X to Y -->
+      <h3 style="font-family:var(--font-didone);margin:24px 0 12px;font-size:22px;color:var(--ink);border-top:1px dashed var(--line);padding-top:24px;">Module III: Percentage Change from X to Y</h3>
+      <div class="row">
+        <div class="field">
+          <label for="a3">Initial Starting Value (X)</label>
+          <input type="number" id="a3" placeholder="500" step="any" value="500">
+        </div>
+        <div class="field">
+          <label for="b3">Final Ending Value (Y)</label>
+          <input type="number" id="b3" placeholder="650" step="any" value="650">
+        </div>
+      </div>
+      <div class="out" id="o3" style="margin-top:10px;"></div>
+    </div>
+
+    <!-- AdSense Slot -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; PROPORTIONAL ALGORITHMS
+      </span>
+      <h3>The Three Standard Percentage Formulas</h3>
+      <p>
+        A percentage signifies a dimensionless ratio expressed as a fraction of 100. The three computational standards are:
+      </p>
+      <ul>
+        <li><strong>Percentage of an Amount:</strong> $P = (X / 100) \times Y$</li>
+        <li><strong>Relative Proportion:</strong> $\text{Rate} = (X / Y) \times 100$</li>
+        <li><strong>Percentage Increase or Decrease:</strong> $\Delta\% = [(Y - X) / |X|] \times 100$</li>
+      </ul>
+    </div>
+
+    <!-- Deep Editorial Article -->
+    <article class="article">
+      <h2>Mastering Proportional Calculations</h2>
+      <p>
+        Nearly every percentage dilemma in commerce, statistics, and daily budgeting reduces to one of three mathematical patterns: finding a slice of a known total, determining how much a fraction accounts for, or evaluating growth and decline between two measurements.
+      </p>
+
+      <h3>Mental Arithmetic Shortcuts</h3>
+      <ul>
+        <li><strong>The Reversibility Rule:</strong> $X\%$ of $Y$ is always mathematically equal to $Y\%$ of $X$. For example, finding 16% of 50 is mentally challenging, but 50% of 16 is immediately 8.</li>
+        <li><strong>The 10% Pivot:</strong> To find 10% of any number, move the decimal one place to the left. Half of that gives 5%, and doubling it yields 20%.</li>
+        <li><strong>Beware Base Asymmetry:</strong> A 20% price hike followed by a 20% discount does not return to the original price; it leaves you 4% lower ($1.20 \times 0.80 = 0.96$).</li>
+      </ul>
+    </article>
+
+    <!-- Related Tools -->
+    <section class="related">
+      <h2>Related Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/discount-calculator">
+          <div class="tile-top"><span class="tile-idx">[05]</span><span class="tile-badge">Commerce</span></div>
+          <b>Discount Calculator</b>
+          <i>Compute sale price, savings, and stacked discounts.</i>
+        </a>
+        <a class="tile" href="/tools/sales-tax-calculator">
+          <div class="tile-top"><span class="tile-idx">[06]</span><span class="tile-badge">Statutory</span></div>
+          <b>Sales Tax Calculator</b>
+          <i>Add or strip VAT and GST from retail prices.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/percentage-calculator">Percentage Calculator</a></li>
+          <li><a href="/tools/discount-calculator">Discount Calculator</a></li>
+          <li><a href="/tools/sales-tax-calculator">Sales Tax Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Atelier &amp; Legal</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Standards</h4>
+        <p style="font-size:13.5px;color:var(--slate);">Live Reactive Inputs &bull; Zero Server Latency</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var round = function(x) { return Math.round(x * 10000) / 10000; };
+
+  function calc1() {
+    var p = parseFloat(document.getElementById('p1').value);
+    var n = parseFloat(document.getElementById('n1').value);
+    var o = document.getElementById('o1');
+    if(isNaN(p) || isNaN(n)) { o.innerHTML = ''; return; }
+    var ans = round((p * n) / 100);
+    o.innerHTML = 
+      '<div class="big">' + ans.toLocaleString() + '</div>' +
+      '<p class="sub">' + p + '% of ' + n.toLocaleString() + '</p>' +
+      '<div class="kv"><span>Formula Applied</span><b>(' + p + ' &times; ' + n + ') &divide; 100</b></div>';
+  }
+
+  function calc2() {
+    var a = parseFloat(document.getElementById('a2').value);
+    var b = parseFloat(document.getElementById('b2').value);
+    var o = document.getElementById('o2');
+    if(isNaN(a) || isNaN(b)) { o.innerHTML = ''; return; }
+    if(b === 0) {
+      o.innerHTML = '<p class="err">Division by zero: Total whole (Y) cannot be 0.</p>';
+      return;
+    }
+    var ans = round((a / b) * 100);
+    o.innerHTML = 
+      '<div class="big">' + ans + '%</div>' +
+      '<p class="sub">' + a.toLocaleString() + ' out of a total of ' + b.toLocaleString() + '</p>' +
+      '<div class="kv"><span>Fraction Ratio</span><b>' + a + ' &divide; ' + b + ' = ' + (a/b).toFixed(4) + '</b></div>';
+  }
+
+  function calc3() {
+    var a = parseFloat(document.getElementById('a3').value);
+    var b = parseFloat(document.getElementById('b3').value);
+    var o = document.getElementById('o3');
+    if(isNaN(a) || isNaN(b)) { o.innerHTML = ''; return; }
+    if(a === 0) {
+      o.innerHTML = '<p class="err">Starting base (X) cannot be zero for percentage change calculation.</p>';
+      return;
+    }
+    var change = ((b - a) / Math.abs(a)) * 100;
+    var absDiff = Math.abs(b - a);
+    var isInc = change >= 0;
+    var color = isInc ? '#2E8560' : '#D9535D';
+    o.innerHTML = 
+      '<div class="big" style="color:' + color + '">' + (isInc ? '+' : '') + round(change) + '%</div>' +
+      '<p class="sub"><strong style="color:' + color + '">' + (isInc ? 'Net Increase' : 'Net Decrease') + '</strong> of ' + round(absDiff).toLocaleString() + '</p>' +
+      '<div class="kv"><span>Absolute Difference</span><b>' + (isInc ? '+' : '-') + round(absDiff) + '</b></div>' +
+      '<div class="kv"><span>Multiplier Factor</span><b>' + (b / a).toFixed(4) + '&times;</b></div>';
+  }
+
+  ['p1','n1'].forEach(function(id){ document.getElementById(id).addEventListener('input', calc1); });
+  ['a2','b2'].forEach(function(id){ document.getElementById(id).addEventListener('input', calc2); });
+  ['a3','b3'].forEach(function(id){ document.getElementById(id).addEventListener('input', calc3); });
+
+  calc1(); calc2(); calc3();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>

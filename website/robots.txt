@@ -1,0 +1,9 @@
+# ==============================================================================
+# Toolbay Atelier - Robots Configuration
+# Conforms to RFC 9309 & Search Engine Crawling Directives
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+Sitemap: https://tools.xyzhome.site/sitemap.xml

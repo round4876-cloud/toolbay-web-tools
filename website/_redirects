@@ -1,0 +1,14 @@
+# ==============================================================================
+# Toolbay Atelier - Netlify Static Routing & Redirects
+# ==============================================================================
+
+# Direct static rewrites for clean URLs (serves static files with 200 OK)
+/about            /about.html            200
+/contact          /contact.html          200
+/privacy          /privacy.html          200
+/terms            /terms.html            200
+/tools/:slug      /tools/:slug.html      200
+
+# Custom 404 error page (never use wildcard SPA rewrite '/* /index.html 200')
+/*                /404.html              404
+

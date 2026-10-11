@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QR Code Generator — Free Permanent Static Vector & PNG Codes | Toolbay</title>
+<meta name="description" content="Create permanent high-resolution QR codes for websites, WiFi networks, phone numbers, and text. No sign up, no expiry, no tracking redirects. Download high-res PNG.">
+<meta name="keywords" content="qr code generator, free qr code, wifi qr code, permanent qr code, vector qr code, qr code png download">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="canonical" href="https://tools.xyzhome.site/tools/qr-code-generator">
+
+<!-- Open Graph & Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Toolbay">
+<meta property="og:title" content="QR Code Generator — Permanent High-Res Codes | Toolbay">
+<meta property="og:description" content="Generate permanent static QR codes for links, WiFi, and contacts with zero redirects.">
+<meta property="og:url" content="https://tools.xyzhome.site/tools/qr-code-generator">
+<meta property="og:image" content="https://tools.xyzhome.site/assets/cover.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#EF6F79">
+
+<!-- PWA & Favicon -->
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Caveat+Brush&family=Caveat:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+
+<!-- QRCode CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Toolbay Permanent QR Code Generator",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "All",
+      "url": "https://tools.xyzhome.site/tools/qr-code-generator",
+      "description": "Permanent static vector and raster QR code generator with adjustable Reed-Solomon error correction.",
+      "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Atelier", "item": "https://tools.xyzhome.site/"},
+        {"@type": "ListItem", "position": 2, "name": "Security & Visual Media", "item": "https://tools.xyzhome.site/#tools"},
+        {"@type": "ListItem", "position": 3, "name": "QR Code Generator", "item": "https://tools.xyzhome.site/tools/qr-code-generator"}
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="site-head" role="banner">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Toolbay Home">
+      <span class="brand-monogram" aria-hidden="true">T</span>
+      <span>Toolbay</span>
+      <span class="brand-atelier-tag">Atelier</span>
+    </a>
+    <nav class="nav" role="navigation">
+      <a href="/#tools">All Instruments</a>
+      <a href="/about">Atelier Story</a>
+      <a class="hide-sm" href="/privacy">Privacy</a>
+      <a class="hide-sm" href="/contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light or dark theme">
+        <span id="themeBtnText">Dark</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="crumbs"><a href="/">Atelier</a> &rsaquo; <a href="/#tools">Security &amp; Visual Media</a> &rsaquo; QR Code Generator</p>
+    
+    <div class="tool-head">
+      <span class="tool-head-tag">[12] &bull; MATRIX INSTRUMENT</span>
+      <h1>Permanent Static QR Code Generator</h1>
+      <p>Generate permanent 2D optical barcode matrices for URLs, WiFi logins, and contact cards with adjustable Reed-Solomon error recovery.</p>
+    </div>
+
+    <!-- Calculator Panel -->
+    <div class="panel">
+      <div class="field">
+        <label for="txt">Target Payload or URL</label>
+        <input type="text" id="txt" placeholder="https://example.com" value="https://tools.xyzhome.site/">
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="size">Output Dimension (Pixels)</label>
+          <select id="size">
+            <option value="256">256 &times; 256 px (Compact Display)</option>
+            <option value="400" selected>400 &times; 400 px (Standard Print)</option>
+            <option value="600">600 &times; 600 px (Packaging / Signage)</option>
+            <option value="1000">1000 &times; 1000 px (Ultra High Definition)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ec">Reed-Solomon Error Correction</label>
+          <select id="ec">
+            <option value="L">Level L (7% damage recovery)</option>
+            <option value="M" selected>Level M (15% standard recovery)</option>
+            <option value="Q">Level Q (25% high recovery)</option>
+            <option value="H">Level H (30% industrial resilience)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="go" id="run">Render QR Matrix</button>
+        <button class="ghost" id="dl">Download PNG</button>
+      </div>
+
+      <div class="out" id="out" role="region" aria-live="polite">
+        <div id="holder" style="display:flex;justify-content:center;padding:24px;background:#FFFFFF;border-radius:var(--radius-sm);margin:16px auto;max-width:440px;box-shadow:0 8px 24px rgba(0,0,0,0.06);"></div>
+      </div>
+
+      <div class="note">
+        <strong>Instant WiFi Matrix Format:</strong> To create a code that joins a WiFi network automatically upon scanning, paste: <code>WIFI:T:WPA;S:NetworkName;P:YourPassword;;</code>
+      </div>
+    </div>
+
+    <!-- AdSense Placement -->
+    <div class="ad-slot-container">
+      <span class="ad-slot-label">ADVERTISEMENT</span>
+      <div class="ad-slot-box">
+        <span>Responsive Ad Placement &bull; High Content Ratio Compliant</span>
+      </div>
+    </div>
+
+    <!-- GEO Direct Answer Block -->
+    <div class="geo-answer-block" data-geo-summary>
+      <span class="geo-badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        DIRECT ANSWER &bull; STATIC VS DYNAMIC QR CODES
+      </span>
+      <h3>Why Static In-Browser QR Codes Never Expire</h3>
+      <p>
+        Commercial online QR generators frequently embed a tracking URL redirect that deactivates once a trial period expires. Toolbay embeds the raw byte payload directly into the visual matrix modules using ISO/IEC 18004 standards. Because there is no intermediary proxy server, the generated code remains functional perpetually.
+      </p>
+    </div>
+
+    <!-- Related Instruments -->
+    <section class="related">
+      <h2>Related Instruments</h2>
+      <div class="tools-grid">
+        <a class="tile" href="/tools/password-generator">
+          <div class="tile-top"><span class="tile-idx">[11]</span><span class="tile-badge">Crypto</span></div>
+          <b>Password Generator</b>
+          <i>Cryptographically random offline credentials.</i>
+        </a>
+        <a class="tile" href="/tools/image-compressor">
+          <div class="tile-top"><span class="tile-idx">[13]</span><span class="tile-badge">Raster</span></div>
+          <b>Image Compressor</b>
+          <i>Reduce JPG and PNG file sizes locally in your browser.</i>
+        </a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="site-foot" role="contentinfo">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <h3>Toolbay Atelier</h3>
+        <p>A curated suite of 15 browser-native instruments engineered for mathematical accuracy and zero-latency utility.</p>
+      </div>
+      <div>
+        <h4>Calculators</h4>
+        <ul>
+          <li><a href="/tools/qr-code-generator">QR Code Generator</a></li>
+          <li><a href="/tools/password-generator">Password Generator</a></li>
+          <li><a href="/tools/image-compressor">Image Compressor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal &amp; Trust</h4>
+        <ul>
+          <li><a href="/about">About the Atelier</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Standard</h4>
+        <p style="font-size:13.5px;color:var(--slate);">ISO/IEC 18004 International Standard Compliant.</p>
+      </div>
+    </div>
+    <div class="copy">
+      <div>&copy; 2026 Toolbay Atelier. Free for commercial and personal use.</div>
+      <div style="color:var(--dusty-pink);">DUSTY PINK &amp; PLASTER EDITORIAL</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var txt = document.getElementById('txt');
+  var size = document.getElementById('size');
+  var ec = document.getElementById('ec');
+  var holder = document.getElementById('holder');
+  var btnRun = document.getElementById('run');
+  var btnDl = document.getElementById('dl');
+
+  function renderQR() {
+    if (typeof QRCode === 'undefined') {
+      setTimeout(renderQR, 150);
+      return;
+    }
+    holder.innerHTML = '';
+    var v = txt.value.trim();
+    if(!v) {
+      holder.innerHTML = '<p class="err">Please enter a valid URL or text payload.</p>';
+      return;
+    }
+
+    var s = parseInt(size.value, 10);
+    var errLevel = (QRCode.CorrectLevel && QRCode.CorrectLevel[ec.value]) ? QRCode.CorrectLevel[ec.value] : QRCode.CorrectLevel.M;
+
+    try {
+      new QRCode(holder, {
+        text: v,
+        width: Math.min(s, 380),
+        height: Math.min(s, 380),
+        colorDark: "#1D1718",
+        colorLight: "#FFFFFF",
+        correctLevel: errLevel
+      });
+    } catch(e) {
+      holder.innerHTML = '<p class="err">Could not render QR code: ' + (e.message || 'unknown error') + '</p>';
+    }
+  }
+
+  btnRun.addEventListener('click', renderQR);
+  txt.addEventListener('keydown', function(e){ if(e.key === 'Enter') renderQR(); });
+
+  btnDl.addEventListener('click', function(){
+    var canvas = holder.querySelector('canvas');
+    if(!canvas) { renderQR(); return; }
+    try {
+      var a = document.createElement('a');
+      a.href = canvas.toDataURL('image/png');
+      a.download = 'toolbay-qr-code.png';
+      a.click();
+    } catch(e) {
+      console.warn('Download error:', e);
+    }
+  });
+
+  renderQR();
+
+  // Theme Toggle
+  var themeBtn = document.getElementById('themeBtn');
+  var themeBtnText = document.getElementById('themeBtnText');
+  try {
+    var saved = localStorage.getItem('toolbay_theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  } catch(e){}
+
+  function updateTheme() {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                 (!document.documentElement.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if(themeBtnText) themeBtnText.textContent = isDark ? 'Light' : 'Dark';
+  }
+  updateTheme();
+
+  if(themeBtn) {
+    themeBtn.onclick = function() {
+      var cur = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var target = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      try { localStorage.setItem('toolbay_theme', target); } catch(e){}
+      updateTheme();
+    };
+  }
+})();
+</script>
+</body>
+</html>
